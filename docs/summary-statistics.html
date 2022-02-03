@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Summary statistics | R Primer for Social Scientists</title>
+  <meta name="description" content="3 Summary statistics | R Primer for Social Scientists" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Summary statistics | R Primer for Social Scientists" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Summary statistics | R Primer for Social Scientists" />
+  
+  
+  
+
+<meta name="author" content="Aditya Ranganath" />
+
+
+<meta name="date" content="2022-02-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="loading-data.html"/>
+
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Primer</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>2</b> Loading data</a></li>
+<li class="chapter" data-level="3" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>3</b> Summary statistics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-a-table-of-summary-statistics"><i class="fa fa-check"></i><b>3.1</b> Generating a table of summary statistics</a></li>
+<li class="chapter" data-level="3.2" data-path="summary-statistics.html"><a href="summary-statistics.html#exporting-a-summary-statistics-table-as-a-csv-file"><i class="fa fa-check"></i><b>3.2</b> Exporting a summary statistics table as a CSV file</a></li>
+<li class="chapter" data-level="3.3" data-path="summary-statistics.html"><a href="summary-statistics.html#using-stargazer-to-create-and-export-summary-statistics-with"><i class="fa fa-check"></i><b>3.3</b> Using <code>stargazer</code> to create and export summary statistics with</a></li>
+<li class="chapter" data-level="3.4" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-summary-statistics-by-group"><i class="fa fa-check"></i><b>3.4</b> Generating summary statistics by group</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Primer for Social Scientists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="summary-statistics" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Summary statistics</h1>
+<div id="generating-a-table-of-summary-statistics" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Generating a table of summary statistics</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="summary-statistics.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate summary statistics for &quot;pt_copy&quot; and assign to new object named &quot;pt_copy_summarystats1&quot;</span></span>
+<span id="cb8-2"><a href="summary-statistics.html#cb8-2" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1<span class="ot">&lt;-</span><span class="fu">describe</span>(pt_copy)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="summary-statistics.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print contents of &quot;pt_copy_summarystats1&quot;</span></span>
+<span id="cb9-2"><a href="summary-statistics.html#cb9-2" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1</span></code></pre></div>
+<pre><code>##            vars  n    mean      sd  median trimmed     mad     min      max    range  skew kurtosis     se
+## oecd          1 85    0.29    0.46    0.00    0.25    0.00    0.00     1.00     1.00  0.89    -1.23   0.05
+## country*      2 85   43.00   24.68   43.00   43.00   31.13    1.00    85.00    84.00  0.00    -1.24   2.68
+## pind          3 85    0.46    0.47    0.42    0.45    0.62    0.00     1.00     1.00  0.13    -1.89   0.05
+## pindo         4 85    0.61    0.46    0.90    0.63    0.15    0.00     1.00     1.00 -0.46    -1.69   0.05
+## ctrycd        5 85  430.88  284.89  299.00  406.86  240.18  111.00   968.00   857.00  0.63    -1.08  30.90
+## col_uk        6 85    0.35    0.48    0.00    0.32    0.00    0.00     1.00     1.00  0.60    -1.65   0.05
+## t_indep       7 85  119.73   89.76   92.00  117.48  114.16    6.00   250.00   244.00  0.26    -1.54   9.74
+## col_uka       8 85    0.28    0.39    0.00    0.24    0.00    0.00     0.93     0.93  0.71    -1.44   0.04
+## col_espa      9 85    0.06    0.13    0.00    0.03    0.00    0.00     0.79     0.79  2.68     9.07   0.01
+## col_otha     10 85    0.22    0.36    0.00    0.16    0.00    0.00     0.98     0.98  1.16    -0.42   0.04
+## legor_uk     11 85    0.39    0.49    0.00    0.36    0.00    0.00     1.00     1.00  0.45    -1.82   0.05
+## legor_so     12 85    0.13    0.34    0.00    0.04    0.00    0.00     1.00     1.00  2.17     2.74   0.04
+## legor_fr     13 85    0.35    0.48    0.00    0.32    0.00    0.00     1.00     1.00  0.60    -1.65   0.05
+## legor_ge     14 85    0.07    0.26    0.00    0.00    0.00    0.00     1.00     1.00  3.29     8.96   0.03
+## legor_sc     15 85    0.06    0.24    0.00    0.00    0.00    0.00     1.00     1.00  3.68    11.71   0.03
+## prot80       16 85   17.46   25.50    2.70   12.24    3.85    0.00    97.80    97.80  1.65     1.99   2.77
+## catho80      17 85   40.69   38.66   27.60   38.92   39.88    0.00    97.30    97.30  0.38    -1.59   4.19
+## confu        18 85    0.07    0.26    0.00    0.00    0.00    0.00     1.00     1.00  3.29     8.96   0.03
+## avelf        19 85    0.29    0.26    0.18    0.26    0.21    0.00     0.84     0.84  0.76    -0.79   0.03
+## govef        20 81    4.21    1.75    4.48    4.25    1.99    0.84     7.26     6.42 -0.22    -1.11   0.19
+## graft        21 81    4.17    1.89    4.24    4.26    2.18    0.74     6.92     6.17 -0.37    -1.14   0.21
+## logyl        22 74    9.23    0.90    9.29    9.30    1.15    6.95    10.48     3.52 -0.57    -0.53   0.10
+## loga         23 73    8.17    0.61    8.37    8.23    0.58    6.28     9.02     2.73 -0.85     0.12   0.07
+## yrsopen      24 75    0.52    0.54    0.42    0.47    0.53    0.00     4.09     4.09  3.72    22.32   0.06
+## gadp         25 75    0.69    0.20    0.68    0.69    0.24    0.31     1.00     0.69  0.11    -1.19   0.02
+## engfrac      26 78    0.14    0.32    0.00    0.06    0.00    0.00     1.00     1.00  1.97     2.04   0.04
+## eurfrac      27 78    0.40    0.44    0.08    0.38    0.12    0.00     1.00     1.00  0.31    -1.80   0.05
+## frankrom     28 78    2.87    0.84    2.91    2.86    0.78    0.94     5.64     4.70  0.25     0.60   0.10
+## latitude     29 78   17.96   27.87   17.30   19.13   33.67  -36.89    63.89   100.78 -0.31    -0.98   3.16
+## gastil       30 85    2.44    1.23    2.28    2.36    1.65    1.00     4.89     3.89  0.39    -1.16   0.13
+## cgexp        31 82   28.82   10.49   28.90   28.50   13.04    9.74    51.18    41.44  0.17    -0.99   1.16
+## cgrev        32 78   26.49   10.12   24.16   26.05   10.98    8.92    50.85    41.93  0.34    -0.84   1.15
+## ssw          33 71    8.15    6.67    7.17    7.65    8.60    0.13    22.38    22.26  0.41    -1.16   0.79
+## rgdph        34 85 6688.63 5495.17 4400.03 6130.45 4371.13  530.22 20782.81 20252.59  0.77    -0.71 596.03
+## trade        35 85   78.77   47.34   68.45   73.50   34.38   17.56   343.39   325.82  2.37     9.85   5.13
+## prop1564     36 84   62.07    5.76   63.94   62.49    5.31   49.05    71.70    22.66 -0.60    -0.87   0.63
+## prop65       37 84    8.45    4.89    6.47    8.26    5.68    2.30    17.43    15.13  0.23    -1.60   0.53
+## federal      38 83    0.16    0.37    0.00    0.07    0.00    0.00     1.00     1.00  1.86     1.46   0.04
+## eduger       39 82   88.58   17.70   93.48   90.55   14.33   40.05   117.11    77.06 -0.94     0.59   1.95
+## spropn       40 77    0.13    0.25    0.00    0.07    0.00    0.00     1.00     1.00  2.22     4.33   0.03
+## yearele      41 81 1965.55   36.85 1981.00 1972.62   16.31 1800.00  1994.00   194.00 -2.13     5.16   4.09
+## yearreg      42 81 1961.48   40.16 1978.00 1969.65   20.76 1800.00  1994.00   194.00 -1.85     3.28   4.46
+## seats        43 85  215.45  162.54  166.00  195.25  127.17   15.00   656.00   641.00  1.06     0.18  17.63
+## maj          44 85    0.39    0.49    0.00    0.36    0.00    0.00     1.00     1.00  0.45    -1.82   0.05
+## pres         45 85    0.39    0.49    0.00    0.36    0.00    0.00     1.00     1.00  0.45    -1.82   0.05
+## lyp          46 85    8.41    0.97    8.39    8.45    1.25    6.27     9.94     3.67 -0.24    -1.04   0.11
+## semi         47 85    0.11    0.31    0.00    0.01    0.00    0.00     1.00     1.00  2.52     4.39   0.03
+## majpar       48 85    0.25    0.42    0.00    0.19    0.00    0.00     1.00     1.00  1.12    -0.69   0.05
+## majpres      49 85    0.13    0.33    0.00    0.04    0.00    0.00     1.00     1.00  2.17     2.75   0.04
+## propres      50 85    0.26    0.44    0.00    0.20    0.00    0.00     1.00     1.00  1.08    -0.84   0.05
+## dem_age      51 85 1958.34   43.74 1978.00 1967.00   19.27 1800.00  1994.00   194.00 -1.65     2.05   4.74
+## lat01        52 78    0.32    0.19    0.28    0.31    0.20    0.00     0.71     0.71  0.27    -1.10   0.02
+## age          53 85    0.21    0.22    0.11    0.17    0.10    0.03     1.00     0.97  1.65     2.05   0.02
+## polityIV     54 80    7.17    3.64    8.11    7.92    2.80   -6.00    10.00    16.00 -1.62     2.20   0.41
+## spl          55 74   -2.18    3.48   -1.69   -2.22    2.85  -11.36    12.59    23.95  0.88     3.85   0.40
+## cpi9500      56 71    4.81    2.38    5.29    4.95    2.46    0.27     8.25     7.98 -0.49    -1.12   0.28
+## du_60ctry    57 85    0.71    0.46    1.00    0.75    0.00    0.00     1.00     1.00 -0.89    -1.23   0.05
+## magn         58 84    0.47    0.40    0.26    0.46    0.31    0.01     1.00     0.99  0.39    -1.64   0.04
+## sdm          59 77    0.35    0.39    0.16    0.32    0.15    0.01     1.00     0.99  0.93    -0.95   0.04
+## oecd.x       60 85    0.27    0.45    0.00    0.22    0.00    0.00     1.00     1.00  1.01    -0.98   0.05
+## mining_gdp   61 77    4.26    6.72    1.29    2.82    1.51    0.02    37.20    37.18  2.41     6.61   0.77
+## gini_8090    62 72   39.20   10.41   37.52   38.71   12.23   19.49    62.30    42.81  0.35    -0.80   1.23
+## con2150      63 85    0.11    0.31    0.00    0.01    0.00    0.00     1.00     1.00  2.52     4.39   0.03
+## con5180      64 85    0.29    0.46    0.00    0.25    0.00    0.00     1.00     1.00  0.89    -1.23   0.05
+## con81        65 85    0.49    0.50    0.00    0.49    0.00    0.00     1.00     1.00  0.02    -2.02   0.05
+## list         66 84  114.48  129.55   77.67   93.16  115.15    0.00   510.33   510.33  1.19     0.79  14.14
+## maj_bad      67 85    1.06    1.60    0.00    0.77    0.00    0.00     4.89     4.89  1.23     0.04   0.17
+## maj_gin      68 72   16.40   20.96    0.00   13.86    0.00    0.00    62.00    62.00  0.63    -1.30   2.47
+## maj_old      69 85    0.08    0.19    0.00    0.04    0.00    0.00     1.00     1.00  3.05     9.57   0.02
+## pres_bad     70 85    1.21    1.69    0.00    0.97    0.00    0.00     4.89     4.89  0.91    -0.81   0.18
+## pres_gin     71 72   16.66   22.90    0.00   13.83    0.00    0.00    62.00    62.00  0.71    -1.33   2.70
+## pres_old     72 85    0.06    0.16    0.00    0.02    0.00    0.00     1.00     1.00  4.26    18.75   0.02
+## propar       73 85    0.35    0.48    0.00    0.32    0.00    0.00     1.00     1.00  0.60    -1.65   0.05
+## lpop         74 60   15.90    1.92   15.94   15.95    1.47   11.61    20.63     9.02 -0.16    -0.32   0.25
+## continent*   75 85    3.04    1.06    3.00    3.16    1.48    1.00     4.00     3.00 -0.72    -0.82   0.12</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+vars
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+median
+</th>
+<th style="text-align:right;">
+trimmed
+</th>
+<th style="text-align:right;">
+mad
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+range
+</th>
+<th style="text-align:right;">
+skew
+</th>
+<th style="text-align:right;">
+kurtosis
+</th>
+<th style="text-align:right;">
+se
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+oecd
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+0.2941176
+</td>
+<td style="text-align:right;">
+0.4583492
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.2463768
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.8877955
+</td>
+<td style="text-align:right;">
+-1.225827
+</td>
+<td style="text-align:right;">
+0.0497150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+country*
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+43.0000000
+</td>
+<td style="text-align:right;">
+24.6813020
+</td>
+<td style="text-align:right;">
+43.0000000
+</td>
+<td style="text-align:right;">
+43.0000000
+</td>
+<td style="text-align:right;">
+31.1346000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+84
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+-1.242428
+</td>
+<td style="text-align:right;">
+2.6770631
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pind
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+0.4600902
+</td>
+<td style="text-align:right;">
+0.4659720
+</td>
+<td style="text-align:right;">
+0.4188713
+</td>
+<td style="text-align:right;">
+0.4508357
+</td>
+<td style="text-align:right;">
+0.6210186
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1317631
+</td>
+<td style="text-align:right;">
+-1.887050
+</td>
+<td style="text-align:right;">
+0.0505418
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pindo
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+0.6061366
+</td>
+<td style="text-align:right;">
+0.4573739
+</td>
+<td style="text-align:right;">
+0.9000000
+</td>
+<td style="text-align:right;">
+0.6307480
+</td>
+<td style="text-align:right;">
+0.1482600
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-0.4581688
+</td>
+<td style="text-align:right;">
+-1.691084
+</td>
+<td style="text-align:right;">
+0.0496092
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ctrycd
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+430.8823529
+</td>
+<td style="text-align:right;">
+284.8886755
+</td>
+<td style="text-align:right;">
+299.0000000
+</td>
+<td style="text-align:right;">
+406.8550725
+</td>
+<td style="text-align:right;">
+240.1812000
+</td>
+<td style="text-align:right;">
+111
+</td>
+<td style="text-align:right;">
+968
+</td>
+<td style="text-align:right;">
+857
+</td>
+<td style="text-align:right;">
+0.6276472
+</td>
+<td style="text-align:right;">
+-1.082973
+</td>
+<td style="text-align:right;">
+30.9005154
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+col_uk
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+0.3529412
+</td>
+<td style="text-align:right;">
+0.4807207
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.3188406
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.6046284
+</td>
+<td style="text-align:right;">
+-1.653463
+</td>
+<td style="text-align:right;">
+0.0521415
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="exporting-a-summary-statistics-table-as-a-csv-file" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Exporting a summary statistics table as a CSV file</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="summary-statistics.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add rownames to pt_copy_summarystats1</span></span>
+<span id="cb11-2"><a href="summary-statistics.html#cb11-2" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1<span class="sc">$</span>variable<span class="ot">&lt;-</span><span class="fu">rownames</span>(pt_copy_summarystats1)</span>
+<span id="cb11-3"><a href="summary-statistics.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="summary-statistics.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make &quot;variables&quot; field the first one in the dataset</span></span>
+<span id="cb11-5"><a href="summary-statistics.html#cb11-5" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1<span class="ot">&lt;-</span>pt_copy_summarystats1 <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(variable)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="summary-statistics.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write out summary statistics table as CSV file</span></span>
+<span id="cb12-2"><a href="summary-statistics.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(pt_copy_summarystats1, <span class="st">&quot;/Users/adra7980/Documents/git_repositories/r_primer/written_data/pt_copy_summarystats1.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="using-stargazer-to-create-and-export-summary-statistics-with" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Using <code>stargazer</code> to create and export summary statistics with</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="summary-statistics.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the summary stats into a data frame</span></span>
+<span id="cb13-2"><a href="summary-statistics.html#cb13-2" aria-hidden="true" tabindex="-1"></a>pt_copy_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(pt_copy)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="summary-statistics.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use stargazer to export summary statistics as a text file</span></span>
+<span id="cb14-2"><a href="summary-statistics.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(pt_copy_df, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">title=</span><span class="st">&quot;Descriptive Statistics&quot;</span>, <span class="at">digits=</span><span class="dv">1</span>, <span class="at">out=</span><span class="st">&quot;summary_stats.txt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="summary-statistics.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use stargazer to export summary statistics as an html file</span></span>
+<span id="cb15-2"><a href="summary-statistics.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(pt_copy_df, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">title=</span><span class="st">&quot;Descriptive Statistics&quot;</span>, <span class="at">digits=</span><span class="dv">1</span>, <span class="at">out=</span><span class="st">&quot;summary_stats.html&quot;</span>)</span></code></pre></div>
+</div>
+<div id="generating-summary-statistics-by-group" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Generating summary statistics by group</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="summary-statistics.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1</span></span>
+<span id="cb16-2"><a href="summary-statistics.html#cb16-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent<span class="ot">&lt;-</span><span class="fu">describeBy</span>(pt_copy, pt_copy<span class="sc">$</span>continent)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="loading-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/aranganath24/r_primer/edit/master/02-lesson.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/aranganath24/r_primer/blob/master/02-lesson.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

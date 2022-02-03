@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Loading data | R Primer for Social Scientists</title>
+  <meta name="description" content="2 Loading data | R Primer for Social Scientists" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Loading data | R Primer for Social Scientists" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Loading data | R Primer for Social Scientists" />
+  
+  
+  
+
+<meta name="author" content="Aditya Ranganath" />
+
+
+<meta name="date" content="2022-02-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="summary-statistics.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Primer</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>2</b> Loading data</a></li>
+<li class="chapter" data-level="3" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>3</b> Summary statistics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-a-table-of-summary-statistics"><i class="fa fa-check"></i><b>3.1</b> Generating a table of summary statistics</a></li>
+<li class="chapter" data-level="3.2" data-path="summary-statistics.html"><a href="summary-statistics.html#exporting-a-summary-statistics-table-as-a-csv-file"><i class="fa fa-check"></i><b>3.2</b> Exporting a summary statistics table as a CSV file</a></li>
+<li class="chapter" data-level="3.3" data-path="summary-statistics.html"><a href="summary-statistics.html#using-stargazer-to-create-and-export-summary-statistics-with"><i class="fa fa-check"></i><b>3.3</b> Using <code>stargazer</code> to create and export summary statistics with</a></li>
+<li class="chapter" data-level="3.4" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-summary-statistics-by-group"><i class="fa fa-check"></i><b>3.4</b> Generating summary statistics by group</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Primer for Social Scientists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="loading-data" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Loading data</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="loading-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in persson and tabellini dataset</span></span>
+<span id="cb2-2"><a href="loading-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a>persson_tabellini_original<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;persson_tabellini_workshop.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────
+## cols(
+##   .default = col_double(),
+##   country = col_character(),
+##   continent = col_character()
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="loading-data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the dataset so we don&#39;t alter the original dataset; then, view</span></span>
+<span id="cb4-2"><a href="loading-data.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the copied dataset </span></span>
+<span id="cb4-3"><a href="loading-data.html#cb4-3" aria-hidden="true" tabindex="-1"></a>pt_copy<span class="ot">&lt;-</span>persson_tabellini_original</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="loading-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print contents of &quot;pt_copy&quot;</span></span>
+<span id="cb5-2"><a href="loading-data.html#cb5-2" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
+<pre><code>## # A tibble: 85 x 75
+##     oecd country  pind pindo ctrycd col_uk t_indep col_uka col_espa col_otha legor_uk legor_so legor_fr legor_ge
+##    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1     0 Argent… 0     0        213      0     183   0        0.268    0            0        0        1        0
+##  2     1 Austra… 1     1        193      1      98   0.608    0        0            1        0        0        0
+##  3     1 Austria 0     0        122      0     250   0        0        0            0        0        0        1
+##  4     0 Bahamas 1     1        313      1      26   0.896    0        0            1        0        0        0
+##  5     0 Bangla… 1     1        513      0      28   0        0        0.888        1        0        0        0
+##  6     0 Barbad… 1     1        316      1      33   0.868    0        0            1        0        0        0
+##  7     0 Belarus 1     1        913      0       8   0        0        0.968        0        1        0        0
+##  8     1 Belgium 0     0        124      0     169   0        0        0.324        0        0        1        0
+##  9     0 Belize  1     1        339      1      18   0.928    0        0            1        0        0        0
+## 10     0 Bolivia 0.116 0.116    218      0     174   0        0.304    0            0        0        1        0
+## # … with 75 more rows, and 61 more variables: legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;,
+## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
+## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
+## #   rgdph &lt;dbl&gt;, trade &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;,
+## #   yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;,
+## #   majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;, spl &lt;dbl&gt;,
+## #   cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, oecd.x &lt;dbl&gt;, mining_gdp &lt;dbl&gt;, gini_8090 &lt;dbl&gt;,
+## #   con2150 &lt;dbl&gt;, con5180 &lt;dbl&gt;, con81 &lt;dbl&gt;, list &lt;dbl&gt;, maj_bad &lt;dbl&gt;, maj_gin &lt;dbl&gt;, maj_old &lt;dbl&gt;,
+## #   pres_bad &lt;dbl&gt;, pres_gin &lt;dbl&gt;, pres_old &lt;dbl&gt;, propar &lt;dbl&gt;, lpop &lt;dbl&gt;, continent &lt;chr&gt;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="loading-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(pt_copy)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+oecd
+</th>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:right;">
+pind
+</th>
+<th style="text-align:right;">
+pindo
+</th>
+<th style="text-align:right;">
+ctrycd
+</th>
+<th style="text-align:right;">
+col_uk
+</th>
+<th style="text-align:right;">
+t_indep
+</th>
+<th style="text-align:right;">
+col_uka
+</th>
+<th style="text-align:right;">
+col_espa
+</th>
+<th style="text-align:right;">
+col_otha
+</th>
+<th style="text-align:right;">
+legor_uk
+</th>
+<th style="text-align:right;">
+legor_so
+</th>
+<th style="text-align:right;">
+legor_fr
+</th>
+<th style="text-align:right;">
+legor_ge
+</th>
+<th style="text-align:right;">
+legor_sc
+</th>
+<th style="text-align:right;">
+prot80
+</th>
+<th style="text-align:right;">
+catho80
+</th>
+<th style="text-align:right;">
+confu
+</th>
+<th style="text-align:right;">
+avelf
+</th>
+<th style="text-align:right;">
+govef
+</th>
+<th style="text-align:right;">
+graft
+</th>
+<th style="text-align:right;">
+logyl
+</th>
+<th style="text-align:right;">
+loga
+</th>
+<th style="text-align:right;">
+yrsopen
+</th>
+<th style="text-align:right;">
+gadp
+</th>
+<th style="text-align:right;">
+engfrac
+</th>
+<th style="text-align:right;">
+eurfrac
+</th>
+<th style="text-align:right;">
+frankrom
+</th>
+<th style="text-align:right;">
+latitude
+</th>
+<th style="text-align:right;">
+gastil
+</th>
+<th style="text-align:right;">
+cgexp
+</th>
+<th style="text-align:right;">
+cgrev
+</th>
+<th style="text-align:right;">
+ssw
+</th>
+<th style="text-align:right;">
+rgdph
+</th>
+<th style="text-align:right;">
+trade
+</th>
+<th style="text-align:right;">
+prop1564
+</th>
+<th style="text-align:right;">
+prop65
+</th>
+<th style="text-align:right;">
+federal
+</th>
+<th style="text-align:right;">
+eduger
+</th>
+<th style="text-align:right;">
+spropn
+</th>
+<th style="text-align:right;">
+yearele
+</th>
+<th style="text-align:right;">
+yearreg
+</th>
+<th style="text-align:right;">
+seats
+</th>
+<th style="text-align:right;">
+maj
+</th>
+<th style="text-align:right;">
+pres
+</th>
+<th style="text-align:right;">
+lyp
+</th>
+<th style="text-align:right;">
+semi
+</th>
+<th style="text-align:right;">
+majpar
+</th>
+<th style="text-align:right;">
+majpres
+</th>
+<th style="text-align:right;">
+propres
+</th>
+<th style="text-align:right;">
+dem_age
+</th>
+<th style="text-align:right;">
+lat01
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+polityIV
+</th>
+<th style="text-align:right;">
+spl
+</th>
+<th style="text-align:right;">
+cpi9500
+</th>
+<th style="text-align:right;">
+du_60ctry
+</th>
+<th style="text-align:right;">
+magn
+</th>
+<th style="text-align:right;">
+sdm
+</th>
+<th style="text-align:right;">
+oecd.x
+</th>
+<th style="text-align:right;">
+mining_gdp
+</th>
+<th style="text-align:right;">
+gini_8090
+</th>
+<th style="text-align:right;">
+con2150
+</th>
+<th style="text-align:right;">
+con5180
+</th>
+<th style="text-align:right;">
+con81
+</th>
+<th style="text-align:right;">
+list
+</th>
+<th style="text-align:right;">
+maj_bad
+</th>
+<th style="text-align:right;">
+maj_gin
+</th>
+<th style="text-align:right;">
+maj_old
+</th>
+<th style="text-align:right;">
+pres_bad
+</th>
+<th style="text-align:right;">
+pres_gin
+</th>
+<th style="text-align:right;">
+pres_old
+</th>
+<th style="text-align:right;">
+propar
+</th>
+<th style="text-align:right;">
+lpop
+</th>
+<th style="text-align:left;">
+continent
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Argentina
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+213
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+183
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.268
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+91.6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.1769318
+</td>
+<td style="text-align:right;">
+4.475911
+</td>
+<td style="text-align:right;">
+5.549095
+</td>
+<td style="text-align:right;">
+9.60270
+</td>
+<td style="text-align:right;">
+8.39295
+</td>
+<td style="text-align:right;">
+0.089
+</td>
+<td style="text-align:right;">
+0.579
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.836
+</td>
+<td style="text-align:right;">
+1.723
+</td>
+<td style="text-align:right;">
+-36.676
+</td>
+<td style="text-align:right;">
+2.333333
+</td>
+<td style="text-align:right;">
+14.00048
+</td>
+<td style="text-align:right;">
+12.31048
+</td>
+<td style="text-align:right;">
+6.7540784
+</td>
+<td style="text-align:right;">
+5831.075
+</td>
+<td style="text-align:right;">
+18.42008
+</td>
+<td style="text-align:right;">
+61.37738
+</td>
+<td style="text-align:right;">
+9.293244
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+94.8000
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1983
+</td>
+<td style="text-align:right;">
+1983
+</td>
+<td style="text-align:right;">
+257.11111
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8.670957
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1983
+</td>
+<td style="text-align:right;">
+0.4075111
+</td>
+<td style="text-align:right;">
+0.085
+</td>
+<td style="text-align:right;">
+7.000000
+</td>
+<td style="text-align:right;">
+-0.5086034
+</td>
+<td style="text-align:right;">
+6.506667
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0933475
+</td>
+<td style="text-align:right;">
+0.1889764
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.8993865
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+257.1111
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+2.333333
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.085
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+17.35051
+</td>
+<td style="text-align:left;">
+laam
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Australia
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+193
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+0.608
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+23.5
+</td>
+<td style="text-align:right;">
+29.6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.1127971
+</td>
+<td style="text-align:right;">
+2.082613
+</td>
+<td style="text-align:right;">
+1.797832
+</td>
+<td style="text-align:right;">
+10.30421
+</td>
+<td style="text-align:right;">
+8.67103
+</td>
+<td style="text-align:right;">
+0.689
+</td>
+<td style="text-align:right;">
+0.931
+</td>
+<td style="text-align:right;">
+0.950
+</td>
+<td style="text-align:right;">
+0.950
+</td>
+<td style="text-align:right;">
+1.404
+</td>
+<td style="text-align:right;">
+-32.219
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+<td style="text-align:right;">
+25.78327
+</td>
+<td style="text-align:right;">
+24.22912
+</td>
+<td style="text-align:right;">
+8.6001902
+</td>
+<td style="text-align:right;">
+15499.723
+</td>
+<td style="text-align:right;">
+38.79273
+</td>
+<td style="text-align:right;">
+66.80672
+</td>
+<td style="text-align:right;">
+11.663297
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+111.3375
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1901
+</td>
+<td style="text-align:right;">
+1901
+</td>
+<td style="text-align:right;">
+147.66667
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9.648578
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1901
+</td>
+<td style="text-align:right;">
+0.3579889
+</td>
+<td style="text-align:right;">
+0.495
+</td>
+<td style="text-align:right;">
+10.000000
+</td>
+<td style="text-align:right;">
+-0.6793869
+</td>
+<td style="text-align:right;">
+1.340000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.1904762
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4.4933643
+</td>
+<td style="text-align:right;">
+39.860
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+<td style="text-align:right;">
+39.860
+</td>
+<td style="text-align:right;">
+0.495
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+16.69928
+</td>
+<td style="text-align:left;">
+other
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Austria
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+122
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+250
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:right;">
+88.8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0332123
+</td>
+<td style="text-align:right;">
+2.562550
+</td>
+<td style="text-align:right;">
+2.085785
+</td>
+<td style="text-align:right;">
+10.13165
+</td>
+<td style="text-align:right;">
+8.80521
+</td>
+<td style="text-align:right;">
+0.778
+</td>
+<td style="text-align:right;">
+0.949
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.980
+</td>
+<td style="text-align:right;">
+3.601
+</td>
+<td style="text-align:right;">
+48.231
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+<td style="text-align:right;">
+40.14563
+</td>
+<td style="text-align:right;">
+36.20243
+</td>
+<td style="text-align:right;">
+17.8820381
+</td>
+<td style="text-align:right;">
+13313.135
+</td>
+<td style="text-align:right;">
+78.26205
+</td>
+<td style="text-align:right;">
+67.45173
+</td>
+<td style="text-align:right;">
+15.100343
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+103.9571
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1945
+</td>
+<td style="text-align:right;">
+1945
+</td>
+<td style="text-align:right;">
+183.00000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9.496507
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1945
+</td>
+<td style="text-align:right;">
+0.5359000
+</td>
+<td style="text-align:right;">
+0.275
+</td>
+<td style="text-align:right;">
+10.000000
+</td>
+<td style="text-align:right;">
+-4.4101000
+</td>
+<td style="text-align:right;">
+2.478333
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0491803
+</td>
+<td style="text-align:right;">
+0.0728745
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.3989157
+</td>
+<td style="text-align:right;">
+29.000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+183.0000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+15.89130
+</td>
+<td style="text-align:left;">
+other
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Bahamas
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+313
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0.896
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+47.2
+</td>
+<td style="text-align:right;">
+25.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+4.052546
+</td>
+<td style="text-align:right;">
+4.005234
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.614
+</td>
+<td style="text-align:right;">
+0.865
+</td>
+<td style="text-align:right;">
+0.865
+</td>
+<td style="text-align:right;">
+3.638
+</td>
+<td style="text-align:right;">
+24.700
+</td>
+<td style="text-align:right;">
+1.722222
+</td>
+<td style="text-align:right;">
+18.80976
+</td>
+<td style="text-align:right;">
+17.46011
+</td>
+<td style="text-align:right;">
+0.9501425
+</td>
+<td style="text-align:right;">
+11768.360
+</td>
+<td style="text-align:right;">
+101.83389
+</td>
+<td style="text-align:right;">
+63.95686
+</td>
+<td style="text-align:right;">
+4.389884
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+95.3000
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1973
+</td>
+<td style="text-align:right;">
+1973
+</td>
+<td style="text-align:right;">
+47.00000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9.373170
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1973
+</td>
+<td style="text-align:right;">
+0.2744445
+</td>
+<td style="text-align:right;">
+0.135
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+-2.3542581
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.5927405
+</td>
+<td style="text-align:right;">
+45.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+1.722222
+</td>
+<td style="text-align:right;">
+45.000
+</td>
+<td style="text-align:right;">
+0.135
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+12.51776
+</td>
+<td style="text-align:left;">
+laam
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Bangladesh
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+513
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.888
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+6.129216
+</td>
+<td style="text-align:right;">
+5.578219
+</td>
+<td style="text-align:right;">
+8.41382
+</td>
+<td style="text-align:right;">
+8.65712
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.313
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+2.333
+</td>
+<td style="text-align:right;">
+23.880
+</td>
+<td style="text-align:right;">
+3.166667
+</td>
+<td style="text-align:right;">
+12.56501
+</td>
+<td style="text-align:right;">
+13.79131
+</td>
+<td style="text-align:right;">
+0.1292526
+</td>
+<td style="text-align:right;">
+1611.785
+</td>
+<td style="text-align:right;">
+25.35251
+</td>
+<td style="text-align:right;">
+53.81113
+</td>
+<td style="text-align:right;">
+3.232165
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+43.6000
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+1991
+</td>
+<td style="text-align:right;">
+1991
+</td>
+<td style="text-align:right;">
+330.00000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+7.385097
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.8888889
+</td>
+<td style="text-align:right;">
+0.1111111
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1991
+</td>
+<td style="text-align:right;">
+0.2653333
+</td>
+<td style="text-align:right;">
+0.045
+</td>
+<td style="text-align:right;">
+4.777778
+</td>
+<td style="text-align:right;">
+1.1960450
+</td>
+<td style="text-align:right;">
+7.710000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.9090909
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0184373
+</td>
+<td style="text-align:right;">
+33.635
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+3.166667
+</td>
+<td style="text-align:right;">
+33.635
+</td>
+<td style="text-align:right;">
+0.045
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+asiae
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Barbados
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+316
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+0.868
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+33.2
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0733333
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+9.56870
+</td>
+<td style="text-align:right;">
+8.54757
+</td>
+<td style="text-align:right;">
+1.000
+</td>
+<td style="text-align:right;">
+0.739
+</td>
+<td style="text-align:right;">
+1.000
+</td>
+<td style="text-align:right;">
+1.000
+</td>
+<td style="text-align:right;">
+4.027
+</td>
+<td style="text-align:right;">
+13.179
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+<td style="text-align:right;">
+32.36219
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+7094.703
+</td>
+<td style="text-align:right;">
+116.35070
+</td>
+<td style="text-align:right;">
+65.17910
+</td>
+<td style="text-align:right;">
+11.119803
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1966
+</td>
+<td style="text-align:right;">
+1966
+</td>
+<td style="text-align:right;">
+27.88889
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8.867104
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1966
+</td>
+<td style="text-align:right;">
+0.1464333
+</td>
+<td style="text-align:right;">
+0.170
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.5067325
+</td>
+<td style="text-align:right;">
+49.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+<td style="text-align:right;">
+49.000
+</td>
+<td style="text-align:right;">
+0.170
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+12.47983
+</td>
+<td style="text-align:left;">
+laam
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summary-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/aranganath24/r_primer/edit/master/02-lesson.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/aranganath24/r_primer/blob/master/02-lesson.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

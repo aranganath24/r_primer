@@ -5,5 +5,18 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Introduction
+
+```{r}
+library(tidyverse)
+library(stargazer)
+library(ggeffects)
+library(psych)
+library(janitor)
+library(fastDummies)
+```
+
+
+
+
 

@@ -1,3 +1,7 @@
-down-the-rabbit-hole
-the-pool-of-tears
-a-caucus-race-and-a-long-tale
+introduction
+loading-data
+summary-statistics
+generating-a-table-of-summary-statistics
+exporting-a-summary-statistics-table-as-a-csv-file
+using-stargazer-to-create-and-export-summary-statistics-with
+generating-summary-statistics-by-group

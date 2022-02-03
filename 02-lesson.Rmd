@@ -1,0 +1,92 @@
+# Loading data
+
+```{r, echo=-1}
+setwd("/Users/adra7980/Documents/git_repositories/r_primer/workshop_data")
+# Read in persson and tabellini dataset
+persson_tabellini_original<-read_csv("persson_tabellini_workshop.csv")
+```
+
+```{r}
+# Make a copy of the dataset so we don't alter the original dataset; then, view
+# the copied dataset 
+pt_copy<-persson_tabellini_original
+```
+
+```{r}
+# Print contents of "pt_copy"
+pt_copy
+```
+
+```{r}
+View(pt_copy)
+```
+
+```{r, echo=FALSE}
+kable(head(pt_copy))
+```
+
+# Summary statistics
+
+## Generating a table of summary statistics
+
+```{r}
+# Generate summary statistics for "pt_copy" and assign to new object named "pt_copy_summarystats1"
+pt_copy_summarystats1<-describe(pt_copy)
+```
+
+```{r}
+# Print contents of "pt_copy_summarystats1"
+pt_copy_summarystats1
+```
+
+```{r, echo=F}
+kable(head(pt_copy_summarystats1))
+```
+
+## Exporting a summary statistics table as a CSV file
+
+```{r}
+# add rownames to pt_copy_summarystats1
+pt_copy_summarystats1$variable<-rownames(pt_copy_summarystats1)
+
+# make "variables" field the first one in the dataset
+pt_copy_summarystats1<-pt_copy_summarystats1 %>% relocate(variable)
+```
+
+```{r}
+# write out summary statistics table as CSV file
+write_csv(pt_copy_summarystats1, "/Users/adra7980/Documents/git_repositories/r_primer/written_data/pt_copy_summarystats1.csv")
+```
+
+## Using ```stargazer``` to create and export summary statistics with
+
+```{r}
+# Make the summary stats into a data frame
+pt_copy_df<-as.data.frame(pt_copy)
+```
+
+```{r, results=FALSE}
+# Use stargazer to export summary statistics as a text file
+stargazer(pt_copy_df, type="text", title="Descriptive Statistics", digits=1, out="summary_stats.txt")
+```
+
+```{r, results=FALSE}
+# Use stargazer to export summary statistics as an html file
+stargazer(pt_copy_df, type="text", title="Descriptive Statistics", digits=1, out="summary_stats.html")
+
+```
+
+## Generating summary statistics by group
+
+```{r}
+# Option 1
+summary_stats_by_continent<-describeBy(pt_copy, pt_copy$continent)
+```
+
+
+
+
+
+
+
+
