@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Basic Data Cleaning and Preparation Tasks | R Primer for Social Scientists</title>
+  <meta name="description" content="4 Basic Data Cleaning and Preparation Tasks | R Primer for Social Scientists" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Basic Data Cleaning and Preparation Tasks | R Primer for Social Scientists" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Basic Data Cleaning and Preparation Tasks | R Primer for Social Scientists" />
+  
+  
+  
+
+<meta name="author" content="Aditya Ranganath" />
+
+
+<meta name="date" content="2022-02-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="summary-statistics.html"/>
+
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Primer</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>2</b> Loading data</a></li>
+<li class="chapter" data-level="3" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>3</b> Summary statistics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-a-table-of-summary-statistics"><i class="fa fa-check"></i><b>3.1</b> Generating a table of summary statistics</a></li>
+<li class="chapter" data-level="3.2" data-path="summary-statistics.html"><a href="summary-statistics.html#exporting-a-summary-statistics-table-as-a-csv-file"><i class="fa fa-check"></i><b>3.2</b> Exporting a summary statistics table as a CSV file</a></li>
+<li class="chapter" data-level="3.3" data-path="summary-statistics.html"><a href="summary-statistics.html#using-stargazer-to-create-and-export-summary-statistics-with"><i class="fa fa-check"></i><b>3.3</b> Using <code>stargazer</code> to create and export summary statistics with</a></li>
+<li class="chapter" data-level="3.4" data-path="summary-statistics.html"><a href="summary-statistics.html#summary-statistics-and-grouping-variables"><i class="fa fa-check"></i><b>3.4</b> Summary statistics and grouping variables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="summary-statistics.html"><a href="summary-statistics.html#subsetting-summary-statistics-by-group-with-the-describe-function"><i class="fa fa-check"></i><b>3.4.1</b> Subsetting summary statistics by group with the <code>describe</code> function</a></li>
+<li class="chapter" data-level="3.4.2" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-group-level-summary-statistics-with-the-summarize-function-from-dplyr"><i class="fa fa-check"></i><b>3.4.2</b> Generating group-level summary statistics with the <code>summarize</code> function from <code>dplyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-crosstabs"><i class="fa fa-check"></i><b>3.5</b> Generating crosstabs</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="summary-statistics.html"><a href="summary-statistics.html#crosstabs-with-tabyl"><i class="fa fa-check"></i><b>3.5.1</b> Crosstabs with <code>tabyl</code></a></li>
+<li class="chapter" data-level="3.5.2" data-path="summary-statistics.html"><a href="summary-statistics.html#crosstabs-with-tbl_cross"><i class="fa fa-check"></i><b>3.5.2</b> Crosstabs with <code>tbl_cross</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html"><i class="fa fa-check"></i><b>4</b> Basic Data Cleaning and Preparation Tasks</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#rearranging-columns"><i class="fa fa-check"></i><b>4.1</b> Rearranging columns</a></li>
+<li class="chapter" data-level="4.2" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#renaming-variables"><i class="fa fa-check"></i><b>4.2</b> Renaming variables</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Primer for Social Scientists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basic-data-cleaning-and-preparation-tasks" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Basic Data Cleaning and Preparation Tasks</h1>
+<div id="rearranging-columns" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Rearranging columns</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb38-1" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
+<pre><code>## # A tibble: 85 × 75
+##     oecd country   pind pindo ctrycd col_uk t_indep col_uka col_espa col_otha legor_uk legor_so legor_fr legor_ge
+##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1     0 Argenti… 0     0        213      0     183   0        0.268    0            0        0        1        0
+##  2     1 Austral… 1     1        193      1      98   0.608    0        0            1        0        0        0
+##  3     1 Austria  0     0        122      0     250   0        0        0            0        0        0        1
+##  4     0 Bahamas  1     1        313      1      26   0.896    0        0            1        0        0        0
+##  5     0 Banglad… 1     1        513      0      28   0        0        0.888        1        0        0        0
+##  6     0 Barbados 1     1        316      1      33   0.868    0        0            1        0        0        0
+##  7     0 Belarus  1     1        913      0       8   0        0        0.968        0        1        0        0
+##  8     1 Belgium  0     0        124      0     169   0        0        0.324        0        0        1        0
+##  9     0 Belize   1     1        339      1      18   0.928    0        0            1        0        0        0
+## 10     0 Bolivia  0.116 0.116    218      0     174   0        0.304    0            0        0        1        0
+## # … with 75 more rows, and 61 more variables: legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;,
+## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
+## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
+## #   rgdph &lt;dbl&gt;, trade &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;,
+## #   yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;,
+## #   majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;, spl &lt;dbl&gt;,
+## #   cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, oecd.x &lt;dbl&gt;, mining_gdp &lt;dbl&gt;, gini_8090 &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring the &quot;country&quot; column to the front of the dataset</span></span>
+<span id="cb40-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb40-2" aria-hidden="true" tabindex="-1"></a>pt_copy<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(country)</span>
+<span id="cb40-3"><a href="basic-data-cleaning-and-preparation-tasks.html#cb40-3" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
+<pre><code>## # A tibble: 85 × 75
+##    country   oecd  pind pindo ctrycd col_uk t_indep col_uka col_espa col_otha legor_uk legor_so legor_fr legor_ge
+##    &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Argenti…     0 0     0        213      0     183   0        0.268    0            0        0        1        0
+##  2 Austral…     1 1     1        193      1      98   0.608    0        0            1        0        0        0
+##  3 Austria      1 0     0        122      0     250   0        0        0            0        0        0        1
+##  4 Bahamas      0 1     1        313      1      26   0.896    0        0            1        0        0        0
+##  5 Banglad…     0 1     1        513      0      28   0        0        0.888        1        0        0        0
+##  6 Barbados     0 1     1        316      1      33   0.868    0        0            1        0        0        0
+##  7 Belarus      0 1     1        913      0       8   0        0        0.968        0        1        0        0
+##  8 Belgium      1 0     0        124      0     169   0        0        0.324        0        0        1        0
+##  9 Belize       0 1     1        339      1      18   0.928    0        0            1        0        0        0
+## 10 Bolivia      0 0.116 0.116    218      0     174   0        0.304    0            0        0        1        0
+## # … with 75 more rows, and 61 more variables: legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;,
+## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
+## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
+## #   rgdph &lt;dbl&gt;, trade &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;,
+## #   yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;,
+## #   majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;, spl &lt;dbl&gt;,
+## #   cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, oecd.x &lt;dbl&gt;, mining_gdp &lt;dbl&gt;, gini_8090 &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb42-1" aria-hidden="true" tabindex="-1"></a>pt_copy<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(country, list, oecd)</span>
+<span id="cb42-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="basic-data-cleaning-and-preparation-tasks.html#cb42-3" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
+<pre><code>## # A tibble: 85 × 75
+##    country     list  oecd  pind pindo ctrycd col_uk t_indep col_uka col_espa col_otha legor_uk legor_so legor_fr
+##    &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Argentina   257.     0 0     0        213      0     183   0        0.268    0            0        0        1
+##  2 Australia     0      1 1     1        193      1      98   0.608    0        0            1        0        0
+##  3 Austria     183      1 0     0        122      0     250   0        0        0            0        0        0
+##  4 Bahamas       0      0 1     1        313      1      26   0.896    0        0            1        0        0
+##  5 Bangladesh    0      0 1     1        513      0      28   0        0        0.888        1        0        0
+##  6 Barbados      0      0 1     1        316      1      33   0.868    0        0            1        0        0
+##  7 Belarus       0      0 1     1        913      0       8   0        0        0.968        0        1        0
+##  8 Belgium     184.     1 0     0        124      0     169   0        0        0.324        0        0        1
+##  9 Belize        0      0 1     1        339      1      18   0.928    0        0            1        0        0
+## 10 Bolivia     115.     0 0.116 0.116    218      0     174   0        0.304    0            0        0        1
+## # … with 75 more rows, and 61 more variables: legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;,
+## #   confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;,
+## #   engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;,
+## #   ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, trade &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;,
+## #   spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;,
+## #   majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;,
+## #   spl &lt;dbl&gt;, cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, oecd.x &lt;dbl&gt;, mining_gdp &lt;dbl&gt;, …</code></pre>
+</div>
+<div id="renaming-variables" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Renaming variables</h2>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Renaming a variable (renames &quot;list&quot; to &quot;party_list&quot;)</span></span>
+<span id="cb44-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb44-2" aria-hidden="true" tabindex="-1"></a>pt_copy<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">party_list=</span>list)</span>
+<span id="cb44-3"><a href="basic-data-cleaning-and-preparation-tasks.html#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="basic-data-cleaning-and-preparation-tasks.html#cb44-4" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
+<pre><code>## # A tibble: 85 × 75
+##    country    party_list  oecd  pind pindo ctrycd col_uk t_indep col_uka col_espa col_otha legor_uk legor_so
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Argentina        257.     0 0     0        213      0     183   0        0.268    0            0        0
+##  2 Australia          0      1 1     1        193      1      98   0.608    0        0            1        0
+##  3 Austria          183      1 0     0        122      0     250   0        0        0            0        0
+##  4 Bahamas            0      0 1     1        313      1      26   0.896    0        0            1        0
+##  5 Bangladesh         0      0 1     1        513      0      28   0        0        0.888        1        0
+##  6 Barbados           0      0 1     1        316      1      33   0.868    0        0            1        0
+##  7 Belarus            0      0 1     1        913      0       8   0        0        0.968        0        1
+##  8 Belgium          184.     1 0     0        124      0     169   0        0        0.324        0        0
+##  9 Belize             0      0 1     1        339      1      18   0.928    0        0            1        0
+## 10 Bolivia          115.     0 0.116 0.116    218      0     174   0        0.304    0            0        0
+## # … with 75 more rows, and 62 more variables: legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;,
+## #   catho80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;,
+## #   gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;,
+## #   cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, trade &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;,
+## #   spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;,
+## #   majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;,
+## #   spl &lt;dbl&gt;, cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, oecd.x &lt;dbl&gt;, mining_gdp &lt;dbl&gt;, …</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="summary-statistics.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/aranganath24/r_primer/edit/master/02-lesson.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/aranganath24/r_primer/blob/master/02-lesson.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

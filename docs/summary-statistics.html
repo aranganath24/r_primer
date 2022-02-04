@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2022-02-02" />
+<meta name="date" content="2022-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="loading-data.html"/>
-
+<link rel="next" href="basic-data-cleaning-and-preparation-tasks.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -143,7 +143,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-a-table-of-summary-statistics"><i class="fa fa-check"></i><b>3.1</b> Generating a table of summary statistics</a></li>
 <li class="chapter" data-level="3.2" data-path="summary-statistics.html"><a href="summary-statistics.html#exporting-a-summary-statistics-table-as-a-csv-file"><i class="fa fa-check"></i><b>3.2</b> Exporting a summary statistics table as a CSV file</a></li>
 <li class="chapter" data-level="3.3" data-path="summary-statistics.html"><a href="summary-statistics.html#using-stargazer-to-create-and-export-summary-statistics-with"><i class="fa fa-check"></i><b>3.3</b> Using <code>stargazer</code> to create and export summary statistics with</a></li>
-<li class="chapter" data-level="3.4" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-summary-statistics-by-group"><i class="fa fa-check"></i><b>3.4</b> Generating summary statistics by group</a></li>
+<li class="chapter" data-level="3.4" data-path="summary-statistics.html"><a href="summary-statistics.html#summary-statistics-and-grouping-variables"><i class="fa fa-check"></i><b>3.4</b> Summary statistics and grouping variables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="summary-statistics.html"><a href="summary-statistics.html#subsetting-summary-statistics-by-group-with-the-describe-function"><i class="fa fa-check"></i><b>3.4.1</b> Subsetting summary statistics by group with the <code>describe</code> function</a></li>
+<li class="chapter" data-level="3.4.2" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-group-level-summary-statistics-with-the-summarize-function-from-dplyr"><i class="fa fa-check"></i><b>3.4.2</b> Generating group-level summary statistics with the <code>summarize</code> function from <code>dplyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-crosstabs"><i class="fa fa-check"></i><b>3.5</b> Generating crosstabs</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="summary-statistics.html"><a href="summary-statistics.html#crosstabs-with-tabyl"><i class="fa fa-check"></i><b>3.5.1</b> Crosstabs with <code>tabyl</code></a></li>
+<li class="chapter" data-level="3.5.2" data-path="summary-statistics.html"><a href="summary-statistics.html#crosstabs-with-tbl_cross"><i class="fa fa-check"></i><b>3.5.2</b> Crosstabs with <code>tbl_cross</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html"><i class="fa fa-check"></i><b>4</b> Basic Data Cleaning and Preparation Tasks</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#rearranging-columns"><i class="fa fa-check"></i><b>4.1</b> Rearranging columns</a></li>
+<li class="chapter" data-level="4.2" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#renaming-variables"><i class="fa fa-check"></i><b>4.2</b> Renaming variables</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -581,11 +595,1150 @@ col_uk
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="summary-statistics.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use stargazer to export summary statistics as an html file</span></span>
 <span id="cb15-2"><a href="summary-statistics.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(pt_copy_df, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">title=</span><span class="st">&quot;Descriptive Statistics&quot;</span>, <span class="at">digits=</span><span class="dv">1</span>, <span class="at">out=</span><span class="st">&quot;summary_stats.html&quot;</span>)</span></code></pre></div>
 </div>
-<div id="generating-summary-statistics-by-group" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Generating summary statistics by group</h2>
+<div id="summary-statistics-and-grouping-variables" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Summary statistics and grouping variables</h2>
+<div id="subsetting-summary-statistics-by-group-with-the-describe-function" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Subsetting summary statistics by group with the <code>describe</code> function</h3>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="summary-statistics.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1</span></span>
 <span id="cb16-2"><a href="summary-statistics.html#cb16-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent<span class="ot">&lt;-</span><span class="fu">describeBy</span>(pt_copy, pt_copy<span class="sc">$</span>continent)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="summary-statistics.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accessing continent-level summary statistics for africa from the &quot;summary_stats_by_continent&quot; list</span></span>
+<span id="cb17-2"><a href="summary-statistics.html#cb17-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent[[<span class="st">&quot;africa&quot;</span>]]</span></code></pre></div>
+<pre><code>##            vars  n    mean      sd  median trimmed    mad     min     max   range  skew kurtosis     se
+## oecd          1 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## country*      2 11    6.00    3.32    6.00    6.00   4.45    1.00   11.00   10.00  0.00    -1.53   1.00
+## pind          3 11    0.77    0.42    1.00    0.83   0.00    0.00    1.00    1.00 -1.06    -0.79   0.13
+## pindo         4 11    0.77    0.42    1.00    0.83   0.00    0.00    1.00    1.00 -1.06    -0.79   0.13
+## ctrycd        5 11  647.55  154.90  684.00  685.56  56.34  199.00  754.00  555.00 -2.13     3.44  46.70
+## col_uk        6 11    0.82    0.40    1.00    0.89   0.00    0.00    1.00    1.00 -1.43     0.08   0.12
+## t_indep       7 11   36.64   19.77   35.00   33.89   5.93    9.00   89.00   80.00  1.38     1.88   5.96
+## col_uka       8 11    0.69    0.35    0.86    0.74   0.02    0.00    0.92    0.92 -1.31    -0.14   0.10
+## col_espa      9 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## col_otha     10 11    0.15    0.33    0.00    0.07   0.00    0.00    0.96    0.96  1.58     0.79   0.10
+## legor_uk     11 11    0.82    0.40    1.00    0.89   0.00    0.00    1.00    1.00 -1.43     0.08   0.12
+## legor_so     12 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## legor_fr     13 11    0.18    0.40    0.00    0.11   0.00    0.00    1.00    1.00  1.43     0.08   0.12
+## legor_ge     14 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## legor_sc     15 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## prot80       16 11   22.17   20.23   25.80   19.96  19.57    0.10   64.20   64.10  0.46    -0.80   6.10
+## catho80      17 11   19.46   13.67   18.70   18.07  13.20    1.90   49.60   47.70  0.71    -0.39   4.12
+## confu        18 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## avelf        19 11    0.71    0.14    0.73    0.73   0.15    0.38    0.84    0.46 -1.15     0.44   0.04
+## govef        20 11    5.37    0.82    5.02    5.25   0.68    4.56    7.26    2.70  0.97    -0.17   0.25
+## graft        21 11    5.11    0.77    5.39    5.12   0.80    3.93    6.23    2.30 -0.17    -1.62   0.23
+## logyl        22 11    7.93    0.78    7.75    7.90   0.53    6.95    9.13    2.18  0.42    -1.43   0.23
+## loga         23 11    7.38    0.66    7.33    7.37   0.55    6.28    8.58    2.29  0.03    -0.91   0.20
+## yrsopen      24 11    0.21    0.29    0.16    0.15   0.18    0.00    1.00    1.00  1.72     2.15   0.09
+## gadp         25 11    0.55    0.12    0.54    0.55   0.12    0.37    0.74    0.37  0.28    -1.38   0.04
+## engfrac      26 11    0.02    0.04    0.00    0.02   0.00    0.00    0.09    0.09  0.95    -1.09   0.01
+## eurfrac      27 11    0.07    0.17    0.00    0.03   0.00    0.00    0.57    0.57  2.24     3.76   0.05
+## frankrom     28 11    2.90    0.51    2.94    2.86   0.56    2.19    3.95    1.77  0.54    -0.69   0.15
+## latitude     29 11   -9.14   15.17  -15.81   -9.58   8.49  -29.13   14.77   43.90  0.44    -1.52   4.57
+## gastil       30 11    3.59    1.16    4.00    3.66   1.32    1.61    4.89    3.28 -0.48    -1.45   0.35
+## cgexp        31 10   27.00    7.63   25.50   27.10   8.58   14.65   38.57   23.92  0.06    -1.30   2.41
+## cgrev        32  9   26.15   10.36   23.81   26.15   6.14   17.24   50.85   33.61  1.40     0.71   3.45
+## ssw          33  6    1.67    1.46    0.94    1.67   0.58    0.44    3.80    3.36  0.52    -1.87   0.60
+## rgdph        34 11 1899.87 1832.60 1116.28 1522.39 738.30  530.22 6666.77 6136.54  1.50     1.28 552.55
+## trade        35 11   77.34   32.13   69.17   76.87  27.13   30.83  128.12   97.29  0.31    -1.40   9.69
+## prop1564     36 11   54.23    4.91   53.23   53.51   2.96   49.05   65.95   16.90  1.19     0.34   1.48
+## prop65       37 11    3.28    1.16    2.80    3.06   0.65    2.34    6.26    3.92  1.47     1.16   0.35
+## federal      38 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## eduger       39 11   73.95   23.54   73.55   73.64  25.47   40.05  110.67   70.62  0.08    -1.50   7.10
+## spropn       40 10    0.27    0.42    0.00    0.21   0.00    0.00    1.00    1.00  0.92    -1.07   0.13
+## yearele      41  8 1982.50   13.48 1990.50 1982.50   5.19 1965.00 1994.00   29.00 -0.41    -2.00   4.77
+## yearreg      42  8 1982.50   13.48 1990.50 1982.50   5.19 1965.00 1994.00   29.00 -0.41    -2.00   4.77
+## seats        43 11  151.20  109.96  122.22  136.21  86.65   37.33  400.00  362.67  0.92    -0.20  33.16
+## maj          44 11    0.73    0.47    1.00    0.78   0.00    0.00    1.00    1.00 -0.88    -1.31   0.14
+## pres         45 11    0.64    0.50    1.00    0.67   0.00    0.00    1.00    1.00 -0.49    -1.91   0.15
+## lyp          46 11    7.22    0.81    7.02    7.15   0.88    6.27    8.80    2.53  0.53    -1.18   0.25
+## semi         47 11    0.18    0.40    0.00    0.11   0.00    0.00    1.00    1.00  1.43     0.08   0.12
+## majpar       48 11    0.18    0.40    0.00    0.11   0.00    0.00    1.00    1.00  1.43     0.08   0.12
+## majpres      49 11    0.55    0.52    1.00    0.56   0.00    0.00    1.00    1.00 -0.16    -2.15   0.16
+## propres      50 11    0.09    0.30    0.00    0.00   0.00    0.00    1.00    1.00  2.47     4.52   0.09
+## dem_age      51 11 1975.82   24.77 1989.00 1981.11   7.41 1910.00 1994.00   84.00 -1.57     1.64   7.47
+## lat01        52 11    0.17    0.08    0.18    0.17   0.05    0.00    0.32    0.32 -0.28    -0.38   0.03
+## age          53 11    0.12    0.12    0.05    0.09   0.04    0.03    0.45    0.42  1.57     1.64   0.04
+## polityIV     54 11    2.34    5.56    0.22    2.42   6.75   -6.00   10.00   16.00  0.07    -1.63   1.68
+## spl          55  8   -1.55    4.52   -1.54   -1.55   1.91   -6.77    8.23   15.00  0.98     0.05   1.60
+## cpi9500      56  9    5.70    1.15    5.90    5.70   1.14    3.93    7.55    3.61  0.01    -1.45   0.38
+## du_60ctry    57 11    0.27    0.47    0.00    0.22   0.00    0.00    1.00    1.00  0.88    -1.31   0.14
+## magn         58 11    0.71    0.41    1.00    0.75   0.00    0.02    1.00    0.98 -0.58    -1.70   0.12
+## sdm          59  9    0.71    0.45    1.00    0.71   0.00    0.03    1.00    0.97 -0.67    -1.63   0.15
+## oecd.x       60 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## mining_gdp   61 10    8.43   11.70    4.10    5.89   5.71    0.02   37.20   37.18  1.39     0.79   3.70
+## gini_8090    62  9   50.25    9.95   54.00   50.25  11.86   35.36   62.30   26.94 -0.19    -1.71   3.32
+## con2150      63 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## con5180      64 11    0.27    0.47    0.00    0.22   0.00    0.00    1.00    1.00  0.88    -1.31   0.14
+## con81        65 11    0.73    0.47    1.00    0.78   0.00    0.00    1.00    1.00 -0.88    -1.31   0.14
+## list         66 11   49.83  119.87    0.00   16.46   0.00    0.00  400.00  400.00  2.22     3.64  36.14
+## maj_bad      67 11    2.73    2.05    3.83    2.80   1.56    0.00    4.89    4.89 -0.32    -1.81   0.62
+## maj_gin      68  9   37.31   22.84   41.35   37.31  18.75    0.00   62.00   62.00 -0.71    -1.17   7.61
+## maj_old      69 11    0.06    0.07    0.04    0.06   0.06    0.00    0.17    0.17  0.69    -1.39   0.02
+## pres_bad     70 11    2.63    2.18    3.83    2.67   1.56    0.00    4.89    4.89 -0.30    -1.92   0.66
+## pres_gin     71  9   26.72   26.59   35.36   26.72  39.50    0.00   62.00   62.00  0.04    -1.97   8.86
+## pres_old     72 11    0.04    0.05    0.03    0.03   0.04    0.00    0.17    0.17  1.66     2.10   0.02
+## propar       73 11    0.18    0.40    0.00    0.11   0.00    0.00    1.00    1.00  1.43     0.08   0.12
+## lpop         74  3   13.99    0.15   13.92   13.99   0.05   13.88   14.17    0.28  0.36    -2.33   0.09
+## continent*   75 11    1.00    0.00    1.00    1.00   0.00    1.00    1.00    0.00   NaN      NaN   0.00</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="summary-statistics.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accessing continent-level summary statistics for africa from the &quot;summary_stats_by_continent&quot; list; alternate syntax</span></span>
+<span id="cb19-2"><a href="summary-statistics.html#cb19-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent <span class="sc">%&gt;%</span> <span class="fu">pluck</span>(<span class="st">&quot;africa&quot;</span>)</span></code></pre></div>
+<pre><code>##            vars  n    mean      sd  median trimmed    mad     min     max   range  skew kurtosis     se
+## oecd          1 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## country*      2 11    6.00    3.32    6.00    6.00   4.45    1.00   11.00   10.00  0.00    -1.53   1.00
+## pind          3 11    0.77    0.42    1.00    0.83   0.00    0.00    1.00    1.00 -1.06    -0.79   0.13
+## pindo         4 11    0.77    0.42    1.00    0.83   0.00    0.00    1.00    1.00 -1.06    -0.79   0.13
+## ctrycd        5 11  647.55  154.90  684.00  685.56  56.34  199.00  754.00  555.00 -2.13     3.44  46.70
+## col_uk        6 11    0.82    0.40    1.00    0.89   0.00    0.00    1.00    1.00 -1.43     0.08   0.12
+## t_indep       7 11   36.64   19.77   35.00   33.89   5.93    9.00   89.00   80.00  1.38     1.88   5.96
+## col_uka       8 11    0.69    0.35    0.86    0.74   0.02    0.00    0.92    0.92 -1.31    -0.14   0.10
+## col_espa      9 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## col_otha     10 11    0.15    0.33    0.00    0.07   0.00    0.00    0.96    0.96  1.58     0.79   0.10
+## legor_uk     11 11    0.82    0.40    1.00    0.89   0.00    0.00    1.00    1.00 -1.43     0.08   0.12
+## legor_so     12 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## legor_fr     13 11    0.18    0.40    0.00    0.11   0.00    0.00    1.00    1.00  1.43     0.08   0.12
+## legor_ge     14 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## legor_sc     15 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## prot80       16 11   22.17   20.23   25.80   19.96  19.57    0.10   64.20   64.10  0.46    -0.80   6.10
+## catho80      17 11   19.46   13.67   18.70   18.07  13.20    1.90   49.60   47.70  0.71    -0.39   4.12
+## confu        18 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## avelf        19 11    0.71    0.14    0.73    0.73   0.15    0.38    0.84    0.46 -1.15     0.44   0.04
+## govef        20 11    5.37    0.82    5.02    5.25   0.68    4.56    7.26    2.70  0.97    -0.17   0.25
+## graft        21 11    5.11    0.77    5.39    5.12   0.80    3.93    6.23    2.30 -0.17    -1.62   0.23
+## logyl        22 11    7.93    0.78    7.75    7.90   0.53    6.95    9.13    2.18  0.42    -1.43   0.23
+## loga         23 11    7.38    0.66    7.33    7.37   0.55    6.28    8.58    2.29  0.03    -0.91   0.20
+## yrsopen      24 11    0.21    0.29    0.16    0.15   0.18    0.00    1.00    1.00  1.72     2.15   0.09
+## gadp         25 11    0.55    0.12    0.54    0.55   0.12    0.37    0.74    0.37  0.28    -1.38   0.04
+## engfrac      26 11    0.02    0.04    0.00    0.02   0.00    0.00    0.09    0.09  0.95    -1.09   0.01
+## eurfrac      27 11    0.07    0.17    0.00    0.03   0.00    0.00    0.57    0.57  2.24     3.76   0.05
+## frankrom     28 11    2.90    0.51    2.94    2.86   0.56    2.19    3.95    1.77  0.54    -0.69   0.15
+## latitude     29 11   -9.14   15.17  -15.81   -9.58   8.49  -29.13   14.77   43.90  0.44    -1.52   4.57
+## gastil       30 11    3.59    1.16    4.00    3.66   1.32    1.61    4.89    3.28 -0.48    -1.45   0.35
+## cgexp        31 10   27.00    7.63   25.50   27.10   8.58   14.65   38.57   23.92  0.06    -1.30   2.41
+## cgrev        32  9   26.15   10.36   23.81   26.15   6.14   17.24   50.85   33.61  1.40     0.71   3.45
+## ssw          33  6    1.67    1.46    0.94    1.67   0.58    0.44    3.80    3.36  0.52    -1.87   0.60
+## rgdph        34 11 1899.87 1832.60 1116.28 1522.39 738.30  530.22 6666.77 6136.54  1.50     1.28 552.55
+## trade        35 11   77.34   32.13   69.17   76.87  27.13   30.83  128.12   97.29  0.31    -1.40   9.69
+## prop1564     36 11   54.23    4.91   53.23   53.51   2.96   49.05   65.95   16.90  1.19     0.34   1.48
+## prop65       37 11    3.28    1.16    2.80    3.06   0.65    2.34    6.26    3.92  1.47     1.16   0.35
+## federal      38 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## eduger       39 11   73.95   23.54   73.55   73.64  25.47   40.05  110.67   70.62  0.08    -1.50   7.10
+## spropn       40 10    0.27    0.42    0.00    0.21   0.00    0.00    1.00    1.00  0.92    -1.07   0.13
+## yearele      41  8 1982.50   13.48 1990.50 1982.50   5.19 1965.00 1994.00   29.00 -0.41    -2.00   4.77
+## yearreg      42  8 1982.50   13.48 1990.50 1982.50   5.19 1965.00 1994.00   29.00 -0.41    -2.00   4.77
+## seats        43 11  151.20  109.96  122.22  136.21  86.65   37.33  400.00  362.67  0.92    -0.20  33.16
+## maj          44 11    0.73    0.47    1.00    0.78   0.00    0.00    1.00    1.00 -0.88    -1.31   0.14
+## pres         45 11    0.64    0.50    1.00    0.67   0.00    0.00    1.00    1.00 -0.49    -1.91   0.15
+## lyp          46 11    7.22    0.81    7.02    7.15   0.88    6.27    8.80    2.53  0.53    -1.18   0.25
+## semi         47 11    0.18    0.40    0.00    0.11   0.00    0.00    1.00    1.00  1.43     0.08   0.12
+## majpar       48 11    0.18    0.40    0.00    0.11   0.00    0.00    1.00    1.00  1.43     0.08   0.12
+## majpres      49 11    0.55    0.52    1.00    0.56   0.00    0.00    1.00    1.00 -0.16    -2.15   0.16
+## propres      50 11    0.09    0.30    0.00    0.00   0.00    0.00    1.00    1.00  2.47     4.52   0.09
+## dem_age      51 11 1975.82   24.77 1989.00 1981.11   7.41 1910.00 1994.00   84.00 -1.57     1.64   7.47
+## lat01        52 11    0.17    0.08    0.18    0.17   0.05    0.00    0.32    0.32 -0.28    -0.38   0.03
+## age          53 11    0.12    0.12    0.05    0.09   0.04    0.03    0.45    0.42  1.57     1.64   0.04
+## polityIV     54 11    2.34    5.56    0.22    2.42   6.75   -6.00   10.00   16.00  0.07    -1.63   1.68
+## spl          55  8   -1.55    4.52   -1.54   -1.55   1.91   -6.77    8.23   15.00  0.98     0.05   1.60
+## cpi9500      56  9    5.70    1.15    5.90    5.70   1.14    3.93    7.55    3.61  0.01    -1.45   0.38
+## du_60ctry    57 11    0.27    0.47    0.00    0.22   0.00    0.00    1.00    1.00  0.88    -1.31   0.14
+## magn         58 11    0.71    0.41    1.00    0.75   0.00    0.02    1.00    0.98 -0.58    -1.70   0.12
+## sdm          59  9    0.71    0.45    1.00    0.71   0.00    0.03    1.00    0.97 -0.67    -1.63   0.15
+## oecd.x       60 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## mining_gdp   61 10    8.43   11.70    4.10    5.89   5.71    0.02   37.20   37.18  1.39     0.79   3.70
+## gini_8090    62  9   50.25    9.95   54.00   50.25  11.86   35.36   62.30   26.94 -0.19    -1.71   3.32
+## con2150      63 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN      NaN   0.00
+## con5180      64 11    0.27    0.47    0.00    0.22   0.00    0.00    1.00    1.00  0.88    -1.31   0.14
+## con81        65 11    0.73    0.47    1.00    0.78   0.00    0.00    1.00    1.00 -0.88    -1.31   0.14
+## list         66 11   49.83  119.87    0.00   16.46   0.00    0.00  400.00  400.00  2.22     3.64  36.14
+## maj_bad      67 11    2.73    2.05    3.83    2.80   1.56    0.00    4.89    4.89 -0.32    -1.81   0.62
+## maj_gin      68  9   37.31   22.84   41.35   37.31  18.75    0.00   62.00   62.00 -0.71    -1.17   7.61
+## maj_old      69 11    0.06    0.07    0.04    0.06   0.06    0.00    0.17    0.17  0.69    -1.39   0.02
+## pres_bad     70 11    2.63    2.18    3.83    2.67   1.56    0.00    4.89    4.89 -0.30    -1.92   0.66
+## pres_gin     71  9   26.72   26.59   35.36   26.72  39.50    0.00   62.00   62.00  0.04    -1.97   8.86
+## pres_old     72 11    0.04    0.05    0.03    0.03   0.04    0.00    0.17    0.17  1.66     2.10   0.02
+## propar       73 11    0.18    0.40    0.00    0.11   0.00    0.00    1.00    1.00  1.43     0.08   0.12
+## lpop         74  3   13.99    0.15   13.92   13.99   0.05   13.88   14.17    0.28  0.36    -2.33   0.09
+## continent*   75 11    1.00    0.00    1.00    1.00   0.00    1.00    1.00    0.00   NaN      NaN   0.00</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="summary-statistics.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group-level summary statistics can be assigned to their own object for easy retrieval</span></span>
+<span id="cb21-2"><a href="summary-statistics.html#cb21-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics<span class="ot">&lt;-</span>summary_stats_by_continent <span class="sc">%&gt;%</span> <span class="fu">pluck</span>(<span class="st">&quot;asiae&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="summary-statistics.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># retrieve summary statistics for Asia/Europe </span></span>
+<span id="cb22-2"><a href="summary-statistics.html#cb22-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics</span></code></pre></div>
+<pre><code>##            vars  n    mean      sd  median trimmed     mad     min      max    range  skew kurtosis      se
+## oecd          1 13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN      NaN    0.00
+## country*      2 13    7.00    3.89    7.00    7.00    4.45    1.00    13.00    12.00  0.00    -1.48    1.08
+## pind          3 13    0.87    0.28    1.00    0.94    0.00    0.00     1.00     1.00 -2.31     4.47    0.08
+## pindo         4 13    0.95    0.09    1.00    0.96    0.00    0.78     1.00     0.22 -1.12    -0.77    0.03
+## ctrycd        5 13  623.00  141.16  564.00  605.64   32.62  513.00   924.00   411.00  1.15    -0.50   39.15
+## col_uk        6 13    0.54    0.52    1.00    0.55    0.00    0.00     1.00     1.00 -0.14    -2.13    0.14
+## t_indep       7 13   74.31   78.67   51.00   62.91   13.34   24.00   250.00   226.00  1.64     0.87   21.82
+## col_uka       8 13    0.45    0.44    0.79    0.45    0.17    0.00     0.90     0.90 -0.12    -2.11    0.12
+## col_espa      9 13    0.06    0.22    0.00    0.00    0.00    0.00     0.79     0.79  2.82     6.44    0.06
+## col_otha     10 13    0.39    0.44    0.00    0.38    0.00    0.00     0.90     0.90  0.15    -2.10    0.12
+## legor_uk     11 13    0.77    0.44    1.00    0.82    0.00    0.00     1.00     1.00 -1.13    -0.76    0.12
+## legor_so     12 13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN      NaN    0.00
+## legor_fr     13 13    0.08    0.28    0.00    0.00    0.00    0.00     1.00     1.00  2.82     6.44    0.08
+## legor_ge     14 13    0.15    0.38    0.00    0.09    0.00    0.00     1.00     1.00  1.70     0.99    0.10
+## legor_sc     15 13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN      NaN    0.00
+## prot80       16 13    9.48   18.15    1.40    5.89    1.78    0.00    58.40    58.40  1.77     1.64    5.04
+## catho80      17 13   11.38   23.52    2.80    5.81    3.56    0.00    84.10    84.10  2.28     4.10    6.52
+## confu        18 13    0.38    0.51    0.00    0.36    0.00    0.00     1.00     1.00  0.42    -1.96    0.14
+## avelf        19 13    0.46    0.28    0.45    0.47    0.29    0.00     0.80     0.80 -0.31    -1.35    0.08
+## govef        20 12    4.60    1.75    4.86    4.79    1.90    0.84     6.49     5.65 -0.69    -0.68    0.51
+## graft        21 12    4.76    1.56    5.29    4.93    1.38    1.10     6.71     5.60 -0.85    -0.04    0.45
+## logyl        22 12    8.83    0.66    8.62    8.80    0.82    7.92     9.97     2.05  0.30    -1.39    0.19
+## loga         23 12    8.05    0.52    8.01    8.03    0.58    7.30     8.90     1.60  0.04    -1.32    0.15
+## yrsopen      24 13    0.72    1.09    0.41    0.48    0.60    0.00     4.09     4.09  2.19     4.17    0.30
+## gadp         25 12    0.61    0.17    0.62    0.61    0.20    0.31     0.86     0.55 -0.17    -1.31    0.05
+## engfrac      26 13    0.01    0.02    0.00    0.00    0.00    0.00     0.09     0.09  2.63     5.72    0.01
+## eurfrac      27 13    0.01    0.02    0.00    0.00    0.00    0.00     0.09     0.09  2.63     5.72    0.01
+## frankrom     28 13    2.52    0.61    2.59    2.52    0.45    1.19     3.89     2.70  0.07     0.65    0.17
+## latitude     29 13   14.28   16.21   13.92   15.08   16.83  -17.83    37.55    55.38 -0.41    -1.06    4.49
+## gastil       30 13    3.52    0.75    3.33    3.54    0.74    2.17     4.67     2.50  0.04    -1.21    0.21
+## cgexp        31 13   20.44    5.76   18.48   20.22    4.29   12.57    30.81    18.25  0.47    -1.34    1.60
+## cgrev        32 13   19.54    6.81   18.45   19.06    6.91    9.74    34.67    24.94  0.62    -0.47    1.89
+## ssw          33 11    1.27    1.29    0.65    1.05    0.77    0.13     4.39     4.26  1.23     0.40    0.39
+## rgdph        34 13 4601.57 4223.17 2441.69 3994.20 1919.26 1147.17 14737.04 13589.87  1.11    -0.03 1171.30
+## trade        35 13   97.78   84.61   80.63   82.35   45.68   21.88   343.39   321.50  1.79     2.64   23.47
+## prop1564     36 12   60.79    6.17   60.00   60.41    7.40   53.78    71.70    17.92  0.47    -1.20    1.78
+## prop65       37 12    4.27    1.16    3.86    4.23    1.15    2.79     6.23     3.44  0.37    -1.50    0.33
+## federal      38 13    0.15    0.38    0.00    0.09    0.00    0.00     1.00     1.00  1.70     0.99    0.10
+## eduger       39 12   74.16   20.58   77.72   74.91   20.56   42.15    98.74    56.59 -0.40    -1.42    5.94
+## spropn       40 10    0.09    0.12    0.04    0.07    0.06    0.00     0.36     0.36  1.04    -0.24    0.04
+## yearele      41 12 1981.94   14.46 1989.00 1984.10    4.45 1950.00  1992.22    42.22 -1.19    -0.18    4.17
+## yearreg      42 12 1979.00   17.19 1988.00 1980.80    5.19 1948.00  1992.00    44.00 -0.89    -1.10    4.96
+## seats        43 13  229.54  126.01  202.89  217.97  141.01   66.00   520.33   454.33  0.74    -0.21   34.95
+## maj          44 13    0.69    0.48    1.00    0.73    0.00    0.00     1.00     1.00 -0.74    -1.56    0.13
+## pres         45 13    0.31    0.48    0.00    0.27    0.00    0.00     1.00     1.00  0.74    -1.56    0.13
+## lyp          46 13    8.08    0.86    7.80    8.03    0.79    7.05     9.60     2.55  0.40    -1.50    0.24
+## semi         47 13    0.23    0.44    0.00    0.18    0.00    0.00     1.00     1.00  1.13    -0.76    0.12
+## majpar       48 13    0.57    0.49    0.89    0.59    0.16    0.00     1.00     1.00 -0.29    -1.97    0.13
+## majpres      49 13    0.15    0.35    0.00    0.09    0.00    0.00     1.00     1.00  1.69     1.02    0.10
+## propres      50 13    0.16    0.37    0.00    0.10    0.00    0.00     1.00     1.00  1.68     0.94    0.10
+## dem_age      51 13 1977.92   16.91 1988.00 1979.36    5.93 1948.00  1992.00    44.00 -0.73    -1.30    4.69
+## lat01        52 13    0.20    0.13    0.20    0.20    0.16    0.02     0.42     0.40  0.03    -1.44    0.04
+## age          53 13    0.11    0.08    0.06    0.10    0.03    0.04     0.26     0.22  0.73    -1.30    0.02
+## polityIV     54 13    6.24    3.08    6.22    6.65    2.14   -2.00    10.00    12.00 -1.16     1.31    0.86
+## spl          55 13   -1.52    5.32   -1.70   -2.27    4.30   -7.36    12.59    19.95  1.19     1.10    1.48
+## cpi9500      56  9    5.89    2.16    6.90    5.89    1.42    1.00     7.86     6.87 -1.11     0.08    0.72
+## du_60ctry    57 13    0.62    0.51    1.00    0.64    0.00    0.00     1.00     1.00 -0.42    -1.96    0.14
+## magn         58 12    0.76    0.32    0.94    0.80    0.08    0.10     1.00     0.90 -0.87    -0.91    0.09
+## sdm          59 11    0.52    0.45    0.39    0.53    0.57    0.01     1.00     0.99  0.06    -2.06    0.14
+## oecd.x       60 13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN      NaN    0.00
+## mining_gdp   61 11    2.86    5.07    1.04    1.64    0.96    0.02    16.74    16.72  1.87     2.21    1.53
+## gini_8090    62 11   38.28    7.66   37.55   38.05    8.62   29.03    49.67    20.64  0.27    -1.64    2.31
+## con2150      63 13    0.15    0.38    0.00    0.09    0.00    0.00     1.00     1.00  1.70     0.99    0.10
+## con5180      64 13    0.31    0.48    0.00    0.27    0.00    0.00     1.00     1.00  0.74    -1.56    0.13
+## con81        65 13    0.62    0.51    1.00    0.64    0.00    0.00     1.00     1.00 -0.42    -1.96    0.14
+## list         66 12   25.74   65.45    0.00    8.39    0.00    0.00   224.89   224.89  2.32     4.17   18.89
+## maj_bad      67 13    2.50    1.83    3.17    2.53    1.65    0.00     4.67     4.67 -0.45    -1.56    0.51
+## maj_gin      68 11   28.37   19.49   32.00   29.15   20.02    0.00    49.67    49.67 -0.52    -1.45    5.88
+## maj_old      69 13    0.08    0.09    0.05    0.07    0.07    0.00     0.25     0.25  0.79    -0.93    0.02
+## pres_bad     70 13    1.05    1.71    0.00    0.85    0.00    0.00     4.28     4.28  0.97    -0.90    0.48
+## pres_gin     71 11   10.43   18.14    0.00    7.70    0.00    0.00    45.50    45.50  0.97    -1.02    5.47
+## pres_old     72 13    0.03    0.07    0.00    0.02    0.00    0.00     0.26     0.26  2.22     4.11    0.02
+## propar       73 13    0.15    0.38    0.00    0.09    0.00    0.00     1.00     1.00  1.70     0.99    0.10
+## lpop         74  8   16.97    2.07   16.83   16.97    1.68   13.57    20.63     7.06  0.10    -0.80    0.73
+## continent*   75 13    1.00    0.00    1.00    1.00    0.00    1.00     1.00     0.00   NaN      NaN    0.00</code></pre>
+<p>The “vars” column in the summary statistics table is an index variable; it can be removed with the following:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="summary-statistics.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removes &quot;vars&quot; indexing variable from &quot;asia_europe_summary_statistics&quot;</span></span>
+<span id="cb24-2"><a href="summary-statistics.html#cb24-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics<span class="ot">&lt;-</span>asia_europe_summary_statistics <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>vars)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="summary-statistics.html#cb25-1" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics</span></code></pre></div>
+<pre><code>##             n    mean      sd  median trimmed     mad     min      max    range  skew kurtosis      se
+## oecd       13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN      NaN    0.00
+## country*   13    7.00    3.89    7.00    7.00    4.45    1.00    13.00    12.00  0.00    -1.48    1.08
+## pind       13    0.87    0.28    1.00    0.94    0.00    0.00     1.00     1.00 -2.31     4.47    0.08
+## pindo      13    0.95    0.09    1.00    0.96    0.00    0.78     1.00     0.22 -1.12    -0.77    0.03
+## ctrycd     13  623.00  141.16  564.00  605.64   32.62  513.00   924.00   411.00  1.15    -0.50   39.15
+## col_uk     13    0.54    0.52    1.00    0.55    0.00    0.00     1.00     1.00 -0.14    -2.13    0.14
+## t_indep    13   74.31   78.67   51.00   62.91   13.34   24.00   250.00   226.00  1.64     0.87   21.82
+## col_uka    13    0.45    0.44    0.79    0.45    0.17    0.00     0.90     0.90 -0.12    -2.11    0.12
+## col_espa   13    0.06    0.22    0.00    0.00    0.00    0.00     0.79     0.79  2.82     6.44    0.06
+## col_otha   13    0.39    0.44    0.00    0.38    0.00    0.00     0.90     0.90  0.15    -2.10    0.12
+## legor_uk   13    0.77    0.44    1.00    0.82    0.00    0.00     1.00     1.00 -1.13    -0.76    0.12
+## legor_so   13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN      NaN    0.00
+## legor_fr   13    0.08    0.28    0.00    0.00    0.00    0.00     1.00     1.00  2.82     6.44    0.08
+## legor_ge   13    0.15    0.38    0.00    0.09    0.00    0.00     1.00     1.00  1.70     0.99    0.10
+## legor_sc   13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN      NaN    0.00
+## prot80     13    9.48   18.15    1.40    5.89    1.78    0.00    58.40    58.40  1.77     1.64    5.04
+## catho80    13   11.38   23.52    2.80    5.81    3.56    0.00    84.10    84.10  2.28     4.10    6.52
+## confu      13    0.38    0.51    0.00    0.36    0.00    0.00     1.00     1.00  0.42    -1.96    0.14
+## avelf      13    0.46    0.28    0.45    0.47    0.29    0.00     0.80     0.80 -0.31    -1.35    0.08
+## govef      12    4.60    1.75    4.86    4.79    1.90    0.84     6.49     5.65 -0.69    -0.68    0.51
+## graft      12    4.76    1.56    5.29    4.93    1.38    1.10     6.71     5.60 -0.85    -0.04    0.45
+## logyl      12    8.83    0.66    8.62    8.80    0.82    7.92     9.97     2.05  0.30    -1.39    0.19
+## loga       12    8.05    0.52    8.01    8.03    0.58    7.30     8.90     1.60  0.04    -1.32    0.15
+## yrsopen    13    0.72    1.09    0.41    0.48    0.60    0.00     4.09     4.09  2.19     4.17    0.30
+## gadp       12    0.61    0.17    0.62    0.61    0.20    0.31     0.86     0.55 -0.17    -1.31    0.05
+## engfrac    13    0.01    0.02    0.00    0.00    0.00    0.00     0.09     0.09  2.63     5.72    0.01
+## eurfrac    13    0.01    0.02    0.00    0.00    0.00    0.00     0.09     0.09  2.63     5.72    0.01
+## frankrom   13    2.52    0.61    2.59    2.52    0.45    1.19     3.89     2.70  0.07     0.65    0.17
+## latitude   13   14.28   16.21   13.92   15.08   16.83  -17.83    37.55    55.38 -0.41    -1.06    4.49
+## gastil     13    3.52    0.75    3.33    3.54    0.74    2.17     4.67     2.50  0.04    -1.21    0.21
+## cgexp      13   20.44    5.76   18.48   20.22    4.29   12.57    30.81    18.25  0.47    -1.34    1.60
+## cgrev      13   19.54    6.81   18.45   19.06    6.91    9.74    34.67    24.94  0.62    -0.47    1.89
+## ssw        11    1.27    1.29    0.65    1.05    0.77    0.13     4.39     4.26  1.23     0.40    0.39
+## rgdph      13 4601.57 4223.17 2441.69 3994.20 1919.26 1147.17 14737.04 13589.87  1.11    -0.03 1171.30
+## trade      13   97.78   84.61   80.63   82.35   45.68   21.88   343.39   321.50  1.79     2.64   23.47
+## prop1564   12   60.79    6.17   60.00   60.41    7.40   53.78    71.70    17.92  0.47    -1.20    1.78
+## prop65     12    4.27    1.16    3.86    4.23    1.15    2.79     6.23     3.44  0.37    -1.50    0.33
+## federal    13    0.15    0.38    0.00    0.09    0.00    0.00     1.00     1.00  1.70     0.99    0.10
+## eduger     12   74.16   20.58   77.72   74.91   20.56   42.15    98.74    56.59 -0.40    -1.42    5.94
+## spropn     10    0.09    0.12    0.04    0.07    0.06    0.00     0.36     0.36  1.04    -0.24    0.04
+## yearele    12 1981.94   14.46 1989.00 1984.10    4.45 1950.00  1992.22    42.22 -1.19    -0.18    4.17
+## yearreg    12 1979.00   17.19 1988.00 1980.80    5.19 1948.00  1992.00    44.00 -0.89    -1.10    4.96
+## seats      13  229.54  126.01  202.89  217.97  141.01   66.00   520.33   454.33  0.74    -0.21   34.95
+## maj        13    0.69    0.48    1.00    0.73    0.00    0.00     1.00     1.00 -0.74    -1.56    0.13
+## pres       13    0.31    0.48    0.00    0.27    0.00    0.00     1.00     1.00  0.74    -1.56    0.13
+## lyp        13    8.08    0.86    7.80    8.03    0.79    7.05     9.60     2.55  0.40    -1.50    0.24
+## semi       13    0.23    0.44    0.00    0.18    0.00    0.00     1.00     1.00  1.13    -0.76    0.12
+## majpar     13    0.57    0.49    0.89    0.59    0.16    0.00     1.00     1.00 -0.29    -1.97    0.13
+## majpres    13    0.15    0.35    0.00    0.09    0.00    0.00     1.00     1.00  1.69     1.02    0.10
+## propres    13    0.16    0.37    0.00    0.10    0.00    0.00     1.00     1.00  1.68     0.94    0.10
+## dem_age    13 1977.92   16.91 1988.00 1979.36    5.93 1948.00  1992.00    44.00 -0.73    -1.30    4.69
+## lat01      13    0.20    0.13    0.20    0.20    0.16    0.02     0.42     0.40  0.03    -1.44    0.04
+## age        13    0.11    0.08    0.06    0.10    0.03    0.04     0.26     0.22  0.73    -1.30    0.02
+## polityIV   13    6.24    3.08    6.22    6.65    2.14   -2.00    10.00    12.00 -1.16     1.31    0.86
+## spl        13   -1.52    5.32   -1.70   -2.27    4.30   -7.36    12.59    19.95  1.19     1.10    1.48
+## cpi9500     9    5.89    2.16    6.90    5.89    1.42    1.00     7.86     6.87 -1.11     0.08    0.72
+## du_60ctry  13    0.62    0.51    1.00    0.64    0.00    0.00     1.00     1.00 -0.42    -1.96    0.14
+## magn       12    0.76    0.32    0.94    0.80    0.08    0.10     1.00     0.90 -0.87    -0.91    0.09
+## sdm        11    0.52    0.45    0.39    0.53    0.57    0.01     1.00     0.99  0.06    -2.06    0.14
+## oecd.x     13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN      NaN    0.00
+## mining_gdp 11    2.86    5.07    1.04    1.64    0.96    0.02    16.74    16.72  1.87     2.21    1.53
+## gini_8090  11   38.28    7.66   37.55   38.05    8.62   29.03    49.67    20.64  0.27    -1.64    2.31
+## con2150    13    0.15    0.38    0.00    0.09    0.00    0.00     1.00     1.00  1.70     0.99    0.10
+## con5180    13    0.31    0.48    0.00    0.27    0.00    0.00     1.00     1.00  0.74    -1.56    0.13
+## con81      13    0.62    0.51    1.00    0.64    0.00    0.00     1.00     1.00 -0.42    -1.96    0.14
+## list       12   25.74   65.45    0.00    8.39    0.00    0.00   224.89   224.89  2.32     4.17   18.89
+## maj_bad    13    2.50    1.83    3.17    2.53    1.65    0.00     4.67     4.67 -0.45    -1.56    0.51
+## maj_gin    11   28.37   19.49   32.00   29.15   20.02    0.00    49.67    49.67 -0.52    -1.45    5.88
+## maj_old    13    0.08    0.09    0.05    0.07    0.07    0.00     0.25     0.25  0.79    -0.93    0.02
+## pres_bad   13    1.05    1.71    0.00    0.85    0.00    0.00     4.28     4.28  0.97    -0.90    0.48
+## pres_gin   11   10.43   18.14    0.00    7.70    0.00    0.00    45.50    45.50  0.97    -1.02    5.47
+## pres_old   13    0.03    0.07    0.00    0.02    0.00    0.00     0.26     0.26  2.22     4.11    0.02
+## propar     13    0.15    0.38    0.00    0.09    0.00    0.00     1.00     1.00  1.70     0.99    0.10
+## lpop        8   16.97    2.07   16.83   16.97    1.68   13.57    20.63     7.06  0.10    -0.80    0.73
+## continent* 13    1.00    0.00    1.00    1.00    0.00    1.00     1.00     0.00   NaN      NaN    0.00</code></pre>
+</div>
+<div id="generating-group-level-summary-statistics-with-the-summarize-function-from-dplyr" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Generating group-level summary statistics with the <code>summarize</code> function from <code>dplyr</code></h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="summary-statistics.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a table that displays summary statistics for trade at the continent level and assign to object named &quot;trade_age_by_continent&quot;</span></span>
+<span id="cb27-2"><a href="summary-statistics.html#cb27-2" aria-hidden="true" tabindex="-1"></a>trade_age_by_continent<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="summary-statistics.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">summarise</span>(<span class="at">meanTrade=</span><span class="fu">mean</span>(trade),<span class="at">sdTrade=</span><span class="fu">sd</span>(trade),</span>
+<span id="cb27-4"><a href="summary-statistics.html#cb27-4" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">meanAge=</span><span class="fu">mean</span>(age), <span class="at">sdAge=</span><span class="fu">sd</span>(age),</span>
+<span id="cb27-5"><a href="summary-statistics.html#cb27-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="summary-statistics.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;trade_age_by_continent&quot;</span></span>
+<span id="cb28-2"><a href="summary-statistics.html#cb28-2" aria-hidden="true" tabindex="-1"></a>trade_age_by_continent</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 6
+##   continent meanTrade sdTrade meanAge  sdAge     n
+##   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+## 1 africa         77.3    32.1   0.121 0.124     11
+## 2 asiae          97.8    84.6   0.110 0.0846    13
+## 3 laam           68.6    32.8   0.139 0.153     23
+## 4 other          78.8    40.7   0.309 0.263     38</code></pre>
+</div>
+</div>
+<div id="generating-crosstabs" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Generating crosstabs</h2>
+<div id="crosstabs-with-tabyl" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Crosstabs with <code>tabyl</code></h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="summary-statistics.html#cb30-1" aria-hidden="true" tabindex="-1"></a>crosstab_federal_continent<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(federal, continent)</span>
+<span id="cb30-2"><a href="summary-statistics.html#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="summary-statistics.html#cb30-3" aria-hidden="true" tabindex="-1"></a>crosstab_federal_continent</span></code></pre></div>
+<pre><code>##  federal africa asiae laam other
+##        0     11    11   19    29
+##        1      0     2    4     7
+##       NA      0     0    0     2</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="summary-statistics.html#cb32-1" aria-hidden="true" tabindex="-1"></a>crosstab_majoritarian_continent<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(maj, continent)</span>
+<span id="cb32-2"><a href="summary-statistics.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="summary-statistics.html#cb32-3" aria-hidden="true" tabindex="-1"></a>crosstab_majoritarian_continent</span></code></pre></div>
+<pre><code>##  maj africa asiae laam other
+##    0      3     4   16    29
+##    1      8     9    7     9</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="summary-statistics.html#cb34-1" aria-hidden="true" tabindex="-1"></a>pt_copy <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(maj, continent)</span></code></pre></div>
+<pre><code>##  maj africa asiae laam other
+##    0      3     4   16    29
+##    1      8     9    7     9</code></pre>
+</div>
+<div id="crosstabs-with-tbl_cross" class="section level3" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Crosstabs with <code>tbl_cross</code></h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="summary-statistics.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_cross</span>(pt_copy, <span class="at">row=</span>maj, <span class="at">col=</span>continent)</span></code></pre></div>
+<div id="rxaatnyenm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
 
+#rxaatnyenm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rxaatnyenm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rxaatnyenm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rxaatnyenm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rxaatnyenm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rxaatnyenm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rxaatnyenm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rxaatnyenm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rxaatnyenm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rxaatnyenm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rxaatnyenm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rxaatnyenm .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rxaatnyenm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rxaatnyenm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rxaatnyenm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rxaatnyenm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rxaatnyenm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#rxaatnyenm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rxaatnyenm .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#rxaatnyenm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rxaatnyenm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rxaatnyenm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rxaatnyenm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rxaatnyenm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rxaatnyenm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#rxaatnyenm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rxaatnyenm .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#rxaatnyenm .gt_left {
+  text-align: left;
+}
+
+#rxaatnyenm .gt_center {
+  text-align: center;
+}
+
+#rxaatnyenm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rxaatnyenm .gt_font_normal {
+  font-weight: normal;
+}
+
+#rxaatnyenm .gt_font_bold {
+  font-weight: bold;
+}
+
+#rxaatnyenm .gt_font_italic {
+  font-style: italic;
+}
+
+#rxaatnyenm .gt_super {
+  font-size: 65%;
+}
+
+#rxaatnyenm .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4">
+        <span class="gt_column_spanner"><strong>continent</strong></span>
+      </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1"><strong>Total</strong></th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">africa</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">asiae</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">laam</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">other</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">maj</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">0</td>
+<td class="gt_row gt_center">3</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">16</td>
+<td class="gt_row gt_center">29</td>
+<td class="gt_row gt_center">52</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">1</td>
+<td class="gt_row gt_center">8</td>
+<td class="gt_row gt_center">9</td>
+<td class="gt_row gt_center">7</td>
+<td class="gt_row gt_center">9</td>
+<td class="gt_row gt_center">33</td></tr>
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">Total</td>
+<td class="gt_row gt_center">11</td>
+<td class="gt_row gt_center">13</td>
+<td class="gt_row gt_center">23</td>
+<td class="gt_row gt_center">38</td>
+<td class="gt_row gt_center">85</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="summary-statistics.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_cross</span>(pt_copy, <span class="at">row=</span>federal, <span class="at">col=</span>continent)</span></code></pre></div>
+<div id="jpqyetucmy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#jpqyetucmy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jpqyetucmy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jpqyetucmy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jpqyetucmy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jpqyetucmy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jpqyetucmy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jpqyetucmy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jpqyetucmy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jpqyetucmy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jpqyetucmy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jpqyetucmy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jpqyetucmy .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jpqyetucmy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jpqyetucmy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jpqyetucmy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jpqyetucmy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jpqyetucmy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#jpqyetucmy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jpqyetucmy .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#jpqyetucmy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jpqyetucmy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jpqyetucmy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jpqyetucmy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jpqyetucmy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jpqyetucmy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#jpqyetucmy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jpqyetucmy .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#jpqyetucmy .gt_left {
+  text-align: left;
+}
+
+#jpqyetucmy .gt_center {
+  text-align: center;
+}
+
+#jpqyetucmy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jpqyetucmy .gt_font_normal {
+  font-weight: normal;
+}
+
+#jpqyetucmy .gt_font_bold {
+  font-weight: bold;
+}
+
+#jpqyetucmy .gt_font_italic {
+  font-style: italic;
+}
+
+#jpqyetucmy .gt_super {
+  font-size: 65%;
+}
+
+#jpqyetucmy .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4">
+        <span class="gt_column_spanner"><strong>continent</strong></span>
+      </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1"><strong>Total</strong></th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">africa</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">asiae</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">laam</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">other</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">federal</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">0</td>
+<td class="gt_row gt_center">11</td>
+<td class="gt_row gt_center">11</td>
+<td class="gt_row gt_center">19</td>
+<td class="gt_row gt_center">29</td>
+<td class="gt_row gt_center">70</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">1</td>
+<td class="gt_row gt_center">0</td>
+<td class="gt_row gt_center">2</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">7</td>
+<td class="gt_row gt_center">13</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Unknown</td>
+<td class="gt_row gt_center">0</td>
+<td class="gt_row gt_center">0</td>
+<td class="gt_row gt_center">0</td>
+<td class="gt_row gt_center">2</td>
+<td class="gt_row gt_center">2</td></tr>
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">Total</td>
+<td class="gt_row gt_center">11</td>
+<td class="gt_row gt_center">13</td>
+<td class="gt_row gt_center">23</td>
+<td class="gt_row gt_center">38</td>
+<td class="gt_row gt_center">85</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -593,8 +1746,8 @@ col_uk
           </div>
         </div>
       </div>
-<a href="loading-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="loading-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basic-data-cleaning-and-preparation-tasks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

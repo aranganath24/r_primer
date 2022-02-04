@@ -4,4 +4,12 @@ summary-statistics
 generating-a-table-of-summary-statistics
 exporting-a-summary-statistics-table-as-a-csv-file
 using-stargazer-to-create-and-export-summary-statistics-with
-generating-summary-statistics-by-group
+summary-statistics-and-grouping-variables
+subsetting-summary-statistics-by-group-with-the-describe-function
+generating-group-level-summary-statistics-with-the-summarize-function-from-dplyr
+generating-crosstabs
+crosstabs-with-tabyl
+crosstabs-with-tbl_cross
+basic-data-cleaning-and-preparation-tasks
+rearranging-columns
+renaming-variables

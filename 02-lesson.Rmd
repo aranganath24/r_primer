@@ -76,12 +76,131 @@ stargazer(pt_copy_df, type="text", title="Descriptive Statistics", digits=1, out
 
 ```
 
-## Generating summary statistics by group
+## Summary statistics and grouping variables
+
+### Subsetting summary statistics by group with the ```describe``` function
 
 ```{r}
 # Option 1
 summary_stats_by_continent<-describeBy(pt_copy, pt_copy$continent)
 ```
+
+```{r}
+# Accessing continent-level summary statistics for africa from the "summary_stats_by_continent" list
+summary_stats_by_continent[["africa"]]
+```
+
+```{r}
+# Accessing continent-level summary statistics for africa from the "summary_stats_by_continent" list; alternate syntax
+summary_stats_by_continent %>% pluck("africa")
+```
+
+```{r}
+# Group-level summary statistics can be assigned to their own object for easy retrieval
+asia_europe_summary_statistics<-summary_stats_by_continent %>% pluck("asiae")
+```
+
+```{r}
+# retrieve summary statistics for Asia/Europe 
+asia_europe_summary_statistics
+```
+
+The "vars" column in the summary statistics table is an index variable; it can be removed with the following:
+
+
+```{r}
+# removes "vars" indexing variable from "asia_europe_summary_statistics"
+asia_europe_summary_statistics<-asia_europe_summary_statistics %>% select(-vars)
+```
+
+```{r}
+asia_europe_summary_statistics
+```
+
+### Generating group-level summary statistics with the ```summarize``` function from ```dplyr``` 
+
+```{r}
+# Generate a table that displays summary statistics for trade at the continent level and assign to object named "trade_age_by_continent"
+trade_age_by_continent<-pt_copy %>% group_by(continent) %>% 
+                                    summarise(meanTrade=mean(trade),sdTrade=sd(trade),
+                                              meanAge=mean(age), sdAge=sd(age),
+                                              n=n())
+```
+
+```{r}
+# prints contents of "trade_age_by_continent"
+trade_age_by_continent
+```
+
+## Generating crosstabs
+
+### Crosstabs with ```tabyl```
+
+```{r}
+crosstab_federal_continent<-pt_copy %>% tabyl(federal, continent)
+
+crosstab_federal_continent
+```
+
+
+```{r}
+crosstab_majoritarian_continent<-pt_copy %>% tabyl(maj, continent)
+
+crosstab_majoritarian_continent
+```
+
+
+```{r}
+pt_copy %>% tabyl(maj, continent)
+```
+
+### Crosstabs with ```tbl_cross```
+
+```{r}
+tbl_cross(pt_copy, row=maj, col=continent)
+```
+
+```{r}
+tbl_cross(pt_copy, row=federal, col=continent)
+```
+
+# Basic Data Cleaning and Preparation Tasks
+
+## Rearranging columns
+
+```{r}
+pt_copy
+```
+
+```{r}
+# bring the "country" column to the front of the dataset
+pt_copy<-pt_copy %>% relocate(country)
+pt_copy
+```
+
+```{r}
+pt_copy<-pt_copy %>% relocate(country, list, oecd)
+
+pt_copy
+```
+
+## Renaming variables
+
+```{r}
+## Renaming a variable (renames "list" to "party_list")
+pt_copy<-pt_copy %>% rename(party_list=list)
+
+pt_copy
+```
+
+
+
+
+
+
+
+
+
 
 
 
