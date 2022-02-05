@@ -107,7 +107,6 @@ asia_europe_summary_statistics
 
 The "vars" column in the summary statistics table is an index variable; it can be removed with the following:
 
-
 ```{r}
 # removes "vars" indexing variable from "asia_europe_summary_statistics"
 asia_europe_summary_statistics<-asia_europe_summary_statistics %>% select(-vars)
@@ -315,5 +314,96 @@ pt_copy<-pt_copy %>% dummy_cols("trade_level") %>%
 ```{r}
 pt_copy
 ```
+
+## Subsetting data based on criteria
+
+### The ```filter``` function
+
+```{r}
+oecd_countries<-pt_copy %>% filter(oecd==1) %>% 
+                            relocate(country, oecd)
+```
+
+```{r}
+oecd_countries
+```
+
+```{r}
+high_revenues<-pt_copy %>% filter(rev_exp>1) %>% 
+                              relocate(country, rev_exp)
+                        
+```
+
+```{r}
+high_revenues
+```
+
+```{r}
+minority_catholic<-pt_copy %>% filter(catho80<=50) %>% 
+                               relocate(country, catho80)
+```
+
+```{r}
+minority_catholic
+```
+
+Using the ```&``` operator 
+
+```{r}
+oecd_federal_countries<-pt_copy %>% filter(oecd==1 & federal==1) %>% 
+                                      relocate(country, oecd, federal)
+```
+
+```{r}
+oecd_federal_countries
+```
+
+Using the ```|``` operator
+
+```{r}
+asia_europe_africa<-pt_copy %>% filter(continent=="africa"|continent=="asiae") %>% 
+                                  relocate(continent)
+```
+
+```{r}
+asia_europe_africa
+```
+
+Filtering for observations that do NOT meet a condition:
+
+```{r}
+pt_copy_sans_africa<-pt_copy %>% filter(continent!="africa") %>% relocate(continent)
+```
+
+```{r}
+pt_copy_sans_africa
+```
+
+# Exploratory visualizations using ```ggplot```
+
+
+
+
+
+
+
+
+
+
+correlation matrix
+```{r}
+x<-pt_copy_trade_revexp %>% select(-country)
+cor(x, use="complete.obs")
+```
+
+
+
+
+
+
+
+
+
+
 
 

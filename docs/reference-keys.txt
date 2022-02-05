@@ -22,3 +22,6 @@ recoding-variables
 creating-dummy-variables-from-continuous-numeric-variables
 creating-categorical-variables-from-continuous-numeric-variables
 creating-dummmy-variables-from-categorical-variables
+subsetting-data-based-on-criteria
+the-filter-function
+exploratory-visualizations-using-ggplot
