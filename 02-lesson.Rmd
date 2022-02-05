@@ -179,7 +179,7 @@ pt_copy
 ```
 
 ```{r}
-pt_copy<-pt_copy %>% relocate(country, list, oecd)
+pt_copy<-pt_copy %>% relocate(country, list, trade, oecd)
 
 pt_copy
 ```
@@ -194,18 +194,126 @@ pt_copy
 ```
 
 
+## Sorting a dataset in ascending or descending order with respect to a variable
+
+```{r}
+# sorting in ascending (low to high) order with respect to the "trade" variable
+pt_copy<-pt_copy %>% arrange(trade)
+pt_copy
+```
+
+```{r}
+# sorting in descending (high to low) order with respect to the "trade" variable
+pt_copy<-pt_copy %>% arrange(desc(trade))
+pt_copy
+```
+
+## Creating new variables based on existing variables
+
+ratio of revenue to expenditures
+
+```{r}
+# Create new variable named "rev_exp" that is calculated as a ratio of "cgrev" (central government revenues) to "cgexp" (central government expenditures), and relocates "country", "cgexp", "cgrev", "trade", and the newly created "rev_exp" to the front of the dataset
+pt_copy<-pt_copy %>% mutate(rev_exp=(cgrev/cgexp)) %>% 
+                     relocate(country, cgexp, cgrev, trade, rev_exp)
+```
+
+```{r}
+pt_copy
+```
 
 
+## Selecting or deleting variables 
 
+### Selecting variables
 
+```{r}
+# Selects "country", "cgexp", "cgrev", and "rev_exp" variables from the "pt_copy" dataset
+pt_copy %>% select(country, cgexp, cgrev, trade, rev_exp)
+```
 
+```{r}
+# Selects "country", "cgexp", "cgrev", and "rev_exp" variables from the "pt_copy" dataset and assigns the selection to a new object named "pt_copy_selection"
 
+pt_copy_selection<-pt_copy %>% select(country, cgexp, cgrev, trade, rev_exp)
+```
 
+```{r}
+pt_copy_selection
+```
 
+### Deleting variables 
 
+```{r}
+# Deletes "cgrev" variable from "pt_copy_selection" dataset
+pt_copy_selection %>% select(-cgrev)
+```
 
+```{r}
+# Deletes "cgrev" AND "cgexp" variables from "pt_copy_selection" dataset
+pt_copy_selection %>% select(-c(cgexp, cgrev))
+```
 
+```{r}
+# Deletes "cgrev" AND "cgexp" variables from "pt_copy_selection" dataset and assigns the result to a new object named "pt_copy_trade_revexp"
+pt_copy_trade_revexp<-pt_copy_selection %>% select(-c(cgexp, cgrev))
+```
 
+```{r}
+# Prints contents of "pt_copy_trade_revexp"
+pt_copy_trade_revexp
+```
 
+```{r}
+# Deletes "cgrev" AND "cgexp" variables from "pt_copy_selection" dataset and assigns the result to "pt_copy_selection", thereby overwriting the existing version of "pt_copy_selection" with a new version that reflects these deletions
+pt_copy_selection<-pt_copy_selection %>% select(-c(cgexp, cgrev))
+```
+
+```{r}
+# prints updated contents of "pt_copy_selection"
+pt_copy_selection
+```
+
+## Recoding variables
+
+### Creating Dummy Variables from Continuous Numeric Variables
+
+```{r}
+# Creates a new dummy variable based on the existing "trade" variable named "trade_open" (which takes on a value of "1" if "trade" is greater than or equal to 77, and 0 otherwise) and then moves the newly created variable to the front of the dataset along with "country" and "trade"; all changes are assigned to "pt_copy", thereby overwriting the existing version of "pt_copy"
+
+pt_copy<-pt_copy %>% mutate(trade_open=ifelse(trade>=77, 1, 0)) %>% 
+                     relocate(country, trade_open, trade)
+```
+
+```{r}
+# prints updated contents of "pt_copy"; note the newly created dummy variable
+pt_copy
+```
+
+### Creating categorical variables from continuous numeric variables
+
+```{r}
+# Creates a new variable in the "pt_copy" dataset named "trade_level" (that is coded as "Low Trade" when the "trade" variable is greater than 15 and less than 50, coded as "Intermediate Trade" when "trade" is greater than or equal to 50 and less than 100, and coded as "High TradE" when "trade" is greater than or equal to 100), and then reorders the dataset such that "country", "trade_level", and "trade" are the first three variables in the dataset
+pt_copy<-pt_copy %>% mutate(trade_level=case_when(trade>15 & trade<50~"Low_Trade",
+                                                  trade>=50 & trade<100~"Intermediate_Trade",
+                                                  trade>=100~"High_Trade")) %>% 
+                    relocate(country, trade_level, trade)
+```
+
+```{r}
+# prints updated contents of "pt_copy"; note the newly created categorical variable
+pt_copy
+```
+
+### Creating dummmy variables from categorical variables 
+
+```{r, message=FALSE}
+pt_copy<-pt_copy %>% dummy_cols("trade_level") %>% 
+                      relocate(country, trade_level, trade_level_High_Trade, trade_level_Intermediate_Trade, trade_level_Low_Trade)
+```
+
+```{r}
+pt_copy
+```
 
 

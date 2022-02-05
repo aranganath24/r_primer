@@ -13,3 +13,12 @@ crosstabs-with-tbl_cross
 basic-data-cleaning-and-preparation-tasks
 rearranging-columns
 renaming-variables
+sorting-a-dataset-in-ascending-or-descending-order-with-respect-to-a-variable
+creating-new-variables-based-on-existing-variables
+selecting-or-deleting-variables
+selecting-variables
+deleting-variables
+recoding-variables
+creating-dummy-variables-from-continuous-numeric-variables
+creating-categorical-variables-from-continuous-numeric-variables
+creating-dummmy-variables-from-categorical-variables
