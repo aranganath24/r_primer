@@ -460,7 +460,7 @@ scatter_cgexp_trade_line<-
 scatter_cgexp_trade_line
 ```
 
-# Elementary Data Analaysis
+# Elementary Data Analysis
 
 ## Computing correlations 
 
@@ -487,9 +487,17 @@ stargazer(matrix_to_export, type="text", title="Correlation Matrix", digits=3, o
 
 ```
 
+## Basic regression analysis
+
+### Running a regression model
+
+### Working with categorical variables in a regression model
+
+### Working with interaction terms in regression models
+
+### Creating and exporting regression tables
 
 
-
-
+shift discussion of joining data earlier 
 
 

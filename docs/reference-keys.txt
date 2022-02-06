@@ -32,5 +32,10 @@ scatterplots
 basic-scatterplot
 grouped-scatterplot
 scatterplot-with-line-of-best-fit
-elementary-data-analaysis
+elementary-data-analysis
 computing-correlations
+basic-regression-analysis
+running-a-regression-model
+working-with-categorical-variables-in-a-regression-model
+working-with-interaction-terms-in-regression-models
+creating-and-exporting-regression-tables
