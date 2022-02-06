@@ -217,12 +217,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">6</span> Elementary Data Analaysis</h1>
 <div id="computing-correlations" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Computing correlations</h2>
-<p>correlation matrix</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="elementary-data-analaysis.html#cb105-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>pt_copy_trade_revexp <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>country)</span>
-<span id="cb105-2"><a href="elementary-data-analaysis.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x, <span class="at">use=</span><span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
-<pre><code>##             trade   rev_exp
-## trade   1.0000000 0.4762376
-## rev_exp 0.4762376 1.0000000</code></pre>
+<p>Computing correlations between two variables in a dataset</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="elementary-data-analaysis.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(pt_copy<span class="sc">$</span>trade, pt_copy<span class="sc">$</span>cgexp, <span class="at">use=</span><span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  pt_copy$trade and pt_copy$cgexp
+## t = 1.8131, df = 80, p-value = 0.07356
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.01915884  0.39850057
+## sample estimates:
+##       cor 
+## 0.1986743</code></pre>
+<p>Generating a correlation matrix</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="elementary-data-analaysis.html#cb103-1" aria-hidden="true" tabindex="-1"></a>desired_variables<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">select</span>(trade, cgexp, cgrev, catho80)</span>
+<span id="cb103-2"><a href="elementary-data-analaysis.html#cb103-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-3"><a href="elementary-data-analaysis.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(desired_variables, <span class="at">use=</span><span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
+<pre><code>##               trade      cgexp      cgrev     catho80
+## trade    1.00000000  0.1792884  0.3458730 -0.08442666
+## cgexp    0.17928838  1.0000000  0.9094998 -0.07010910
+## cgrev    0.34587298  0.9094998  1.0000000 -0.05923500
+## catho80 -0.08442666 -0.0701091 -0.0592350  1.00000000</code></pre>
+<p>Exporting a correlation matrix with stargazer</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="elementary-data-analaysis.html#cb105-1" aria-hidden="true" tabindex="-1"></a>matrix_to_export<span class="ot">&lt;-</span><span class="fu">cor</span>(desired_variables, <span class="at">use=</span><span class="st">&quot;complete.obs&quot;</span>)</span>
+<span id="cb105-2"><a href="elementary-data-analaysis.html#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="elementary-data-analaysis.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(matrix_to_export, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">title=</span><span class="st">&quot;Correlation Matrix&quot;</span>, <span class="at">digits=</span><span class="dv">3</span>, <span class="at">out=</span><span class="st">&quot;corr_table.html&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## Correlation Matrix
+## ====================================
+##         trade  cgexp  cgrev  catho80
+## ------------------------------------
+## trade     1    0.179  0.346  -0.084 
+## cgexp   0.179    1    0.909  -0.070 
+## cgrev   0.346  0.909    1    -0.059 
+## catho80 -0.084 -0.070 -0.059    1   
+## ------------------------------------</code></pre>
 
 </div>
 </div>

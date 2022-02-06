@@ -421,7 +421,7 @@ scatter_cgexp_trade<-
   pt_copy %>% 
   drop_na(cgexp) %>% 
   ggplot()+
-  geom_point(aes(x=cgrev, y=trade))+
+  geom_point(aes(x=cgexp, y=trade))+
   labs(title="Trade Share of GDP \nas a function of\n Central Govt Expenditure (1990-1998 Average) ", 
        x="Central Government Expenditure (Pct of GDP)", y="Overall Trade (Pct of GDP)")+
   theme(plot.title=element_text(hjust=0.5)) 
@@ -436,7 +436,7 @@ scatter_cgexp_trade_grouped<-
   pt_copy %>% 
   drop_na(cgexp) %>% 
   ggplot()+
-  geom_point(aes(x=cgrev, y=trade, color=continent))+
+  geom_point(aes(x=cgexp, y=trade, color=continent))+
   labs(title="Trade Share of GDP \nas a function of\n Central Govt Expenditure (1990-1998 Average) ", 
        x="Central Government Expenditure (Pct of GDP)", y="Overall Trade (Pct of GDP)")+
   theme(plot.title=element_text(hjust=0.5)) 
@@ -451,8 +451,8 @@ scatter_cgexp_trade_line<-
   pt_copy %>% 
   drop_na(cgexp) %>% 
   ggplot()+
-  geom_point(aes(x=cgrev, y=trade))+
-  geom_smooth(aes(x=cgrev, y=trade), method="lm")+
+  geom_point(aes(x=cgexp, y=trade))+
+  geom_smooth(aes(x=cgexp, y=trade), method="lm")+
   labs(title="Trade Share of GDP \nas a function of\n Central Govt Expenditure (1990-1998 Average) ", 
        x="Central Government Expenditure (Pct of GDP)", y="Overall Trade (Pct of GDP)")+
   theme(plot.title=element_text(hjust=0.5)) 
@@ -464,22 +464,28 @@ scatter_cgexp_trade_line
 
 ## Computing correlations 
 
-```{r}
+Computing correlations between two variables in a dataset
 
+```{r}
+cor.test(pt_copy$trade, pt_copy$cgexp, use="complete.obs")
 ```
 
+Generating a correlation matrix 
 
-
-correlation matrix
 ```{r}
-x<-pt_copy_trade_revexp %>% select(-country)
-cor(x, use="complete.obs")
+desired_variables<-pt_copy %>% select(trade, cgexp, cgrev, catho80)
+
+cor(desired_variables, use="complete.obs")
 ```
 
+Exporting a correlation matrix with stargazer
 
+```{r}
+matrix_to_export<-cor(desired_variables, use="complete.obs")
 
+stargazer(matrix_to_export, type="text", title="Correlation Matrix", digits=3, out="corr_table.html")
 
-
+```
 
 
 
