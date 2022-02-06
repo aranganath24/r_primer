@@ -25,3 +25,12 @@ creating-dummmy-variables-from-categorical-variables
 subsetting-data-based-on-criteria
 the-filter-function
 exploratory-visualizations-using-ggplot
+bar-charts
+basic-bar-chart
+inverted-bar-chart
+scatterplots
+basic-scatterplot
+grouped-scatterplot
+scatterplot-with-line-of-best-fit
+elementary-data-analaysis
+computing-correlations

@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2022-02-04" />
+<meta name="date" content="2022-02-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -176,7 +176,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7.1" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#the-filter-function"><i class="fa fa-check"></i><b>4.7.1</b> The <code>filter</code> function</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="exploratory-visualizations-using-ggplot.html"><a href="exploratory-visualizations-using-ggplot.html"><i class="fa fa-check"></i><b>5</b> Exploratory visualizations using <code>ggplot</code></a></li>
+<li class="chapter" data-level="5" data-path="exploratory-visualizations-using-ggplot.html"><a href="exploratory-visualizations-using-ggplot.html"><i class="fa fa-check"></i><b>5</b> Exploratory visualizations using <code>ggplot</code></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="exploratory-visualizations-using-ggplot.html"><a href="exploratory-visualizations-using-ggplot.html#bar-charts"><i class="fa fa-check"></i><b>5.1</b> Bar charts</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="exploratory-visualizations-using-ggplot.html"><a href="exploratory-visualizations-using-ggplot.html#basic-bar-chart"><i class="fa fa-check"></i><b>5.1.1</b> Basic bar chart</a></li>
+<li class="chapter" data-level="5.1.2" data-path="exploratory-visualizations-using-ggplot.html"><a href="exploratory-visualizations-using-ggplot.html#inverted-bar-chart"><i class="fa fa-check"></i><b>5.1.2</b> Inverted bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="exploratory-visualizations-using-ggplot.html"><a href="exploratory-visualizations-using-ggplot.html#scatterplots"><i class="fa fa-check"></i><b>5.2</b> Scatterplots</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="exploratory-visualizations-using-ggplot.html"><a href="exploratory-visualizations-using-ggplot.html#basic-scatterplot"><i class="fa fa-check"></i><b>5.2.1</b> Basic scatterplot</a></li>
+<li class="chapter" data-level="5.2.2" data-path="exploratory-visualizations-using-ggplot.html"><a href="exploratory-visualizations-using-ggplot.html#grouped-scatterplot"><i class="fa fa-check"></i><b>5.2.2</b> Grouped scatterplot</a></li>
+<li class="chapter" data-level="5.2.3" data-path="exploratory-visualizations-using-ggplot.html"><a href="exploratory-visualizations-using-ggplot.html#scatterplot-with-line-of-best-fit"><i class="fa fa-check"></i><b>5.2.3</b> Scatterplot with line of best fit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="elementary-data-analaysis.html"><a href="elementary-data-analaysis.html"><i class="fa fa-check"></i><b>6</b> Elementary Data Analaysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="elementary-data-analaysis.html"><a href="elementary-data-analaysis.html#computing-correlations"><i class="fa fa-check"></i><b>6.1</b> Computing correlations</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -347,139 +364,139 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-new-variables-based-on-existing-variables" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Creating new variables based on existing variables</h2>
 <p>ratio of revenue to expenditures</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new variable named &quot;rev_exp&quot; that is calculated as a ratio of &quot;cgrev&quot; (central government revenues) to &quot;cgexp&quot; (central government expenditures), and relocates &quot;country&quot;, &quot;cgexp&quot;, &quot;cgrev&quot;, &quot;trade&quot;, and the newly created &quot;rev_exp&quot; to the front of the dataset</span></span>
-<span id="cb50-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb50-2" aria-hidden="true" tabindex="-1"></a>pt_copy<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rev_exp=</span>(cgrev<span class="sc">/</span>cgexp)) <span class="sc">%&gt;%</span> </span>
-<span id="cb50-3"><a href="basic-data-cleaning-and-preparation-tasks.html#cb50-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">relocate</span>(country, cgexp, cgrev, trade, rev_exp)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new variable named &quot;non_catholic_80&quot; that is calculated by substracting the Catholic share of the population in 1980 (&quot;catho80&quot;) from 100  and relocates &quot;country&quot;, &quot;catho80&quot;, and the newly created &quot;non_catholic_80&quot; to the front of the dataset</span></span>
+<span id="cb50-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb50-2" aria-hidden="true" tabindex="-1"></a>pt_copy<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">non_catholic_80=</span><span class="dv">100</span><span class="sc">-</span>catho80) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-3"><a href="basic-data-cleaning-and-preparation-tasks.html#cb50-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">relocate</span>(country, catho80, non_catholic_80)</span></code></pre></div>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb51-1" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
 <pre><code>## # A tibble: 85 × 76
-##    country cgexp cgrev trade rev_exp party_list  oecd  pind pindo ctrycd col_uk t_indep col_uka col_espa col_otha
-##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 Singap…  18.5  34.7  343.   1.88         0       0     1     1    576      1      34   0.864        0    0.864
-##  2 Malta    41.0  35.0  190.   0.853       65.9     0     0     1    181      1      35   0.860        0    0    
-##  3 Luxemb…  40.2  45.5  189.   1.13        60       1     0     1    137      0     160   0            0    0.360
-##  4 Malays…  24.5  26.8  176.   1.09         0       0     1     1    548      1      42   0.832        0    0    
-##  5 Estonia  30.0  31.1  154.   1.04       101       0     0     1    939      0       8   0            0    0.968
-##  6 Belgium  47.9  43.7  132.   0.911      184.      1     0     0    124      0     169   0            0    0.324
-##  7 Ireland  38.1  34.8  129.   0.913      166       1     0     1    178      1      78   0.688        0    0    
-##  8 Maurit…  22.5  21.6  128.   0.962        0       0     1     1    684      1      31   0.876        0    0    
-##  9 St. Vi…  34.8  28.7  123.   0.824        0       0     1     1    364      1      20   0.920        0    0    
-## 10 Jamaica  NA    NA    122.  NA            0       0     1     1    343      1      37   0.852        0    0    
-## # … with 75 more rows, and 61 more variables: legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;,
-## #   legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;,
+##    country      catho80 non_catholic_80 party_list trade  oecd  pind pindo ctrycd col_uk t_indep col_uka col_espa
+##    &lt;chr&gt;          &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Singapore       4.70           95.3         0    343.     0     1     1    576      1      34   0.864        0
+##  2 Malta          97.3             2.70       65.9  190.     0     0     1    181      1      35   0.860        0
+##  3 Luxembourg     93               7          60    189.     1     0     1    137      0     160   0            0
+##  4 Malaysia        2.80           97.2         0    176.     0     1     1    548      1      42   0.832        0
+##  5 Estonia         2              98         101    154.     0     0     1    939      0       8   0            0
+##  6 Belgium        90              10         184.   132.     1     0     0    124      0     169   0            0
+##  7 Ireland        95.3             4.70      166    129.     1     0     1    178      1      78   0.688        0
+##  8 Mauritius      31.2            68.8         0    128.     0     1     1    684      1      31   0.876        0
+##  9 St. Vincent…   19.4            80.6         0    123.     0     1     1    364      1      20   0.920        0
+## 10 Jamaica         9.60           90.4         0    122.     0     1     1    343      1      37   0.852        0
+## # … with 75 more rows, and 63 more variables: col_otha &lt;dbl&gt;, legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;,
+## #   legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;,
 ## #   logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;,
-## #   latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;,
-## #   eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;,
-## #   semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;,
-## #   polityIV &lt;dbl&gt;, spl &lt;dbl&gt;, cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, oecd.x &lt;dbl&gt;, …</code></pre>
+## #   latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;,
+## #   prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;,
+## #   maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;,
+## #   lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;, spl &lt;dbl&gt;, cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, …</code></pre>
 </div>
 <div id="selecting-or-deleting-variables" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Selecting or deleting variables</h2>
 <div id="selecting-variables" class="section level3" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Selecting variables</h3>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selects &quot;country&quot;, &quot;cgexp&quot;, &quot;cgrev&quot;, and &quot;rev_exp&quot; variables from the &quot;pt_copy&quot; dataset</span></span>
-<span id="cb53-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb53-2" aria-hidden="true" tabindex="-1"></a>pt_copy <span class="sc">%&gt;%</span> <span class="fu">select</span>(country, cgexp, cgrev, trade, rev_exp)</span></code></pre></div>
-<pre><code>## # A tibble: 85 × 5
-##    country       cgexp cgrev trade rev_exp
-##    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Singapore      18.5  34.7  343.   1.88 
-##  2 Malta          41.0  35.0  190.   0.853
-##  3 Luxembourg     40.2  45.5  189.   1.13 
-##  4 Malaysia       24.5  26.8  176.   1.09 
-##  5 Estonia        30.0  31.1  154.   1.04 
-##  6 Belgium        47.9  43.7  132.   0.911
-##  7 Ireland        38.1  34.8  129.   0.913
-##  8 Mauritius      22.5  21.6  128.   0.962
-##  9 St. Vincent&amp;G  34.8  28.7  123.   0.824
-## 10 Jamaica        NA    NA    122.  NA    
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selects &quot;country&quot;, &quot;cgexp&quot;, &quot;cgrev&quot;, and &quot;trade&quot; variables from the &quot;pt_copy&quot; dataset</span></span>
+<span id="cb53-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb53-2" aria-hidden="true" tabindex="-1"></a>pt_copy <span class="sc">%&gt;%</span> <span class="fu">select</span>(country, cgexp, cgrev, trade)</span></code></pre></div>
+<pre><code>## # A tibble: 85 × 4
+##    country       cgexp cgrev trade
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Singapore      18.5  34.7  343.
+##  2 Malta          41.0  35.0  190.
+##  3 Luxembourg     40.2  45.5  189.
+##  4 Malaysia       24.5  26.8  176.
+##  5 Estonia        30.0  31.1  154.
+##  6 Belgium        47.9  43.7  132.
+##  7 Ireland        38.1  34.8  129.
+##  8 Mauritius      22.5  21.6  128.
+##  9 St. Vincent&amp;G  34.8  28.7  123.
+## 10 Jamaica        NA    NA    122.
 ## # … with 75 more rows</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selects &quot;country&quot;, &quot;cgexp&quot;, &quot;cgrev&quot;, and &quot;rev_exp&quot; variables from the &quot;pt_copy&quot; dataset and assigns the selection to a new object named &quot;pt_copy_selection&quot;</span></span>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selects &quot;country&quot;, &quot;cgexp&quot;, &quot;cgrev&quot;, and &quot;trade&quot; variables from the &quot;pt_copy&quot; dataset and assigns the selection to a new object named &quot;pt_copy_selection&quot;</span></span>
 <span id="cb55-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-3"><a href="basic-data-cleaning-and-preparation-tasks.html#cb55-3" aria-hidden="true" tabindex="-1"></a>pt_copy_selection<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">select</span>(country, cgexp, cgrev, trade, rev_exp)</span></code></pre></div>
+<span id="cb55-3"><a href="basic-data-cleaning-and-preparation-tasks.html#cb55-3" aria-hidden="true" tabindex="-1"></a>pt_copy_selection<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">select</span>(country, cgexp, cgrev, trade)</span></code></pre></div>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb56-1" aria-hidden="true" tabindex="-1"></a>pt_copy_selection</span></code></pre></div>
-<pre><code>## # A tibble: 85 × 5
-##    country       cgexp cgrev trade rev_exp
-##    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Singapore      18.5  34.7  343.   1.88 
-##  2 Malta          41.0  35.0  190.   0.853
-##  3 Luxembourg     40.2  45.5  189.   1.13 
-##  4 Malaysia       24.5  26.8  176.   1.09 
-##  5 Estonia        30.0  31.1  154.   1.04 
-##  6 Belgium        47.9  43.7  132.   0.911
-##  7 Ireland        38.1  34.8  129.   0.913
-##  8 Mauritius      22.5  21.6  128.   0.962
-##  9 St. Vincent&amp;G  34.8  28.7  123.   0.824
-## 10 Jamaica        NA    NA    122.  NA    
+<pre><code>## # A tibble: 85 × 4
+##    country       cgexp cgrev trade
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Singapore      18.5  34.7  343.
+##  2 Malta          41.0  35.0  190.
+##  3 Luxembourg     40.2  45.5  189.
+##  4 Malaysia       24.5  26.8  176.
+##  5 Estonia        30.0  31.1  154.
+##  6 Belgium        47.9  43.7  132.
+##  7 Ireland        38.1  34.8  129.
+##  8 Mauritius      22.5  21.6  128.
+##  9 St. Vincent&amp;G  34.8  28.7  123.
+## 10 Jamaica        NA    NA    122.
 ## # … with 75 more rows</code></pre>
 </div>
 <div id="deleting-variables" class="section level3" number="4.5.2">
 <h3><span class="header-section-number">4.5.2</span> Deleting variables</h3>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deletes &quot;cgrev&quot; variable from &quot;pt_copy_selection&quot; dataset</span></span>
 <span id="cb58-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb58-2" aria-hidden="true" tabindex="-1"></a>pt_copy_selection <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>cgrev)</span></code></pre></div>
-<pre><code>## # A tibble: 85 × 4
-##    country       cgexp trade rev_exp
-##    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Singapore      18.5  343.   1.88 
-##  2 Malta          41.0  190.   0.853
-##  3 Luxembourg     40.2  189.   1.13 
-##  4 Malaysia       24.5  176.   1.09 
-##  5 Estonia        30.0  154.   1.04 
-##  6 Belgium        47.9  132.   0.911
-##  7 Ireland        38.1  129.   0.913
-##  8 Mauritius      22.5  128.   0.962
-##  9 St. Vincent&amp;G  34.8  123.   0.824
-## 10 Jamaica        NA    122.  NA    
+<pre><code>## # A tibble: 85 × 3
+##    country       cgexp trade
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;
+##  1 Singapore      18.5  343.
+##  2 Malta          41.0  190.
+##  3 Luxembourg     40.2  189.
+##  4 Malaysia       24.5  176.
+##  5 Estonia        30.0  154.
+##  6 Belgium        47.9  132.
+##  7 Ireland        38.1  129.
+##  8 Mauritius      22.5  128.
+##  9 St. Vincent&amp;G  34.8  123.
+## 10 Jamaica        NA    122.
 ## # … with 75 more rows</code></pre>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deletes &quot;cgrev&quot; AND &quot;cgexp&quot; variables from &quot;pt_copy_selection&quot; dataset</span></span>
 <span id="cb60-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb60-2" aria-hidden="true" tabindex="-1"></a>pt_copy_selection <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(cgexp, cgrev))</span></code></pre></div>
-<pre><code>## # A tibble: 85 × 3
-##    country       trade rev_exp
-##    &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Singapore      343.   1.88 
-##  2 Malta          190.   0.853
-##  3 Luxembourg     189.   1.13 
-##  4 Malaysia       176.   1.09 
-##  5 Estonia        154.   1.04 
-##  6 Belgium        132.   0.911
-##  7 Ireland        129.   0.913
-##  8 Mauritius      128.   0.962
-##  9 St. Vincent&amp;G  123.   0.824
-## 10 Jamaica        122.  NA    
+<pre><code>## # A tibble: 85 × 2
+##    country       trade
+##    &lt;chr&gt;         &lt;dbl&gt;
+##  1 Singapore      343.
+##  2 Malta          190.
+##  3 Luxembourg     189.
+##  4 Malaysia       176.
+##  5 Estonia        154.
+##  6 Belgium        132.
+##  7 Ireland        129.
+##  8 Mauritius      128.
+##  9 St. Vincent&amp;G  123.
+## 10 Jamaica        122.
 ## # … with 75 more rows</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deletes &quot;cgrev&quot; AND &quot;cgexp&quot; variables from &quot;pt_copy_selection&quot; dataset and assigns the result to a new object named &quot;pt_copy_trade_revexp&quot;</span></span>
-<span id="cb62-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb62-2" aria-hidden="true" tabindex="-1"></a>pt_copy_trade_revexp<span class="ot">&lt;-</span>pt_copy_selection <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(cgexp, cgrev))</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deletes &quot;cgrev&quot; AND &quot;cgexp&quot; variables from &quot;pt_copy_selection&quot; dataset and assigns the result to a new object named &quot;pt_copy_trade&quot;</span></span>
+<span id="cb62-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb62-2" aria-hidden="true" tabindex="-1"></a>pt_copy_trade<span class="ot">&lt;-</span>pt_copy_selection <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(cgexp, cgrev))</span></code></pre></div>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prints contents of &quot;pt_copy_trade_revexp&quot;</span></span>
-<span id="cb63-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb63-2" aria-hidden="true" tabindex="-1"></a>pt_copy_trade_revexp</span></code></pre></div>
-<pre><code>## # A tibble: 85 × 3
-##    country       trade rev_exp
-##    &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Singapore      343.   1.88 
-##  2 Malta          190.   0.853
-##  3 Luxembourg     189.   1.13 
-##  4 Malaysia       176.   1.09 
-##  5 Estonia        154.   1.04 
-##  6 Belgium        132.   0.911
-##  7 Ireland        129.   0.913
-##  8 Mauritius      128.   0.962
-##  9 St. Vincent&amp;G  123.   0.824
-## 10 Jamaica        122.  NA    
+<span id="cb63-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb63-2" aria-hidden="true" tabindex="-1"></a>pt_copy_trade</span></code></pre></div>
+<pre><code>## # A tibble: 85 × 2
+##    country       trade
+##    &lt;chr&gt;         &lt;dbl&gt;
+##  1 Singapore      343.
+##  2 Malta          190.
+##  3 Luxembourg     189.
+##  4 Malaysia       176.
+##  5 Estonia        154.
+##  6 Belgium        132.
+##  7 Ireland        129.
+##  8 Mauritius      128.
+##  9 St. Vincent&amp;G  123.
+## 10 Jamaica        122.
 ## # … with 75 more rows</code></pre>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deletes &quot;cgrev&quot; AND &quot;cgexp&quot; variables from &quot;pt_copy_selection&quot; dataset and assigns the result to &quot;pt_copy_selection&quot;, thereby overwriting the existing version of &quot;pt_copy_selection&quot; with a new version that reflects these deletions</span></span>
 <span id="cb65-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb65-2" aria-hidden="true" tabindex="-1"></a>pt_copy_selection<span class="ot">&lt;-</span>pt_copy_selection <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(cgexp, cgrev))</span></code></pre></div>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints updated contents of &quot;pt_copy_selection&quot;</span></span>
 <span id="cb66-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb66-2" aria-hidden="true" tabindex="-1"></a>pt_copy_selection</span></code></pre></div>
-<pre><code>## # A tibble: 85 × 3
-##    country       trade rev_exp
-##    &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Singapore      343.   1.88 
-##  2 Malta          190.   0.853
-##  3 Luxembourg     189.   1.13 
-##  4 Malaysia       176.   1.09 
-##  5 Estonia        154.   1.04 
-##  6 Belgium        132.   0.911
-##  7 Ireland        129.   0.913
-##  8 Mauritius      128.   0.962
-##  9 St. Vincent&amp;G  123.   0.824
-## 10 Jamaica        122.  NA    
+<pre><code>## # A tibble: 85 × 2
+##    country       trade
+##    &lt;chr&gt;         &lt;dbl&gt;
+##  1 Singapore      343.
+##  2 Malta          190.
+##  3 Luxembourg     189.
+##  4 Malaysia       176.
+##  5 Estonia        154.
+##  6 Belgium        132.
+##  7 Ireland        129.
+##  8 Mauritius      128.
+##  9 St. Vincent&amp;G  123.
+## 10 Jamaica        122.
 ## # … with 75 more rows</code></pre>
 </div>
 </div>
@@ -494,25 +511,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints updated contents of &quot;pt_copy&quot;; note the newly created dummy variable</span></span>
 <span id="cb69-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb69-2" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
 <pre><code>## # A tibble: 85 × 77
-##    country       trade_open trade cgexp cgrev rev_exp party_list  oecd  pind pindo ctrycd col_uk t_indep col_uka
-##    &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Singapore              1  343.  18.5  34.7   1.88         0       0     1     1    576      1      34   0.864
-##  2 Malta                  1  190.  41.0  35.0   0.853       65.9     0     0     1    181      1      35   0.860
-##  3 Luxembourg             1  189.  40.2  45.5   1.13        60       1     0     1    137      0     160   0    
-##  4 Malaysia               1  176.  24.5  26.8   1.09         0       0     1     1    548      1      42   0.832
-##  5 Estonia                1  154.  30.0  31.1   1.04       101       0     0     1    939      0       8   0    
-##  6 Belgium                1  132.  47.9  43.7   0.911      184.      1     0     0    124      0     169   0    
-##  7 Ireland                1  129.  38.1  34.8   0.913      166       1     0     1    178      1      78   0.688
-##  8 Mauritius              1  128.  22.5  21.6   0.962        0       0     1     1    684      1      31   0.876
-##  9 St. Vincent&amp;G          1  123.  34.8  28.7   0.824        0       0     1     1    364      1      20   0.920
-## 10 Jamaica                1  122.  NA    NA    NA            0       0     1     1    343      1      37   0.852
-## # … with 75 more rows, and 63 more variables: col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;, legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;,
-## #   legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;,
-## #   govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;,
-## #   frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;,
-## #   federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;,
-## #   lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;,
-## #   polityIV &lt;dbl&gt;, spl &lt;dbl&gt;, cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, oecd.x &lt;dbl&gt;, …</code></pre>
+##    country    trade_open trade catho80 non_catholic_80 party_list  oecd  pind pindo ctrycd col_uk t_indep col_uka
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Singapore           1  343.    4.70           95.3         0       0     1     1    576      1      34   0.864
+##  2 Malta               1  190.   97.3             2.70       65.9     0     0     1    181      1      35   0.860
+##  3 Luxembourg          1  189.   93               7          60       1     0     1    137      0     160   0    
+##  4 Malaysia            1  176.    2.80           97.2         0       0     1     1    548      1      42   0.832
+##  5 Estonia             1  154.    2              98         101       0     0     1    939      0       8   0    
+##  6 Belgium             1  132.   90              10         184.      1     0     0    124      0     169   0    
+##  7 Ireland             1  129.   95.3             4.70      166       1     0     1    178      1      78   0.688
+##  8 Mauritius           1  128.   31.2            68.8         0       0     1     1    684      1      31   0.876
+##  9 St. Vince…          1  123.   19.4            80.6         0       0     1     1    364      1      20   0.920
+## 10 Jamaica             1  122.    9.60           90.4         0       0     1     1    343      1      37   0.852
+## # … with 75 more rows, and 64 more variables: col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;, legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;,
+## #   legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;,
+## #   graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;,
+## #   frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;,
+## #   prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;,
+## #   seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;,
+## #   dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;, spl &lt;dbl&gt;, cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, …</code></pre>
 </div>
 <div id="creating-categorical-variables-from-continuous-numeric-variables" class="section level3" number="4.6.2">
 <h3><span class="header-section-number">4.6.2</span> Creating categorical variables from continuous numeric variables</h3>
@@ -524,25 +541,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints updated contents of &quot;pt_copy&quot;; note the newly created categorical variable</span></span>
 <span id="cb72-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb72-2" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
 <pre><code>## # A tibble: 85 × 78
-##    country    trade_level trade trade_open cgexp cgrev rev_exp party_list  oecd  pind pindo ctrycd col_uk t_indep
-##    &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Singapore  High_Trade   343.          1  18.5  34.7   1.88         0       0     1     1    576      1      34
-##  2 Malta      High_Trade   190.          1  41.0  35.0   0.853       65.9     0     0     1    181      1      35
-##  3 Luxembourg High_Trade   189.          1  40.2  45.5   1.13        60       1     0     1    137      0     160
-##  4 Malaysia   High_Trade   176.          1  24.5  26.8   1.09         0       0     1     1    548      1      42
-##  5 Estonia    High_Trade   154.          1  30.0  31.1   1.04       101       0     0     1    939      0       8
-##  6 Belgium    High_Trade   132.          1  47.9  43.7   0.911      184.      1     0     0    124      0     169
-##  7 Ireland    High_Trade   129.          1  38.1  34.8   0.913      166       1     0     1    178      1      78
-##  8 Mauritius  High_Trade   128.          1  22.5  21.6   0.962        0       0     1     1    684      1      31
-##  9 St. Vince… High_Trade   123.          1  34.8  28.7   0.824        0       0     1     1    364      1      20
-## 10 Jamaica    High_Trade   122.          1  NA    NA    NA            0       0     1     1    343      1      37
-## # … with 75 more rows, and 64 more variables: col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;, legor_uk &lt;dbl&gt;,
-## #   legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;,
+##    country       trade_level trade trade_open catho80 non_catholic_80 party_list  oecd  pind pindo ctrycd col_uk
+##    &lt;chr&gt;         &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Singapore     High_Trade   343.          1    4.70           95.3         0       0     1     1    576      1
+##  2 Malta         High_Trade   190.          1   97.3             2.70       65.9     0     0     1    181      1
+##  3 Luxembourg    High_Trade   189.          1   93               7          60       1     0     1    137      0
+##  4 Malaysia      High_Trade   176.          1    2.80           97.2         0       0     1     1    548      1
+##  5 Estonia       High_Trade   154.          1    2              98         101       0     0     1    939      0
+##  6 Belgium       High_Trade   132.          1   90              10         184.      1     0     0    124      0
+##  7 Ireland       High_Trade   129.          1   95.3             4.70      166       1     0     1    178      1
+##  8 Mauritius     High_Trade   128.          1   31.2            68.8         0       0     1     1    684      1
+##  9 St. Vincent&amp;G High_Trade   123.          1   19.4            80.6         0       0     1     1    364      1
+## 10 Jamaica       High_Trade   122.          1    9.60           90.4         0       0     1     1    343      1
+## # … with 75 more rows, and 66 more variables: t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;,
+## #   legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;,
 ## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
-## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;,
-## #   prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;,
-## #   maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;,
-## #   lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;, spl &lt;dbl&gt;, cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, …</code></pre>
+## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
+## #   rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;,
+## #   yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;,
+## #   propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;, spl &lt;dbl&gt;, cpi9500 &lt;dbl&gt;, …</code></pre>
 </div>
 <div id="creating-dummmy-variables-from-categorical-variables" class="section level3" number="4.6.3">
 <h3><span class="header-section-number">4.6.3</span> Creating dummmy variables from categorical variables</h3>
@@ -550,25 +567,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb74-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb74-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">relocate</span>(country, trade_level, trade_level_High_Trade, trade_level_Intermediate_Trade, trade_level_Low_Trade)</span></code></pre></div>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb75-1" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
 <pre><code>## # A tibble: 85 × 81
-##    country    trade_level trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open cgexp cgrev rev_exp
-##    &lt;chr&gt;      &lt;chr&gt;                  &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Singapore  High_Trade                 1                0                0  343.          1  18.5  34.7   1.88 
-##  2 Malta      High_Trade                 1                0                0  190.          1  41.0  35.0   0.853
-##  3 Luxembourg High_Trade                 1                0                0  189.          1  40.2  45.5   1.13 
-##  4 Malaysia   High_Trade                 1                0                0  176.          1  24.5  26.8   1.09 
-##  5 Estonia    High_Trade                 1                0                0  154.          1  30.0  31.1   1.04 
-##  6 Belgium    High_Trade                 1                0                0  132.          1  47.9  43.7   0.911
-##  7 Ireland    High_Trade                 1                0                0  129.          1  38.1  34.8   0.913
-##  8 Mauritius  High_Trade                 1                0                0  128.          1  22.5  21.6   0.962
-##  9 St. Vince… High_Trade                 1                0                0  123.          1  34.8  28.7   0.824
-## 10 Jamaica    High_Trade                 1                0                0  122.          1  NA    NA    NA    
-## # … with 75 more rows, and 71 more variables: party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;, pindo &lt;dbl&gt;,
-## #   ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;, legor_uk &lt;dbl&gt;,
-## #   legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;,
+##    country       trade_level trade_level_High_Trade trade_level_Interm… trade_level_Low… trade trade_open catho80
+##    &lt;chr&gt;         &lt;chr&gt;                        &lt;int&gt;               &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Singapore     High_Trade                       1                   0                0  343.          1    4.70
+##  2 Malta         High_Trade                       1                   0                0  190.          1   97.3 
+##  3 Luxembourg    High_Trade                       1                   0                0  189.          1   93   
+##  4 Malaysia      High_Trade                       1                   0                0  176.          1    2.80
+##  5 Estonia       High_Trade                       1                   0                0  154.          1    2   
+##  6 Belgium       High_Trade                       1                   0                0  132.          1   90   
+##  7 Ireland       High_Trade                       1                   0                0  129.          1   95.3 
+##  8 Mauritius     High_Trade                       1                   0                0  128.          1   31.2 
+##  9 St. Vincent&amp;G High_Trade                       1                   0                0  123.          1   19.4 
+## 10 Jamaica       High_Trade                       1                   0                0  122.          1    9.60
+## # … with 75 more rows, and 73 more variables: non_catholic_80 &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;,
+## #   pindo &lt;dbl&gt;, ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;,
+## #   legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;,
 ## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
-## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;,
-## #   prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;,
-## #   maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, …</code></pre>
+## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
+## #   rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;,
+## #   yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
 <div id="subsetting-data-based-on-criteria" class="section level2" number="4.7">
@@ -579,148 +596,139 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb77-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb77-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">relocate</span>(country, oecd)</span></code></pre></div>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb78-1" aria-hidden="true" tabindex="-1"></a>oecd_countries</span></code></pre></div>
 <pre><code>## # A tibble: 25 × 81
-##    country      oecd trade_level  trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open cgexp cgrev
-##    &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;                   &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 Luxembourg      1 High_Trade                  1                0                0 189.           1  40.2  45.5
-##  2 Belgium         1 High_Trade                  1                0                0 132.           1  47.9  43.7
-##  3 Ireland         1 High_Trade                  1                0                0 129.           1  38.1  34.8
-##  4 Netherlands     1 High_Trade                  1                0                0 100.           1  51.2  47.6
-##  5 Austria         1 Intermediat…                0                1                0  78.3          1  40.1  36.2
-##  6 Norway          1 Intermediat…                0                1                0  72.2          0  39.9  41.1
-##  7 Switzerland     1 Intermediat…                0                1                0  68.9          0  26.5  22.1
-##  8 Portugal        1 Intermediat…                0                1                0  68.5          0  41.7  34.5
-##  9 Sweden          1 Intermediat…                0                1                0  68.1          0  44.8  40.8
-## 10 Iceland         1 Intermediat…                0                1                0  66.9          0  31.8  30.0
-## # … with 15 more rows, and 71 more variables: rev_exp &lt;dbl&gt;, party_list &lt;dbl&gt;, pind &lt;dbl&gt;, pindo &lt;dbl&gt;,
+##    country      oecd trade_level      trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open catho80
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;                       &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Luxembourg      1 High_Trade                      1                0                0 189.           1  93    
+##  2 Belgium         1 High_Trade                      1                0                0 132.           1  90    
+##  3 Ireland         1 High_Trade                      1                0                0 129.           1  95.3  
+##  4 Netherlands     1 High_Trade                      1                0                0 100.           1  42.6  
+##  5 Austria         1 Intermediate_Tr…                0                1                0  78.3          1  88.8  
+##  6 Norway          1 Intermediate_Tr…                0                1                0  72.2          0   0.300
+##  7 Switzerland     1 Intermediate_Tr…                0                1                0  68.9          0  52.8  
+##  8 Portugal        1 Intermediate_Tr…                0                1                0  68.5          0  94.1  
+##  9 Sweden          1 Intermediate_Tr…                0                1                0  68.1          0   1.40 
+## 10 Iceland         1 Intermediate_Tr…                0                1                0  66.9          0   0.700
+## # … with 15 more rows, and 72 more variables: non_catholic_80 &lt;dbl&gt;, party_list &lt;dbl&gt;, pind &lt;dbl&gt;, pindo &lt;dbl&gt;,
 ## #   ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;, legor_uk &lt;dbl&gt;,
-## #   legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;,
-## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
-## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;,
+## #   legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;,
+## #   govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;,
+## #   frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;,
+## #   prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;,
+## #   seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb80-1" aria-hidden="true" tabindex="-1"></a>high_revenues<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(cgrev<span class="sc">&gt;</span><span class="dv">40</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb80-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb80-2" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">relocate</span>(country, cgrev)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb81-1" aria-hidden="true" tabindex="-1"></a>high_revenues</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 81
+##    country     cgrev trade_level      trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open catho80
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;                       &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Luxembourg   45.5 High_Trade                      1                0                0 189.           1  93    
+##  2 Belgium      43.7 High_Trade                      1                0                0 132.           1  90    
+##  3 Netherlands  47.6 High_Trade                      1                0                0 100.           1  42.6  
+##  4 Botswana     50.8 Intermediate_Tr…                0                1                0  87.5          1   9.40 
+##  5 Hungary      45.6 Intermediate_Tr…                0                1                0  73.7          0  53.9  
+##  6 Norway       41.1 Intermediate_Tr…                0                1                0  72.2          0   0.300
+##  7 Sweden       40.8 Intermediate_Tr…                0                1                0  68.1          0   1.40 
+##  8 Poland       40.3 Low_Trade                       0                0                1  48.3          0  81    
+##  9 France       40.9 Low_Trade                       0                0                1  44.9          0  76.4  
+## 10 Italy        41.2 Low_Trade                       0                0                1  44.3          0  83.2  
+## # … with 72 more variables: non_catholic_80 &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;, pindo &lt;dbl&gt;,
+## #   ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;, legor_uk &lt;dbl&gt;,
+## #   legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;,
+## #   govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;,
+## #   frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;,
 ## #   prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;,
 ## #   maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, …</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb80-1" aria-hidden="true" tabindex="-1"></a>high_revenues<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(rev_exp<span class="sc">&gt;</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb80-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb80-2" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">relocate</span>(country, rev_exp)</span></code></pre></div>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb81-1" aria-hidden="true" tabindex="-1"></a>high_revenues</span></code></pre></div>
-<pre><code>## # A tibble: 19 × 81
-##    country    rev_exp trade_level trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open cgexp cgrev
-##    &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;                  &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 Singapore     1.88 High_Trade                 1                0                0 343.           1  18.5  34.7
-##  2 Luxembourg    1.13 High_Trade                 1                0                0 189.           1  40.2  45.5
-##  3 Malaysia      1.09 High_Trade                 1                0                0 176.           1  24.5  26.8
-##  4 Estonia       1.04 High_Trade                 1                0                0 154.           1  30.0  31.1
-##  5 Botswana      1.32 Intermedia…                0                1                0  87.5          1  38.6  50.8
-##  6 Paraguay      1.10 Intermedia…                0                1                0  86.4          1  12.0  13.1
-##  7 Costa Rica    1.03 Intermedia…                0                1                0  85.9          1  23.3  23.9
-##  8 Thailand      1.14 Intermedia…                0                1                0  84.9          1  16.2  18.4
-##  9 Norway        1.03 Intermedia…                0                1                0  72.2          0  39.9  41.1
-## 10 Dominican…    1.02 Intermedia…                0                1                0  67.9          0  14.8  15.2
-## 11 South Kor…    1.12 Intermedia…                0                1                0  62.9          0  17.1  19.0
-## 12 Chile         1.07 Intermedia…                0                1                0  59.2          0  21.0  22.5
-## 13 New Zeland    1.01 Intermedia…                0                1                0  58.1          0  36.0  36.4
-## 14 Ecuador       1.00 Intermedia…                0                1                0  57.3          0  16.3  16.3
-## 15 Venezuela     1.04 Intermedia…                0                1                0  52.8          0  19.3  20.1
-## 16 Poland        1.02 Low_Trade                  0                0                1  48.3          0  39.5  40.3
-## 17 Uruguay       1.02 Low_Trade                  0                0                1  43.4          0  29.4  29.9
-## 18 Uganda        1.31 Low_Trade                  0                0                1  30.8          0  14.7  19.3
-## 19 Bangladesh    1.10 Low_Trade                  0                0                1  25.4          0  12.6  13.8
-## # … with 71 more variables: party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;, pindo &lt;dbl&gt;, ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;,
-## #   t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;, legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;,
-## #   legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;,
-## #   govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;,
-## #   frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;,
-## #   federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;,
-## #   lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, …</code></pre>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb83-1" aria-hidden="true" tabindex="-1"></a>minority_catholic<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(catho80<span class="sc">&lt;=</span><span class="dv">50</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb83-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb83-2" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">relocate</span>(country, catho80)</span></code></pre></div>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb84-1" aria-hidden="true" tabindex="-1"></a>minority_catholic</span></code></pre></div>
 <pre><code>## # A tibble: 53 × 81
-##    country    catho80 trade_level trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open cgexp cgrev
-##    &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;                  &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 Singapore     4.70 High_Trade                 1                0                0  343.          1  18.5  34.7
-##  2 Malaysia      2.80 High_Trade                 1                0                0  176.          1  24.5  26.8
-##  3 Estonia       2    High_Trade                 1                0                0  154.          1  30.0  31.1
-##  4 Mauritius    31.2  High_Trade                 1                0                0  128.          1  22.5  21.6
-##  5 St. Vince…   19.4  High_Trade                 1                0                0  123.          1  34.8  28.7
-##  6 Jamaica       9.60 High_Trade                 1                0                0  122.          1  NA    NA  
-##  7 Gambia        1.90 High_Trade                 1                0                0  122.          1  24.4  23.8
-##  8 Fiji          9    High_Trade                 1                0                0  119.          1  28.4  26.0
-##  9 Belarus      14    High_Trade                 1                0                0  117.          1  35.5  33.2
-## 10 Barbados      5.90 High_Trade                 1                0                0  116.          1  32.4  NA  
-## # … with 43 more rows, and 71 more variables: rev_exp &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;,
+##    country       catho80 trade_level trade_level_High_Trade trade_level_Interm… trade_level_Low… trade trade_open
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                        &lt;int&gt;               &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Singapore        4.70 High_Trade                       1                   0                0  343.          1
+##  2 Malaysia         2.80 High_Trade                       1                   0                0  176.          1
+##  3 Estonia          2    High_Trade                       1                   0                0  154.          1
+##  4 Mauritius       31.2  High_Trade                       1                   0                0  128.          1
+##  5 St. Vincent&amp;G   19.4  High_Trade                       1                   0                0  123.          1
+##  6 Jamaica          9.60 High_Trade                       1                   0                0  122.          1
+##  7 Gambia           1.90 High_Trade                       1                   0                0  122.          1
+##  8 Fiji             9    High_Trade                       1                   0                0  119.          1
+##  9 Belarus         14    High_Trade                       1                   0                0  117.          1
+## 10 Barbados         5.90 High_Trade                       1                   0                0  116.          1
+## # … with 43 more rows, and 73 more variables: non_catholic_80 &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;,
 ## #   pindo &lt;dbl&gt;, ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;,
 ## #   legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;,
 ## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
-## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;,
-## #   prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;,
-## #   maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, …</code></pre>
+## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
+## #   rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;,
+## #   yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, …</code></pre>
 <p>Using the <code>&amp;</code> operator</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb86-1" aria-hidden="true" tabindex="-1"></a>oecd_federal_countries<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(oecd<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> federal<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb86-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb86-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">relocate</span>(country, oecd, federal)</span></code></pre></div>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb87-1" aria-hidden="true" tabindex="-1"></a>oecd_federal_countries</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 81
-##   country      oecd federal trade_level trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open cgexp
-##   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                  &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
-## 1 Austria         1       1 Intermedia…                0                1                0  78.3          1  40.1
-## 2 Switzerland     1       1 Intermedia…                0                1                0  68.9          0  26.5
-## 3 Canada          1       1 Intermedia…                0                1                0  66.5          0  24.9
-## 4 Germany         1       1 Low_Trade                  0                0                1  48.8          0  32.7
-## 5 Mexico          1       1 Low_Trade                  0                0                1  47.5          0  15.5
-## 6 Australia       1       1 Low_Trade                  0                0                1  38.8          0  25.8
-## 7 USA             1       1 Low_Trade                  0                0                1  23.0          0  21.9
-## # … with 71 more variables: cgrev &lt;dbl&gt;, rev_exp &lt;dbl&gt;, party_list &lt;dbl&gt;, pind &lt;dbl&gt;, pindo &lt;dbl&gt;, ctrycd &lt;dbl&gt;,
+##   country    oecd federal trade_level trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open catho80
+##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                  &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Austria       1       1 Intermedia…                0                1                0  78.3          1    88.8
+## 2 Switzerl…     1       1 Intermedia…                0                1                0  68.9          0    52.8
+## 3 Canada        1       1 Intermedia…                0                1                0  66.5          0    46.6
+## 4 Germany       1       1 Low_Trade                  0                0                1  48.8          0    35  
+## 5 Mexico        1       1 Low_Trade                  0                0                1  47.5          0    94.7
+## 6 Australia     1       1 Low_Trade                  0                0                1  38.8          0    29.6
+## 7 USA           1       1 Low_Trade                  0                0                1  23.0          0    30  
+## # … with 71 more variables: non_catholic_80 &lt;dbl&gt;, party_list &lt;dbl&gt;, pind &lt;dbl&gt;, pindo &lt;dbl&gt;, ctrycd &lt;dbl&gt;,
 ## #   col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;, legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;,
-## #   legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;,
-## #   govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;,
-## #   frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;,
-## #   eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;,
-## #   semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, …</code></pre>
+## #   legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;,
+## #   graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;,
+## #   frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;,
+## #   prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;,
+## #   maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, …</code></pre>
 <p>Using the <code>|</code> operator</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb89-1" aria-hidden="true" tabindex="-1"></a>asia_europe_africa<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">&quot;africa&quot;</span><span class="sc">|</span>continent<span class="sc">==</span><span class="st">&quot;asiae&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb89-2"><a href="basic-data-cleaning-and-preparation-tasks.html#cb89-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">relocate</span>(continent)</span></code></pre></div>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb90-1" aria-hidden="true" tabindex="-1"></a>asia_europe_africa</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 81
-##    continent country  trade_level trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open cgexp cgrev
-##    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;                  &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 asiae     Singapo… High_Trade                 1                0                0 343.           1  18.5  34.7
-##  2 asiae     Malaysia High_Trade                 1                0                0 176.           1  24.5  26.8
-##  3 africa    Mauriti… High_Trade                 1                0                0 128.           1  22.5  21.6
-##  4 africa    Gambia   High_Trade                 1                0                0 122.           1  24.4  23.8
-##  5 asiae     Fiji     High_Trade                 1                0                0 119.           1  28.4  26.0
-##  6 africa    Namibia  High_Trade                 1                0                0 115.           1  37.3  33.2
-##  7 asiae     Papua N… High_Trade                 1                0                0 102.           1  30.8  23.8
-##  8 asiae     Taiwan   Intermedia…                0                1                0  90.7          1  15.6  13.9
-##  9 africa    Botswana Intermedia…                0                1                0  87.5          1  38.6  50.8
-## 10 asiae     Thailand Intermedia…                0                1                0  84.9          1  16.2  18.4
-## # … with 14 more rows, and 71 more variables: rev_exp &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;,
+##    continent country      trade_level trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open catho80
+##    &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;                  &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 asiae     Singapore    High_Trade                 1                0                0 343.           1   4.70 
+##  2 asiae     Malaysia     High_Trade                 1                0                0 176.           1   2.80 
+##  3 africa    Mauritius    High_Trade                 1                0                0 128.           1  31.2  
+##  4 africa    Gambia       High_Trade                 1                0                0 122.           1   1.90 
+##  5 asiae     Fiji         High_Trade                 1                0                0 119.           1   9    
+##  6 africa    Namibia      High_Trade                 1                0                0 115.           1  19.1  
+##  7 asiae     Papua N. Gu… High_Trade                 1                0                0 102.           1  32.8  
+##  8 asiae     Taiwan       Intermedia…                0                1                0  90.7          1   1.5  
+##  9 africa    Botswana     Intermedia…                0                1                0  87.5          1   9.40 
+## 10 asiae     Thailand     Intermedia…                0                1                0  84.9          1   0.400
+## # … with 14 more rows, and 72 more variables: non_catholic_80 &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;,
 ## #   pindo &lt;dbl&gt;, ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;,
-## #   legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;,
-## #   confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;,
-## #   engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;,
-## #   prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;,
-## #   seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, …</code></pre>
+## #   legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;,
+## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
+## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
+## #   rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;,
+## #   yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, …</code></pre>
 <p>Filtering for observations that do NOT meet a condition:</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb92-1" aria-hidden="true" tabindex="-1"></a>pt_copy_sans_africa<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">!=</span><span class="st">&quot;africa&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(continent)</span></code></pre></div>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="basic-data-cleaning-and-preparation-tasks.html#cb93-1" aria-hidden="true" tabindex="-1"></a>pt_copy_sans_africa</span></code></pre></div>
 <pre><code>## # A tibble: 74 × 81
-##    continent country  trade_level trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open cgexp cgrev
-##    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;                  &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 asiae     Singapo… High_Trade                 1                0                0  343.          1  18.5  34.7
-##  2 other     Malta    High_Trade                 1                0                0  190.          1  41.0  35.0
-##  3 other     Luxembo… High_Trade                 1                0                0  189.          1  40.2  45.5
-##  4 asiae     Malaysia High_Trade                 1                0                0  176.          1  24.5  26.8
-##  5 other     Estonia  High_Trade                 1                0                0  154.          1  30.0  31.1
-##  6 other     Belgium  High_Trade                 1                0                0  132.          1  47.9  43.7
-##  7 other     Ireland  High_Trade                 1                0                0  129.          1  38.1  34.8
-##  8 laam      St. Vin… High_Trade                 1                0                0  123.          1  34.8  28.7
-##  9 laam      Jamaica  High_Trade                 1                0                0  122.          1  NA    NA  
-## 10 other     Slovak … High_Trade                 1                0                0  119.          1  40.4  NA  
-## # … with 64 more rows, and 71 more variables: rev_exp &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;,
+##    continent country      trade_level trade_level_Hig… trade_level_Int… trade_level_Low… trade trade_open catho80
+##    &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;                  &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 asiae     Singapore    High_Trade                 1                0                0  343.          1    4.70
+##  2 other     Malta        High_Trade                 1                0                0  190.          1   97.3 
+##  3 other     Luxembourg   High_Trade                 1                0                0  189.          1   93   
+##  4 asiae     Malaysia     High_Trade                 1                0                0  176.          1    2.80
+##  5 other     Estonia      High_Trade                 1                0                0  154.          1    2   
+##  6 other     Belgium      High_Trade                 1                0                0  132.          1   90   
+##  7 other     Ireland      High_Trade                 1                0                0  129.          1   95.3 
+##  8 laam      St. Vincent… High_Trade                 1                0                0  123.          1   19.4 
+##  9 laam      Jamaica      High_Trade                 1                0                0  122.          1    9.60
+## 10 other     Slovak Repu… High_Trade                 1                0                0  119.          1   74   
+## # … with 64 more rows, and 72 more variables: non_catholic_80 &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;,
 ## #   pindo &lt;dbl&gt;, ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;,
-## #   legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;,
-## #   confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;,
-## #   engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;,
-## #   prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;,
-## #   seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, …</code></pre>
+## #   legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, confu &lt;dbl&gt;,
+## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
+## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
+## #   rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;, yearele &lt;dbl&gt;,
+## #   yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
 </div>

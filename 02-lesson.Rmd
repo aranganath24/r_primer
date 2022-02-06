@@ -212,29 +212,28 @@ pt_copy
 ratio of revenue to expenditures
 
 ```{r}
-# Create new variable named "rev_exp" that is calculated as a ratio of "cgrev" (central government revenues) to "cgexp" (central government expenditures), and relocates "country", "cgexp", "cgrev", "trade", and the newly created "rev_exp" to the front of the dataset
-pt_copy<-pt_copy %>% mutate(rev_exp=(cgrev/cgexp)) %>% 
-                     relocate(country, cgexp, cgrev, trade, rev_exp)
+# Create new variable named "non_catholic_80" that is calculated by substracting the Catholic share of the population in 1980 ("catho80") from 100  and relocates "country", "catho80", and the newly created "non_catholic_80" to the front of the dataset
+pt_copy<-pt_copy %>% mutate(non_catholic_80=100-catho80) %>% 
+                     relocate(country, catho80, non_catholic_80)
 ```
 
 ```{r}
 pt_copy
 ```
 
-
 ## Selecting or deleting variables 
 
 ### Selecting variables
 
 ```{r}
-# Selects "country", "cgexp", "cgrev", and "rev_exp" variables from the "pt_copy" dataset
-pt_copy %>% select(country, cgexp, cgrev, trade, rev_exp)
+# Selects "country", "cgexp", "cgrev", and "trade" variables from the "pt_copy" dataset
+pt_copy %>% select(country, cgexp, cgrev, trade)
 ```
 
 ```{r}
-# Selects "country", "cgexp", "cgrev", and "rev_exp" variables from the "pt_copy" dataset and assigns the selection to a new object named "pt_copy_selection"
+# Selects "country", "cgexp", "cgrev", and "trade" variables from the "pt_copy" dataset and assigns the selection to a new object named "pt_copy_selection"
 
-pt_copy_selection<-pt_copy %>% select(country, cgexp, cgrev, trade, rev_exp)
+pt_copy_selection<-pt_copy %>% select(country, cgexp, cgrev, trade)
 ```
 
 ```{r}
@@ -254,13 +253,13 @@ pt_copy_selection %>% select(-c(cgexp, cgrev))
 ```
 
 ```{r}
-# Deletes "cgrev" AND "cgexp" variables from "pt_copy_selection" dataset and assigns the result to a new object named "pt_copy_trade_revexp"
-pt_copy_trade_revexp<-pt_copy_selection %>% select(-c(cgexp, cgrev))
+# Deletes "cgrev" AND "cgexp" variables from "pt_copy_selection" dataset and assigns the result to a new object named "pt_copy_trade"
+pt_copy_trade<-pt_copy_selection %>% select(-c(cgexp, cgrev))
 ```
 
 ```{r}
 # Prints contents of "pt_copy_trade_revexp"
-pt_copy_trade_revexp
+pt_copy_trade
 ```
 
 ```{r}
@@ -329,8 +328,8 @@ oecd_countries
 ```
 
 ```{r}
-high_revenues<-pt_copy %>% filter(rev_exp>1) %>% 
-                              relocate(country, rev_exp)
+high_revenues<-pt_copy %>% filter(cgrev>40) %>% 
+                              relocate(country, cgrev)
                         
 ```
 
@@ -381,12 +380,93 @@ pt_copy_sans_africa
 
 # Exploratory visualizations using ```ggplot```
 
+## Bar charts
 
+### Basic bar chart
 
+```{r}
+cgexp_viz1<-pt_copy %>% 
+  drop_na(cgexp) %>% 
+  ggplot()+
+  geom_col(aes(x=reorder(country, cgexp), y=cgexp))+
+  labs(title="Central Govt Expenditure as Pct of GDP (1990-1998 Average)", x="Country Name", 
+       y="CGEXP")+
+  theme(plot.title=element_text(hjust=0.5),
+        axis.text.x = element_text(angle = 90))
 
+cgexp_viz1
+```
 
+### Inverted bar chart 
 
+```{r, fig.width=8, fig.height=10}
+cgexp_viz2<-pt_copy %>% 
+           drop_na(cgexp) %>% 
+           ggplot()+
+           geom_col(aes(x=reorder(country, cgexp), y=cgexp))+
+           coord_flip()+
+           labs(title="Central Govt Expenditure as Pct of GDP (1990-1998 Average) ", x="Country Name", 
+                y="CGEXP")+
+           theme(plot.title=element_text(hjust=0.5)) 
 
+cgexp_viz2
+```
+
+## Scatterplots
+
+### Basic scatterplot
+
+```{r}
+scatter_cgexp_trade<-
+  pt_copy %>% 
+  drop_na(cgexp) %>% 
+  ggplot()+
+  geom_point(aes(x=cgrev, y=trade))+
+  labs(title="Trade Share of GDP \nas a function of\n Central Govt Expenditure (1990-1998 Average) ", 
+       x="Central Government Expenditure (Pct of GDP)", y="Overall Trade (Pct of GDP)")+
+  theme(plot.title=element_text(hjust=0.5)) 
+
+scatter_cgexp_trade
+```
+
+### Grouped scatterplot
+
+```{r}
+scatter_cgexp_trade_grouped<-
+  pt_copy %>% 
+  drop_na(cgexp) %>% 
+  ggplot()+
+  geom_point(aes(x=cgrev, y=trade, color=continent))+
+  labs(title="Trade Share of GDP \nas a function of\n Central Govt Expenditure (1990-1998 Average) ", 
+       x="Central Government Expenditure (Pct of GDP)", y="Overall Trade (Pct of GDP)")+
+  theme(plot.title=element_text(hjust=0.5)) 
+
+scatter_cgexp_trade_grouped
+```
+
+### Scatterplot with line of best fit
+
+```{r}
+scatter_cgexp_trade_line<-
+  pt_copy %>% 
+  drop_na(cgexp) %>% 
+  ggplot()+
+  geom_point(aes(x=cgrev, y=trade))+
+  geom_smooth(aes(x=cgrev, y=trade), method="lm")+
+  labs(title="Trade Share of GDP \nas a function of\n Central Govt Expenditure (1990-1998 Average) ", 
+       x="Central Government Expenditure (Pct of GDP)", y="Overall Trade (Pct of GDP)")+
+  theme(plot.title=element_text(hjust=0.5)) 
+
+scatter_cgexp_trade_line
+```
+
+# Elementary Data Analaysis
+
+## Computing correlations 
+
+```{r}
+
+```
 
 
 
