@@ -1,3 +1,4 @@
+fig:unnamed-chunk-70
 introduction
 loading-data
 summary-statistics
@@ -39,3 +40,5 @@ running-a-regression-model
 working-with-categorical-variables-in-a-regression-model
 working-with-interaction-terms-in-regression-models
 creating-and-exporting-regression-tables
+working-with-multiple-datasets
+merging-data

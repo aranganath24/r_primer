@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Exploratory visualizations using ggplot | R Primer for Social Scientists</title>
-  <meta name="description" content="5 Exploratory visualizations using ggplot | R Primer for Social Scientists" />
+  <title>7 Working with multiple datasets | R Primer for Social Scientists</title>
+  <meta name="description" content="7 Working with multiple datasets | R Primer for Social Scientists" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Exploratory visualizations using ggplot | R Primer for Social Scientists" />
+  <meta property="og:title" content="7 Working with multiple datasets | R Primer for Social Scientists" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Exploratory visualizations using ggplot | R Primer for Social Scientists" />
+  <meta name="twitter:title" content="7 Working with multiple datasets | R Primer for Social Scientists" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="basic-data-cleaning-and-preparation-tasks.html"/>
-<link rel="next" href="elementary-data-analysis.html"/>
+<link rel="prev" href="elementary-data-analysis.html"/>
+
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -224,90 +224,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exploratory-visualizations-using-ggplot" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Exploratory visualizations using <code>ggplot</code></h1>
-<div id="bar-charts" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Bar charts</h2>
-<div id="basic-bar-chart" class="section level3" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Basic bar chart</h3>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="exploratory-visualizations-using-ggplot.html#cb95-1" aria-hidden="true" tabindex="-1"></a>cgexp_viz1<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> </span>
-<span id="cb95-2"><a href="exploratory-visualizations-using-ggplot.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(cgexp) <span class="sc">%&gt;%</span> </span>
-<span id="cb95-3"><a href="exploratory-visualizations-using-ggplot.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb95-4"><a href="exploratory-visualizations-using-ggplot.html#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(country, cgexp), <span class="at">y=</span>cgexp))<span class="sc">+</span></span>
-<span id="cb95-5"><a href="exploratory-visualizations-using-ggplot.html#cb95-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Central Govt Expenditure as Pct of GDP (1990-1998 Average)&quot;</span>, <span class="at">x=</span><span class="st">&quot;Country Name&quot;</span>, </span>
-<span id="cb95-6"><a href="exploratory-visualizations-using-ggplot.html#cb95-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;CGEXP&quot;</span>)<span class="sc">+</span></span>
-<span id="cb95-7"><a href="exploratory-visualizations-using-ggplot.html#cb95-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
-<span id="cb95-8"><a href="exploratory-visualizations-using-ggplot.html#cb95-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
-<span id="cb95-9"><a href="exploratory-visualizations-using-ggplot.html#cb95-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb95-10"><a href="exploratory-visualizations-using-ggplot.html#cb95-10" aria-hidden="true" tabindex="-1"></a>cgexp_viz1</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
-</div>
-<div id="inverted-bar-chart" class="section level3" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Inverted bar chart</h3>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="exploratory-visualizations-using-ggplot.html#cb96-1" aria-hidden="true" tabindex="-1"></a>cgexp_viz2<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> </span>
-<span id="cb96-2"><a href="exploratory-visualizations-using-ggplot.html#cb96-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">drop_na</span>(cgexp) <span class="sc">%&gt;%</span> </span>
-<span id="cb96-3"><a href="exploratory-visualizations-using-ggplot.html#cb96-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb96-4"><a href="exploratory-visualizations-using-ggplot.html#cb96-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(country, cgexp), <span class="at">y=</span>cgexp))<span class="sc">+</span></span>
-<span id="cb96-5"><a href="exploratory-visualizations-using-ggplot.html#cb96-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb96-6"><a href="exploratory-visualizations-using-ggplot.html#cb96-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Central Govt Expenditure as Pct of GDP (1990-1998 Average) &quot;</span>, <span class="at">x=</span><span class="st">&quot;Country Name&quot;</span>, </span>
-<span id="cb96-7"><a href="exploratory-visualizations-using-ggplot.html#cb96-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">y=</span><span class="st">&quot;CGEXP&quot;</span>)<span class="sc">+</span></span>
-<span id="cb96-8"><a href="exploratory-visualizations-using-ggplot.html#cb96-8" aria-hidden="true" tabindex="-1"></a>           <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>)) </span>
-<span id="cb96-9"><a href="exploratory-visualizations-using-ggplot.html#cb96-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-10"><a href="exploratory-visualizations-using-ggplot.html#cb96-10" aria-hidden="true" tabindex="-1"></a>cgexp_viz2</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-1.png" width="768" /></p>
-</div>
-</div>
-<div id="scatterplots" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Scatterplots</h2>
-<div id="basic-scatterplot" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Basic scatterplot</h3>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="exploratory-visualizations-using-ggplot.html#cb97-1" aria-hidden="true" tabindex="-1"></a>scatter_cgexp_trade<span class="ot">&lt;-</span></span>
-<span id="cb97-2"><a href="exploratory-visualizations-using-ggplot.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  pt_copy <span class="sc">%&gt;%</span> </span>
-<span id="cb97-3"><a href="exploratory-visualizations-using-ggplot.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(cgexp) <span class="sc">%&gt;%</span> </span>
-<span id="cb97-4"><a href="exploratory-visualizations-using-ggplot.html#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb97-5"><a href="exploratory-visualizations-using-ggplot.html#cb97-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>cgexp, <span class="at">y=</span>trade))<span class="sc">+</span></span>
-<span id="cb97-6"><a href="exploratory-visualizations-using-ggplot.html#cb97-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Trade Share of GDP </span><span class="sc">\n</span><span class="st">as a function of</span><span class="sc">\n</span><span class="st"> Central Govt Expenditure (1990-1998 Average) &quot;</span>, </span>
-<span id="cb97-7"><a href="exploratory-visualizations-using-ggplot.html#cb97-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Central Government Expenditure (Pct of GDP)&quot;</span>, <span class="at">y=</span><span class="st">&quot;Overall Trade (Pct of GDP)&quot;</span>)<span class="sc">+</span></span>
-<span id="cb97-8"><a href="exploratory-visualizations-using-ggplot.html#cb97-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>)) </span>
-<span id="cb97-9"><a href="exploratory-visualizations-using-ggplot.html#cb97-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-10"><a href="exploratory-visualizations-using-ggplot.html#cb97-10" aria-hidden="true" tabindex="-1"></a>scatter_cgexp_trade</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
-</div>
-<div id="grouped-scatterplot" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Grouped scatterplot</h3>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="exploratory-visualizations-using-ggplot.html#cb98-1" aria-hidden="true" tabindex="-1"></a>scatter_cgexp_trade_grouped<span class="ot">&lt;-</span></span>
-<span id="cb98-2"><a href="exploratory-visualizations-using-ggplot.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  pt_copy <span class="sc">%&gt;%</span> </span>
-<span id="cb98-3"><a href="exploratory-visualizations-using-ggplot.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(cgexp) <span class="sc">%&gt;%</span> </span>
-<span id="cb98-4"><a href="exploratory-visualizations-using-ggplot.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb98-5"><a href="exploratory-visualizations-using-ggplot.html#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>cgexp, <span class="at">y=</span>trade, <span class="at">color=</span>continent))<span class="sc">+</span></span>
-<span id="cb98-6"><a href="exploratory-visualizations-using-ggplot.html#cb98-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Trade Share of GDP </span><span class="sc">\n</span><span class="st">as a function of</span><span class="sc">\n</span><span class="st"> Central Govt Expenditure (1990-1998 Average) &quot;</span>, </span>
-<span id="cb98-7"><a href="exploratory-visualizations-using-ggplot.html#cb98-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Central Government Expenditure (Pct of GDP)&quot;</span>, <span class="at">y=</span><span class="st">&quot;Overall Trade (Pct of GDP)&quot;</span>)<span class="sc">+</span></span>
-<span id="cb98-8"><a href="exploratory-visualizations-using-ggplot.html#cb98-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>)) </span>
-<span id="cb98-9"><a href="exploratory-visualizations-using-ggplot.html#cb98-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-10"><a href="exploratory-visualizations-using-ggplot.html#cb98-10" aria-hidden="true" tabindex="-1"></a>scatter_cgexp_trade_grouped</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
-</div>
-<div id="scatterplot-with-line-of-best-fit" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Scatterplot with line of best fit</h3>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="exploratory-visualizations-using-ggplot.html#cb99-1" aria-hidden="true" tabindex="-1"></a>scatter_cgexp_trade_line<span class="ot">&lt;-</span></span>
-<span id="cb99-2"><a href="exploratory-visualizations-using-ggplot.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  pt_copy <span class="sc">%&gt;%</span> </span>
-<span id="cb99-3"><a href="exploratory-visualizations-using-ggplot.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(cgexp) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-4"><a href="exploratory-visualizations-using-ggplot.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb99-5"><a href="exploratory-visualizations-using-ggplot.html#cb99-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>cgexp, <span class="at">y=</span>trade))<span class="sc">+</span></span>
-<span id="cb99-6"><a href="exploratory-visualizations-using-ggplot.html#cb99-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">x=</span>cgexp, <span class="at">y=</span>trade), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>)<span class="sc">+</span></span>
-<span id="cb99-7"><a href="exploratory-visualizations-using-ggplot.html#cb99-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Trade Share of GDP </span><span class="sc">\n</span><span class="st">as a function of</span><span class="sc">\n</span><span class="st"> Central Govt Expenditure (1990-1998 Average) &quot;</span>, </span>
-<span id="cb99-8"><a href="exploratory-visualizations-using-ggplot.html#cb99-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Central Government Expenditure (Pct of GDP)&quot;</span>, <span class="at">y=</span><span class="st">&quot;Overall Trade (Pct of GDP)&quot;</span>)<span class="sc">+</span></span>
-<span id="cb99-9"><a href="exploratory-visualizations-using-ggplot.html#cb99-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>)) </span>
-<span id="cb99-10"><a href="exploratory-visualizations-using-ggplot.html#cb99-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-11"><a href="exploratory-visualizations-using-ggplot.html#cb99-11" aria-hidden="true" tabindex="-1"></a>scatter_cgexp_trade_line</span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-70"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-70-1.png" alt="test" width="672" />
-<p class="caption">
-Figure 5.1: test
-</p>
-</div>
-</div>
+<div id="working-with-multiple-datasets" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Working with multiple datasets</h1>
+<div id="merging-data" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Merging data</h2>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="working-with-multiple-datasets.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility from working directory</span></span>
+<span id="cb131-2"><a href="working-with-multiple-datasets.html#cb131-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
+<p>Alternatively,</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="working-with-multiple-datasets.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility data from Github repository</span></span>
+<span id="cb132-2"><a href="working-with-multiple-datasets.html#cb132-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/aranganath24/r_primer/main/workshop_data/chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ───────────────────────────────────────────────────────────────────────
+## cols(
+##   ccode = col_character(),
+##   country_name = col_character(),
+##   ctrycd = col_double(),
+##   kaopen = col_double(),
+##   ka_open = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="working-with-multiple-datasets.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View capital mobility data</span></span>
+<span id="cb134-2"><a href="working-with-multiple-datasets.html#cb134-2" aria-hidden="true" tabindex="-1"></a>capital_mobility</span></code></pre></div>
+<pre><code>## # A tibble: 182 × 5
+##    ccode country_name         ctrycd kaopen ka_open
+##    &lt;chr&gt; &lt;chr&gt;                 &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1 ABW   Aruba                   314 -0.607  0.309 
+##  2 AFG   Afghanistan             512 -1.92   0     
+##  3 AGO   Angola                  614 -1.57   0.0825
+##  4 ALB   Albania                 914 -0.148  0.417 
+##  5 ANT   Netherlands Antilles    353 -0.104  0.427 
+##  6 ARE   United Arab Emirates    466  2.33   1     
+##  7 ARG   Argentina               213  0.662  0.607 
+##  8 ARM   Armenia                 911  1.17   0.725 
+##  9 ATG   Antigua and Barbuda     311  1.98   0.916 
+## 10 AUS   Australia               193  2.16   0.960 
+## # … with 172 more rows</code></pre>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="working-with-multiple-datasets.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Joins &quot;capital_mobility&quot; to &quot;pt_copy&quot; using &quot;ctrycd&quot; as the join field (only keeps observations from &quot;pt_copy&quot;; countries in &quot;capital_mobility&quot; but not &quot;pt_copy&quot; are not included in the final joined dataset; joined dataset is assigned to an object named &quot;pt_capitalmobility&quot;)</span></span>
+<span id="cb136-2"><a href="working-with-multiple-datasets.html#cb136-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility<span class="ot">&lt;-</span><span class="fu">left_join</span>(pt_copy, capital_mobility, <span class="at">by=</span><span class="st">&quot;ctrycd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="working-with-multiple-datasets.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;pt_capitalmobility&quot;</span></span>
+<span id="cb137-2"><a href="working-with-multiple-datasets.html#cb137-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility</span></code></pre></div>
+<pre><code>## # A tibble: 85 × 89
+##    country        kaopen trade_level trade_level_High_… trade_level_Int… trade_level_Low… trade
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                    &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;
+##  1 Singapore      2.10   High_Trade                   1                0                0  343.
+##  2 Malta         -1.06   High_Trade                   1                0                0  190.
+##  3 Luxembourg    NA      High_Trade                   1                0                0  189.
+##  4 Malaysia       1.36   High_Trade                   1                0                0  176.
+##  5 Estonia        2.08   High_Trade                   1                0                0  154.
+##  6 Belgium        2.16   High_Trade                   1                0                0  132.
+##  7 Ireland        1.36   High_Trade                   1                0                0  129.
+##  8 Mauritius     -0.0671 High_Trade                   1                0                0  128.
+##  9 St. Vincent&amp;G -0.505  High_Trade                   1                0                0  123.
+## 10 Jamaica        0.245  High_Trade                   1                0                0  122.
+## # … with 75 more rows, and 82 more variables: trade_open &lt;dbl&gt;, catho80 &lt;dbl&gt;,
+## #   non_catholic_80 &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;, pindo &lt;dbl&gt;,
+## #   ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;,
+## #   legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;,
+## #   prot80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;,
+## #   yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;,
+## #   gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;, rgdph &lt;dbl&gt;, prop1564 &lt;dbl&gt;, …</code></pre>
+
 </div>
 </div>
             </section>
@@ -315,8 +290,8 @@ Figure 5.1: test
           </div>
         </div>
       </div>
-<a href="basic-data-cleaning-and-preparation-tasks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="elementary-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="elementary-data-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2022-02-06" />
+<meta name="date" content="2022-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -201,6 +201,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.4" data-path="elementary-data-analysis.html"><a href="elementary-data-analysis.html#creating-and-exporting-regression-tables"><i class="fa fa-check"></i><b>6.2.4</b> Creating and exporting regression tables</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="working-with-multiple-datasets.html"><a href="working-with-multiple-datasets.html"><i class="fa fa-check"></i><b>7</b> Working with multiple datasets</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-multiple-datasets.html"><a href="working-with-multiple-datasets.html#merging-data"><i class="fa fa-check"></i><b>7.1</b> Merging data</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -225,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="loading-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in persson and tabellini dataset</span></span>
 <span id="cb2-2"><a href="loading-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a>persson_tabellini_original<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;persson_tabellini_workshop.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_double(),
 ##   country = col_character(),
@@ -238,25 +242,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="loading-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print contents of &quot;pt_copy&quot;</span></span>
 <span id="cb5-2"><a href="loading-data.html#cb5-2" aria-hidden="true" tabindex="-1"></a>pt_copy</span></code></pre></div>
 <pre><code>## # A tibble: 85 × 75
-##     oecd country   pind pindo ctrycd col_uk t_indep col_uka col_espa col_otha legor_uk legor_so legor_fr legor_ge
-##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1     0 Argenti… 0     0        213      0     183   0        0.268    0            0        0        1        0
-##  2     1 Austral… 1     1        193      1      98   0.608    0        0            1        0        0        0
-##  3     1 Austria  0     0        122      0     250   0        0        0            0        0        0        1
-##  4     0 Bahamas  1     1        313      1      26   0.896    0        0            1        0        0        0
-##  5     0 Banglad… 1     1        513      0      28   0        0        0.888        1        0        0        0
-##  6     0 Barbados 1     1        316      1      33   0.868    0        0            1        0        0        0
-##  7     0 Belarus  1     1        913      0       8   0        0        0.968        0        1        0        0
-##  8     1 Belgium  0     0        124      0     169   0        0        0.324        0        0        1        0
-##  9     0 Belize   1     1        339      1      18   0.928    0        0            1        0        0        0
-## 10     0 Bolivia  0.116 0.116    218      0     174   0        0.304    0            0        0        1        0
-## # … with 75 more rows, and 61 more variables: legor_sc &lt;dbl&gt;, prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;,
-## #   avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;, logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;,
-## #   eurfrac &lt;dbl&gt;, frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
-## #   rgdph &lt;dbl&gt;, trade &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;, spropn &lt;dbl&gt;,
-## #   yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;, semi &lt;dbl&gt;, majpar &lt;dbl&gt;,
-## #   majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, age &lt;dbl&gt;, polityIV &lt;dbl&gt;, spl &lt;dbl&gt;,
-## #   cpi9500 &lt;dbl&gt;, du_60ctry &lt;dbl&gt;, magn &lt;dbl&gt;, sdm &lt;dbl&gt;, oecd.x &lt;dbl&gt;, mining_gdp &lt;dbl&gt;, gini_8090 &lt;dbl&gt;, …</code></pre>
+##     oecd country   pind pindo ctrycd col_uk t_indep col_uka col_espa col_otha legor_uk legor_so
+##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1     0 Argenti… 0     0        213      0     183   0        0.268    0            0        0
+##  2     1 Austral… 1     1        193      1      98   0.608    0        0            1        0
+##  3     1 Austria  0     0        122      0     250   0        0        0            0        0
+##  4     0 Bahamas  1     1        313      1      26   0.896    0        0            1        0
+##  5     0 Banglad… 1     1        513      0      28   0        0        0.888        1        0
+##  6     0 Barbados 1     1        316      1      33   0.868    0        0            1        0
+##  7     0 Belarus  1     1        913      0       8   0        0        0.968        0        1
+##  8     1 Belgium  0     0        124      0     169   0        0        0.324        0        0
+##  9     0 Belize   1     1        339      1      18   0.928    0        0            1        0
+## 10     0 Bolivia  0.116 0.116    218      0     174   0        0.304    0            0        0
+## # … with 75 more rows, and 63 more variables: legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;,
+## #   prot80 &lt;dbl&gt;, catho80 &lt;dbl&gt;, confu &lt;dbl&gt;, avelf &lt;dbl&gt;, govef &lt;dbl&gt;, graft &lt;dbl&gt;,
+## #   logyl &lt;dbl&gt;, loga &lt;dbl&gt;, yrsopen &lt;dbl&gt;, gadp &lt;dbl&gt;, engfrac &lt;dbl&gt;, eurfrac &lt;dbl&gt;,
+## #   frankrom &lt;dbl&gt;, latitude &lt;dbl&gt;, gastil &lt;dbl&gt;, cgexp &lt;dbl&gt;, cgrev &lt;dbl&gt;, ssw &lt;dbl&gt;,
+## #   rgdph &lt;dbl&gt;, trade &lt;dbl&gt;, prop1564 &lt;dbl&gt;, prop65 &lt;dbl&gt;, federal &lt;dbl&gt;, eduger &lt;dbl&gt;,
+## #   spropn &lt;dbl&gt;, yearele &lt;dbl&gt;, yearreg &lt;dbl&gt;, seats &lt;dbl&gt;, maj &lt;dbl&gt;, pres &lt;dbl&gt;, lyp &lt;dbl&gt;,
+## #   semi &lt;dbl&gt;, majpar &lt;dbl&gt;, majpres &lt;dbl&gt;, propres &lt;dbl&gt;, dem_age &lt;dbl&gt;, lat01 &lt;dbl&gt;, …</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="loading-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(pt_copy)</span></code></pre></div>
 <table>
 <thead>

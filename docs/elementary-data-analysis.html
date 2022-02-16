@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2022-02-06" />
+<meta name="date" content="2022-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="exploratory-visualizations-using-ggplot.html"/>
-
+<link rel="next" href="working-with-multiple-datasets.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -201,6 +201,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.4" data-path="elementary-data-analysis.html"><a href="elementary-data-analysis.html#creating-and-exporting-regression-tables"><i class="fa fa-check"></i><b>6.2.4</b> Creating and exporting regression tables</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="working-with-multiple-datasets.html"><a href="working-with-multiple-datasets.html"><i class="fa fa-check"></i><b>7</b> Working with multiple datasets</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-multiple-datasets.html"><a href="working-with-multiple-datasets.html#merging-data"><i class="fa fa-check"></i><b>7.1</b> Merging data</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -265,17 +269,181 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.2</span> Basic regression analysis</h2>
 <div id="running-a-regression-model" class="section level3" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Running a regression model</h3>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="elementary-data-analysis.html#cb107-1" aria-hidden="true" tabindex="-1"></a>regression1<span class="ot">&lt;-</span><span class="fu">lm</span>(cgexp<span class="sc">~</span>gastil<span class="sc">+</span>lyp<span class="sc">+</span>trade<span class="sc">+</span>prop1564<span class="sc">+</span>prop65<span class="sc">+</span>federal<span class="sc">+</span>oecd, <span class="at">data=</span>pt_copy)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="elementary-data-analysis.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(regression1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = cgexp ~ gastil + lyp + trade + prop1564 + prop65 + 
+##     federal + oecd, data = pt_copy)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -12.9861  -4.6981  -0.5521   4.4482  16.1124 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 52.17290   16.08572   3.243  0.00179 ** 
+## gastil      -2.15202    1.10609  -1.946  0.05561 .  
+## lyp         -2.04441    2.00721  -1.019  0.31184    
+## trade        0.04978    0.01924   2.587  0.01170 *  
+## prop1564    -0.28482    0.26686  -1.067  0.28939    
+## prop65       1.58627    0.33548   4.728 1.09e-05 ***
+## federal     -4.58101    2.38015  -1.925  0.05822 .  
+## oecd         0.96969    2.97171   0.326  0.74514    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.064 on 72 degrees of freedom
+##   (5 observations deleted due to missingness)
+## Multiple R-squared:  0.5865, Adjusted R-squared:  0.5463 
+## F-statistic: 14.59 on 7 and 72 DF,  p-value: 1.137e-11</code></pre>
 </div>
 <div id="working-with-categorical-variables-in-a-regression-model" class="section level3" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Working with categorical variables in a regression model</h3>
+<p><strong>Working with categorical variables by using factors</strong></p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="elementary-data-analysis.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set Continent variable as factor</span></span>
+<span id="cb110-2"><a href="elementary-data-analysis.html#cb110-2" aria-hidden="true" tabindex="-1"></a>pt_copy<span class="sc">$</span>continent<span class="ot">&lt;-</span><span class="fu">as.factor</span>(pt_copy<span class="sc">$</span>continent)</span>
+<span id="cb110-3"><a href="elementary-data-analysis.html#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(pt_copy<span class="sc">$</span>continent)</span></code></pre></div>
+<pre><code>## [1] &quot;africa&quot; &quot;asiae&quot;  &quot;laam&quot;   &quot;other&quot;</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="elementary-data-analysis.html#cb112-1" aria-hidden="true" tabindex="-1"></a>pt_copy<span class="sc">$</span>continent<span class="ot">&lt;-</span><span class="fu">relevel</span>(pt_copy<span class="sc">$</span>continent, <span class="at">ref=</span><span class="st">&quot;other&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="elementary-data-analysis.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the regression with the continent variable</span></span>
+<span id="cb113-2"><a href="elementary-data-analysis.html#cb113-2" aria-hidden="true" tabindex="-1"></a>regression2<span class="ot">&lt;-</span><span class="fu">lm</span>(cgexp<span class="sc">~</span>gastil<span class="sc">+</span>lyp<span class="sc">+</span>trade<span class="sc">+</span>prop1564<span class="sc">+</span>prop65<span class="sc">+</span>federal<span class="sc">+</span>continent<span class="sc">+</span>col_espa<span class="sc">+</span>col_uka<span class="sc">+</span>col_otha<span class="sc">+</span>oecd, <span class="at">data=</span>pt_copy)</span>
+<span id="cb113-3"><a href="elementary-data-analysis.html#cb113-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-4"><a href="elementary-data-analysis.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(regression2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = cgexp ~ gastil + lyp + trade + prop1564 + prop65 + 
+##     federal + continent + col_espa + col_uka + col_otha + oecd, 
+##     data = pt_copy)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.3617  -3.9886  -0.3921   4.6050  17.3752 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)     44.88833   17.56879   2.555   0.0129 *
+## gastil          -2.06438    1.13670  -1.816   0.0739 .
+## lyp             -0.12414    2.08305  -0.060   0.9527  
+## trade            0.03018    0.02069   1.459   0.1494  
+## prop1564        -0.25399    0.27421  -0.926   0.3577  
+## prop65           0.98675    0.45822   2.153   0.0349 *
+## federal         -4.73466    2.34235  -2.021   0.0473 *
+## continentafrica -3.42365    4.58573  -0.747   0.4580  
+## continentasiae  -7.72223    4.17322  -1.850   0.0687 .
+## continentlaam   -9.03522    4.25535  -2.123   0.0375 *
+## col_espa         0.58034    8.05720   0.072   0.9428  
+## col_uka          2.68929    3.22769   0.833   0.4077  
+## col_otha        -0.80223    3.02997  -0.265   0.7920  
+## oecd            -2.37769    3.33814  -0.712   0.4788  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.789 on 66 degrees of freedom
+##   (5 observations deleted due to missingness)
+## Multiple R-squared:  0.6499, Adjusted R-squared:  0.5809 
+## F-statistic: 9.424 on 13 and 66 DF,  p-value: 1.21e-10</code></pre>
+<p><strong>Working with categorical variables by creating dummy variables</strong></p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="elementary-data-analysis.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use &quot;continent&quot; field to make continent dummy variables</span></span>
+<span id="cb115-2"><a href="elementary-data-analysis.html#cb115-2" aria-hidden="true" tabindex="-1"></a>pt_copy<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">dummy_cols</span>(<span class="st">&quot;continent&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="elementary-data-analysis.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run regression with continent dummies, with &quot;other&quot; category excluded</span></span>
+<span id="cb116-2"><a href="elementary-data-analysis.html#cb116-2" aria-hidden="true" tabindex="-1"></a>regression2_alt<span class="ot">&lt;-</span><span class="fu">lm</span>(cgexp<span class="sc">~</span>gastil<span class="sc">+</span>lyp<span class="sc">+</span>trade<span class="sc">+</span>prop1564<span class="sc">+</span>prop65<span class="sc">+</span>federal<span class="sc">+</span>continent_africa<span class="sc">+</span></span>
+<span id="cb116-3"><a href="elementary-data-analysis.html#cb116-3" aria-hidden="true" tabindex="-1"></a>                      continent_asiae<span class="sc">+</span>continent_laam<span class="sc">+</span>col_espa<span class="sc">+</span>col_uka<span class="sc">+</span>col_otha<span class="sc">+</span>oecd,</span>
+<span id="cb116-4"><a href="elementary-data-analysis.html#cb116-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>pt_copy)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="elementary-data-analysis.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View regression2_alt</span></span>
+<span id="cb117-2"><a href="elementary-data-analysis.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(regression2_alt)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = cgexp ~ gastil + lyp + trade + prop1564 + prop65 + 
+##     federal + continent_africa + continent_asiae + continent_laam + 
+##     col_espa + col_uka + col_otha + oecd, data = pt_copy)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.3617  -3.9886  -0.3921   4.6050  17.3752 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)      44.88833   17.56879   2.555   0.0129 *
+## gastil           -2.06438    1.13670  -1.816   0.0739 .
+## lyp              -0.12414    2.08305  -0.060   0.9527  
+## trade             0.03018    0.02069   1.459   0.1494  
+## prop1564         -0.25399    0.27421  -0.926   0.3577  
+## prop65            0.98675    0.45822   2.153   0.0349 *
+## federal          -4.73466    2.34235  -2.021   0.0473 *
+## continent_africa -3.42365    4.58573  -0.747   0.4580  
+## continent_asiae  -7.72223    4.17322  -1.850   0.0687 .
+## continent_laam   -9.03522    4.25535  -2.123   0.0375 *
+## col_espa          0.58034    8.05720   0.072   0.9428  
+## col_uka           2.68929    3.22769   0.833   0.4077  
+## col_otha         -0.80223    3.02997  -0.265   0.7920  
+## oecd             -2.37769    3.33814  -0.712   0.4788  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.789 on 66 degrees of freedom
+##   (5 observations deleted due to missingness)
+## Multiple R-squared:  0.6499, Adjusted R-squared:  0.5809 
+## F-statistic: 9.424 on 13 and 66 DF,  p-value: 1.21e-10</code></pre>
 </div>
 <div id="working-with-interaction-terms-in-regression-models" class="section level3" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> Working with interaction terms in regression models</h3>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="elementary-data-analysis.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run regression with interaction term</span></span>
+<span id="cb119-2"><a href="elementary-data-analysis.html#cb119-2" aria-hidden="true" tabindex="-1"></a>trade_federal_interaction<span class="ot">&lt;-</span><span class="fu">lm</span>(cgexp<span class="sc">~</span>trade<span class="sc">*</span>federal, <span class="at">data=</span>pt_copy)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="elementary-data-analysis.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(trade_federal_interaction)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = cgexp ~ trade * federal, data = pt_copy)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -20.0774  -8.1325   0.5782   7.7004  21.0072 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   26.708234   2.517787  10.608   &lt;2e-16 ***
+## trade          0.034512   0.026410   1.307    0.195    
+## federal       -4.695595   5.512752  -0.852    0.397    
+## trade:federal  0.009965   0.076991   0.129    0.897    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.42 on 77 degrees of freedom
+##   (4 observations deleted due to missingness)
+## Multiple R-squared:  0.05761,    Adjusted R-squared:  0.02089 
+## F-statistic: 1.569 on 3 and 77 DF,  p-value: 0.2037</code></pre>
+<p><strong>Plotting marginal effects</strong></p>
+<p>What</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="elementary-data-analysis.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finds mean value of trade variable</span></span>
+<span id="cb122-2"><a href="elementary-data-analysis.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pt_copy<span class="sc">$</span>trade)</span></code></pre></div>
+<pre><code>## [1] 78.7659</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="elementary-data-analysis.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate marginal effects of federalism, with &quot;trade&quot; held at mean</span></span>
+<span id="cb124-2"><a href="elementary-data-analysis.html#cb124-2" aria-hidden="true" tabindex="-1"></a>marginal_effect_federalism<span class="ot">&lt;-</span><span class="fu">ggpredict</span>(trade_federal_interaction, <span class="at">terms=</span><span class="st">&quot;federal&quot;</span>, <span class="at">condition=</span><span class="fu">c</span>(<span class="at">trade=</span><span class="fl">78.7659</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="elementary-data-analysis.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View marginal effects table</span></span>
+<span id="cb125-2"><a href="elementary-data-analysis.html#cb125-2" aria-hidden="true" tabindex="-1"></a>marginal_effect_federalism</span></code></pre></div>
+<pre><code>## # Predicted values of cgexp
+## 
+## federal | Predicted |         95% CI
+## ------------------------------------
+##       0 |     29.43 | [26.94, 31.91]
+##       1 |     25.52 | [18.91, 32.12]</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="elementary-data-analysis.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot marginal effects of federalism</span></span>
+<span id="cb127-2"><a href="elementary-data-analysis.html#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpredict</span>(trade_federal_interaction, <span class="at">terms=</span><span class="st">&quot;federal&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb127-3"><a href="elementary-data-analysis.html#cb127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, predicted))<span class="sc">+</span></span>
+<span id="cb127-4"><a href="elementary-data-analysis.html#cb127-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb127-5"><a href="elementary-data-analysis.html#cb127-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>conf.low, <span class="at">ymax=</span>conf.high),<span class="at">width=</span><span class="fl">0.05</span>)<span class="sc">+</span></span>
+<span id="cb127-6"><a href="elementary-data-analysis.html#cb127-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>(<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">by=</span><span class="dv">1</span>)))<span class="sc">+</span></span>
+<span id="cb127-7"><a href="elementary-data-analysis.html#cb127-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Predicted Effects of Federalism on Gov&#39;t Expenditure</span><span class="sc">\n</span><span class="st">(with trade set to mean)&quot;</span>, <span class="at">y=</span><span class="st">&quot;Predicted Expenditure&quot;</span>, <span class="at">x=</span><span class="st">&quot;Federalism&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
 </div>
 <div id="creating-and-exporting-regression-tables" class="section level3" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Creating and exporting regression tables</h3>
-<p>shift discussion of joining data earlier</p>
-
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="elementary-data-analysis.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Put the regression models you want in your regression table in a list</span></span>
+<span id="cb128-2"><a href="elementary-data-analysis.html#cb128-2" aria-hidden="true" tabindex="-1"></a>model_list<span class="ot">&lt;-</span><span class="fu">list</span>(regression1,regression2)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="elementary-data-analysis.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exporting table as text file</span></span>
+<span id="cb129-2"><a href="elementary-data-analysis.html#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(model_list, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">out=</span><span class="st">&quot;cgexp_regressions.txt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="elementary-data-analysis.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exporting regression table as html file</span></span>
+<span id="cb130-2"><a href="elementary-data-analysis.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(model_list, <span class="at">type=</span><span class="st">&quot;html&quot;</span>, <span class="at">out=</span><span class="st">&quot;cgexp_regressions.html&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -284,8 +452,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="exploratory-visualizations-using-ggplot.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="exploratory-visualizations-using-ggplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="working-with-multiple-datasets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

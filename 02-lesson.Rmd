@@ -446,7 +446,7 @@ scatter_cgexp_trade_grouped
 
 ### Scatterplot with line of best fit
 
-```{r}
+```{r, fig.cap="test"}
 scatter_cgexp_trade_line<-
   pt_copy %>% 
   drop_na(cgexp) %>% 
@@ -491,13 +491,145 @@ stargazer(matrix_to_export, type="text", title="Correlation Matrix", digits=3, o
 
 ### Running a regression model
 
+```{r}
+regression1<-lm(cgexp~gastil+lyp+trade+prop1564+prop65+federal+oecd, data=pt_copy)
+```
+
+```{r}
+summary(regression1)
+```
+
+
 ### Working with categorical variables in a regression model
+
+**Working with categorical variables by using factors**
+
+```{r}
+# Set Continent variable as factor
+pt_copy$continent<-as.factor(pt_copy$continent)
+levels(pt_copy$continent)
+pt_copy$continent<-relevel(pt_copy$continent, ref="other")
+```
+
+```{r}
+# Run the regression with the continent variable
+regression2<-lm(cgexp~gastil+lyp+trade+prop1564+prop65+federal+continent+col_espa+col_uka+col_otha+oecd, data=pt_copy)
+
+summary(regression2)
+```
+
+**Working with categorical variables by creating dummy variables**
+
+```{r}
+# Use "continent" field to make continent dummy variables
+pt_copy<-pt_copy %>% dummy_cols("continent")
+```
+
+```{r}
+# run regression with continent dummies, with "other" category excluded
+regression2_alt<-lm(cgexp~gastil+lyp+trade+prop1564+prop65+federal+continent_africa+
+                      continent_asiae+continent_laam+col_espa+col_uka+col_otha+oecd,
+                      data=pt_copy)
+```
+
+```{r}
+# View regression2_alt
+summary(regression2_alt)
+```
 
 ### Working with interaction terms in regression models
 
+```{r}
+# run regression with interaction term
+trade_federal_interaction<-lm(cgexp~trade*federal, data=pt_copy)
+```
+
+```{r}
+summary(trade_federal_interaction)
+```
+
+**Plotting marginal effects**
+
+What 
+
+```{r}
+# Finds mean value of trade variable
+mean(pt_copy$trade)
+```
+
+```{r}
+# Calculate marginal effects of federalism, with "trade" held at mean
+marginal_effect_federalism<-ggpredict(trade_federal_interaction, terms="federal", condition=c(trade=78.7659))
+```
+
+```{r}
+# View marginal effects table
+marginal_effect_federalism
+```
+
+```{r}
+# Plot marginal effects of federalism
+ggpredict(trade_federal_interaction, terms="federal") %>% 
+  ggplot(aes(x, predicted))+
+  geom_point()+
+  geom_errorbar(aes(ymin=conf.low, ymax=conf.high),width=0.05)+
+  scale_x_continuous(breaks=(seq(0,1, by=1)))+
+  labs(title="Predicted Effects of Federalism on Gov't Expenditure\n(with trade set to mean)", y="Predicted Expenditure", x="Federalism")
+```
+
 ### Creating and exporting regression tables
 
+```{r}
+# Put the regression models you want in your regression table in a list
+model_list<-list(regression1,regression2)
+```
 
-shift discussion of joining data earlier 
+```{r, message=FALSE, results=F}
+# Exporting table as text file
+stargazer(model_list, type="text", out="cgexp_regressions.txt")
+```
+
+```{r, message=F, results=F}
+# Exporting regression table as html file
+stargazer(model_list, type="html", out="cgexp_regressions.html")
+```
+
+# Working with multiple datasets
+
+## Merging data
+
+```{r, eval=FALSE}
+# Read in capital mobility from working directory
+capital_mobility<-read_csv("chinn_eto_capitalopenness_summary.csv")
+```
+
+Alternatively, 
+
+```{r}
+# Read in capital mobility data from Github repository
+capital_mobility<-read_csv("https://raw.githubusercontent.com/aranganath24/r_primer/main/workshop_data/chinn_eto_capitalopenness_summary.csv")
+```
+
+```{r}
+# View capital mobility data
+capital_mobility
+```
+
+```{r}
+# Joins "capital_mobility" to "pt_copy" using "ctrycd" as the join field (only keeps observations from "pt_copy"; countries in "capital_mobility" but not "pt_copy" are not included in the final joined dataset; joined dataset is assigned to an object named "pt_capitalmobility")
+pt_capitalmobility<-left_join(pt_copy, capital_mobility, by="ctrycd")
+```
+
+```{r, echo=FALSE}
+pt_capitalmobility<-pt_capitalmobility %>% relocate(country, kaopen)
+```
+
+```{r}
+# prints contents of "pt_capitalmobility"
+pt_capitalmobility
+```
+
+
+
 
 
