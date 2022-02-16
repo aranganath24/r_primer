@@ -137,7 +137,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>2</b> Loading data</a></li>
+<li class="chapter" data-level="2" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>2</b> Loading data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="loading-data.html"><a href="loading-data.html#reading-in-data-from-the-working-directory"><i class="fa fa-check"></i><b>2.1</b> Reading in data from the working directory</a></li>
+<li class="chapter" data-level="2.2" data-path="loading-data.html"><a href="loading-data.html#reading-data-directly-from-an-online-source-alternative-method"><i class="fa fa-check"></i><b>2.2</b> Reading data directly from an online source (Alternative method)</a></li>
+<li class="chapter" data-level="2.3" data-path="loading-data.html"><a href="loading-data.html#make-a-copy-of-the-dataset"><i class="fa fa-check"></i><b>2.3</b> Make a copy of the dataset</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>3</b> Summary statistics</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-a-table-of-summary-statistics"><i class="fa fa-check"></i><b>3.1</b> Generating a table of summary statistics</a></li>
@@ -192,7 +197,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="elementary-data-analysis.html"><a href="elementary-data-analysis.html"><i class="fa fa-check"></i><b>6</b> Elementary Data Analysis</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="elementary-data-analysis.html"><a href="elementary-data-analysis.html#computing-correlations"><i class="fa fa-check"></i><b>6.1</b> Computing correlations</a></li>
+<li class="chapter" data-level="6.1" data-path="elementary-data-analysis.html"><a href="elementary-data-analysis.html#computing-correlations"><i class="fa fa-check"></i><b>6.1</b> Computing correlations</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="elementary-data-analysis.html"><a href="elementary-data-analysis.html#computing-correlations-between-two-variables-in-a-dataset"><i class="fa fa-check"></i><b>6.1.1</b> Computing correlations between two variables in a dataset</a></li>
+<li class="chapter" data-level="6.1.2" data-path="elementary-data-analysis.html"><a href="elementary-data-analysis.html#generating-and-exporting-a-correlation-matrix"><i class="fa fa-check"></i><b>6.1.2</b> Generating and exporting a correlation matrix</a></li>
+</ul></li>
 <li class="chapter" data-level="6.2" data-path="elementary-data-analysis.html"><a href="elementary-data-analysis.html#basic-regression-analysis"><i class="fa fa-check"></i><b>6.2</b> Basic regression analysis</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="elementary-data-analysis.html"><a href="elementary-data-analysis.html#running-a-regression-model"><i class="fa fa-check"></i><b>6.2.1</b> Running a regression model</a></li>
@@ -228,11 +237,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">7</span> Working with multiple datasets</h1>
 <div id="merging-data" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Merging data</h2>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="working-with-multiple-datasets.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility from working directory</span></span>
-<span id="cb131-2"><a href="working-with-multiple-datasets.html#cb131-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="working-with-multiple-datasets.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility from working directory</span></span>
+<span id="cb135-2"><a href="working-with-multiple-datasets.html#cb135-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
 <p>Alternatively,</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="working-with-multiple-datasets.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility data from Github repository</span></span>
-<span id="cb132-2"><a href="working-with-multiple-datasets.html#cb132-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/aranganath24/r_primer/main/workshop_data/chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="working-with-multiple-datasets.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility data from Github repository</span></span>
+<span id="cb136-2"><a href="working-with-multiple-datasets.html#cb136-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/aranganath24/r_primer/main/workshop_data/chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## ── Column specification ───────────────────────────────────────────────────────────────────────
 ## cols(
@@ -242,8 +251,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   kaopen = col_double(),
 ##   ka_open = col_double()
 ## )</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="working-with-multiple-datasets.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View capital mobility data</span></span>
-<span id="cb134-2"><a href="working-with-multiple-datasets.html#cb134-2" aria-hidden="true" tabindex="-1"></a>capital_mobility</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="working-with-multiple-datasets.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View capital mobility data</span></span>
+<span id="cb138-2"><a href="working-with-multiple-datasets.html#cb138-2" aria-hidden="true" tabindex="-1"></a>capital_mobility</span></code></pre></div>
 <pre><code>## # A tibble: 182 × 5
 ##    ccode country_name         ctrycd kaopen ka_open
 ##    &lt;chr&gt; &lt;chr&gt;                 &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
@@ -258,10 +267,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 ATG   Antigua and Barbuda     311  1.98   0.916 
 ## 10 AUS   Australia               193  2.16   0.960 
 ## # … with 172 more rows</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="working-with-multiple-datasets.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Joins &quot;capital_mobility&quot; to &quot;pt_copy&quot; using &quot;ctrycd&quot; as the join field (only keeps observations from &quot;pt_copy&quot;; countries in &quot;capital_mobility&quot; but not &quot;pt_copy&quot; are not included in the final joined dataset; joined dataset is assigned to an object named &quot;pt_capitalmobility&quot;)</span></span>
-<span id="cb136-2"><a href="working-with-multiple-datasets.html#cb136-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility<span class="ot">&lt;-</span><span class="fu">left_join</span>(pt_copy, capital_mobility, <span class="at">by=</span><span class="st">&quot;ctrycd&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="working-with-multiple-datasets.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;pt_capitalmobility&quot;</span></span>
-<span id="cb137-2"><a href="working-with-multiple-datasets.html#cb137-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="working-with-multiple-datasets.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Joins &quot;capital_mobility&quot; to &quot;pt_copy&quot; using &quot;ctrycd&quot; as the join field (only keeps observations from &quot;pt_copy&quot;; countries in &quot;capital_mobility&quot; but not &quot;pt_copy&quot; are not included in the final joined dataset; joined dataset is assigned to an object named &quot;pt_capitalmobility&quot;)</span></span>
+<span id="cb140-2"><a href="working-with-multiple-datasets.html#cb140-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility<span class="ot">&lt;-</span><span class="fu">left_join</span>(pt_copy, capital_mobility, <span class="at">by=</span><span class="st">&quot;ctrycd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="working-with-multiple-datasets.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;pt_capitalmobility&quot;</span></span>
+<span id="cb141-2"><a href="working-with-multiple-datasets.html#cb141-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility</span></code></pre></div>
 <pre><code>## # A tibble: 85 × 89
 ##    country        kaopen trade_level trade_level_High_… trade_level_Int… trade_level_Low… trade
 ##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                    &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;

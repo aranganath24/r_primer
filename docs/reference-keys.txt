@@ -1,6 +1,9 @@
-fig:unnamed-chunk-70
+fig:unnamed-chunk-84
 introduction
 loading-data
+reading-in-data-from-the-working-directory
+reading-data-directly-from-an-online-source-alternative-method
+make-a-copy-of-the-dataset
 summary-statistics
 generating-a-table-of-summary-statistics
 exporting-a-summary-statistics-table-as-a-csv-file
@@ -35,6 +38,8 @@ grouped-scatterplot
 scatterplot-with-line-of-best-fit
 elementary-data-analysis
 computing-correlations
+computing-correlations-between-two-variables-in-a-dataset
+generating-and-exporting-a-correlation-matrix
 basic-regression-analysis
 running-a-regression-model
 working-with-categorical-variables-in-a-regression-model

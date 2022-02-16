@@ -1,10 +1,21 @@
 # Loading data
 
+## Reading in data from the working directory 
+
 ```{r, echo=-1}
 setwd("/Users/adra7980/Documents/git_repositories/r_primer/workshop_data")
-# Read in persson and tabellini dataset
+# Read in persson and tabellini dataset from working directory
 persson_tabellini_original<-read_csv("persson_tabellini_workshop.csv")
 ```
+
+## Reading data directly from an online source (Alternative method)
+
+```{r}
+# Read in persson and tabellini dataset from Github repo
+persson_tabellini_original<-read_csv("https://raw.githubusercontent.com/aranganath24/r_primer/main/workshop_data/persson_tabellini_workshop.csv")
+```
+
+## Make a copy of the dataset
 
 ```{r}
 # Make a copy of the dataset so we don't alter the original dataset; then, view
@@ -81,7 +92,7 @@ stargazer(pt_copy_df, type="text", title="Descriptive Statistics", digits=1, out
 ### Subsetting summary statistics by group with the ```describe``` function
 
 ```{r}
-# Option 1
+# Creates summary statistics for each continent grouping, and puts results in list named "summary_stats_by_continent"
 summary_stats_by_continent<-describeBy(pt_copy, pt_copy$continent)
 ```
 
@@ -113,6 +124,7 @@ asia_europe_summary_statistics<-asia_europe_summary_statistics %>% select(-vars)
 ```
 
 ```{r}
+# Prints contents of "asia_europe_summary_statistics"
 asia_europe_summary_statistics
 ```
 
@@ -136,31 +148,35 @@ trade_age_by_continent
 ### Crosstabs with ```tabyl```
 
 ```{r}
+# Creates cross-tab showing the breakdown of federal/non federal across continents
 crosstab_federal_continent<-pt_copy %>% tabyl(federal, continent)
+```
 
+```{r}
+# Prints contents of "crosstab_federal_continent"
 crosstab_federal_continent
 ```
 
-
 ```{r}
+# Creates cross-tab showing the breakdown of majoritarian/nonmajoritarian across continents
 crosstab_majoritarian_continent<-pt_copy %>% tabyl(maj, continent)
-
-crosstab_majoritarian_continent
 ```
 
-
 ```{r}
-pt_copy %>% tabyl(maj, continent)
+# prints contents of "crosstab_majoritarian_continent"
+crosstab_majoritarian_continent
 ```
 
 ### Crosstabs with ```tbl_cross```
 
 ```{r}
-tbl_cross(pt_copy, row=maj, col=continent)
+# Uses "tbl_cross" function to create crosstab showing breakdown of federal/non-federal by continent
+tbl_cross(pt_copy, row=federal, col=continent)
 ```
 
 ```{r}
-tbl_cross(pt_copy, row=federal, col=continent)
+# Uses "tbl_cross" function to create crosstab showing breakdown of majoritarian/non majoritarian by continent
+tbl_cross(pt_copy, row=maj, col=continent)
 ```
 
 # Basic Data Cleaning and Preparation Tasks
@@ -168,6 +184,7 @@ tbl_cross(pt_copy, row=federal, col=continent)
 ## Rearranging columns
 
 ```{r}
+# Prints contents of "pt_copy"
 pt_copy
 ```
 
@@ -178,8 +195,10 @@ pt_copy
 ```
 
 ```{r}
+# bring the "country", "list", "trade", "oecd" columns to the front of the dataset
 pt_copy<-pt_copy %>% relocate(country, list, trade, oecd)
 
+# prints updated contents of "pt_copy"
 pt_copy
 ```
 
@@ -189,6 +208,7 @@ pt_copy
 ## Renaming a variable (renames "list" to "party_list")
 pt_copy<-pt_copy %>% rename(party_list=list)
 
+# prints updated contents of "pt_copy"
 pt_copy
 ```
 
@@ -198,18 +218,20 @@ pt_copy
 ```{r}
 # sorting in ascending (low to high) order with respect to the "trade" variable
 pt_copy<-pt_copy %>% arrange(trade)
+
+# prints updated contents of "pt_copy"
 pt_copy
 ```
 
 ```{r}
 # sorting in descending (high to low) order with respect to the "trade" variable
 pt_copy<-pt_copy %>% arrange(desc(trade))
+
+# prints updated contents of "pt_copy"
 pt_copy
 ```
 
 ## Creating new variables based on existing variables
-
-ratio of revenue to expenditures
 
 ```{r}
 # Create new variable named "non_catholic_80" that is calculated by substracting the Catholic share of the population in 1980 ("catho80") from 100  and relocates "country", "catho80", and the newly created "non_catholic_80" to the front of the dataset
@@ -218,6 +240,7 @@ pt_copy<-pt_copy %>% mutate(non_catholic_80=100-catho80) %>%
 ```
 
 ```{r}
+# prints updated contents of "pt_copy"
 pt_copy
 ```
 
@@ -232,11 +255,11 @@ pt_copy %>% select(country, cgexp, cgrev, trade)
 
 ```{r}
 # Selects "country", "cgexp", "cgrev", and "trade" variables from the "pt_copy" dataset and assigns the selection to a new object named "pt_copy_selection"
-
 pt_copy_selection<-pt_copy %>% select(country, cgexp, cgrev, trade)
 ```
 
 ```{r}
+# Prints Contents of "pt_copy_selection"
 pt_copy_selection
 ```
 
@@ -306,11 +329,13 @@ pt_copy
 ### Creating dummmy variables from categorical variables 
 
 ```{r, message=FALSE}
+# Creates dummy variables from "trade_level" column, and relocates the new dummies to the front of the dataset
 pt_copy<-pt_copy %>% dummy_cols("trade_level") %>% 
                       relocate(country, trade_level, trade_level_High_Trade, trade_level_Intermediate_Trade, trade_level_Low_Trade)
 ```
 
 ```{r}
+# Prints contents of "pt_copy"
 pt_copy
 ```
 
@@ -319,62 +344,74 @@ pt_copy
 ### The ```filter``` function
 
 ```{r}
+# Extracts OECD observations in "pt_copy" and assigns to object named "oecd_countries"
 oecd_countries<-pt_copy %>% filter(oecd==1) %>% 
                             relocate(country, oecd)
 ```
 
 ```{r}
+# Prints contents of "oecd_countries"
 oecd_countries
 ```
 
 ```{r}
+# Extracts observations for which cgrev (central government revenue as % of gdp)>40, and assigns to object named "high_revenues"
 high_revenues<-pt_copy %>% filter(cgrev>40) %>% 
                               relocate(country, cgrev)
                         
 ```
 
 ```{r}
+# Prints contents of "high_revenues"
 high_revenues
 ```
 
 ```{r}
+# Extracts observations for which the "catho80" variable is less than or equal to 50
 minority_catholic<-pt_copy %>% filter(catho80<=50) %>% 
                                relocate(country, catho80)
 ```
 
 ```{r}
+# Prints contents of "minority_catholic"
 minority_catholic
 ```
 
 Using the ```&``` operator 
 
 ```{r}
+# Extracts federal OECD countries (where oecd=1 AND federal=1) and assigns to a new object named "oecd_federal_countries"
 oecd_federal_countries<-pt_copy %>% filter(oecd==1 & federal==1) %>% 
                                       relocate(country, oecd, federal)
 ```
 
 ```{r}
+# prints contents of "oecd_federal_countries"
 oecd_federal_countries
 ```
 
 Using the ```|``` operator
 
 ```{r}
+# Extracts observations that are in Africa ("africa") OR in Asia/Europe ("asiae) and assigns to an object named "asia_europe_africa"
 asia_europe_africa<-pt_copy %>% filter(continent=="africa"|continent=="asiae") %>% 
                                   relocate(continent)
 ```
 
 ```{r}
+# Prints contents of "asia_europe_africa"
 asia_europe_africa
 ```
 
 Filtering for observations that do NOT meet a condition:
 
 ```{r}
+# Extracts all non-Africa observations and assigns to object named "pt_copy_sans_africa"
 pt_copy_sans_africa<-pt_copy %>% filter(continent!="africa") %>% relocate(continent)
 ```
 
 ```{r}
+# Prints contents of "pt_copy_sans_africa"
 pt_copy_sans_africa
 ```
 
@@ -385,6 +422,7 @@ pt_copy_sans_africa
 ### Basic bar chart
 
 ```{r}
+# Creates a bar chart of the "cgexp" variable (central government expenditure as a share of GDP) and assigns the plot to an object named "cgexp_viz1"
 cgexp_viz1<-pt_copy %>% 
   drop_na(cgexp) %>% 
   ggplot()+
@@ -394,12 +432,14 @@ cgexp_viz1<-pt_copy %>%
   theme(plot.title=element_text(hjust=0.5),
         axis.text.x = element_text(angle = 90))
 
+# Prints contents of "cgexp_viz1"
 cgexp_viz1
 ```
 
 ### Inverted bar chart 
 
 ```{r, fig.width=8, fig.height=10}
+# Creates an inverted bar chart of the "cgexp" variable (with countries on vertical axis) and assigns the result to an object named "cgexp_viz2"
 cgexp_viz2<-pt_copy %>% 
            drop_na(cgexp) %>% 
            ggplot()+
@@ -409,6 +449,7 @@ cgexp_viz2<-pt_copy %>%
                 y="CGEXP")+
            theme(plot.title=element_text(hjust=0.5)) 
 
+# Prints contents of "cgexp_viz2"
 cgexp_viz2
 ```
 
@@ -417,6 +458,7 @@ cgexp_viz2
 ### Basic scatterplot
 
 ```{r}
+# Creates scatterplot with "cgexp" variable on x-axis and "trade" variiable on y-axis and assigns to object named "scatter_cgexp_trade"
 scatter_cgexp_trade<-
   pt_copy %>% 
   drop_na(cgexp) %>% 
@@ -426,12 +468,14 @@ scatter_cgexp_trade<-
        x="Central Government Expenditure (Pct of GDP)", y="Overall Trade (Pct of GDP)")+
   theme(plot.title=element_text(hjust=0.5)) 
 
+# Prints contents of "scatter_cgexp_trade"
 scatter_cgexp_trade
 ```
 
 ### Grouped scatterplot
 
 ```{r}
+# Creates scatterplot with "cgexp" variable on x-axis and "trade" variiable on y-axis, and uses different color points for different continents; plot is assigned to object named "scatter_cgexp_trade_grouped"
 scatter_cgexp_trade_grouped<-
   pt_copy %>% 
   drop_na(cgexp) %>% 
@@ -441,12 +485,14 @@ scatter_cgexp_trade_grouped<-
        x="Central Government Expenditure (Pct of GDP)", y="Overall Trade (Pct of GDP)")+
   theme(plot.title=element_text(hjust=0.5)) 
 
+# Prints contents of "scatter_cgexp_trade_grouped"
 scatter_cgexp_trade_grouped
 ```
 
 ### Scatterplot with line of best fit
 
 ```{r, fig.cap="test"}
+# Creates scatterplot with "cgexp" variable on x-axis and "trade" variiable on y-axis, adds line of best fit; plot assigned to object named "scatter_cgexp_trade_line"
 scatter_cgexp_trade_line<-
   pt_copy %>% 
   drop_na(cgexp) %>% 
@@ -457,6 +503,7 @@ scatter_cgexp_trade_line<-
        x="Central Government Expenditure (Pct of GDP)", y="Overall Trade (Pct of GDP)")+
   theme(plot.title=element_text(hjust=0.5)) 
 
+# Prints contents of "scatter_cgexp_trade_line"
 scatter_cgexp_trade_line
 ```
 
@@ -464,25 +511,32 @@ scatter_cgexp_trade_line
 
 ## Computing correlations 
 
-Computing correlations between two variables in a dataset
+### Computing correlations between two variables in a dataset
 
 ```{r}
+# Prints correlation coefficient between "trade" and "cgexp" variables
 cor.test(pt_copy$trade, pt_copy$cgexp, use="complete.obs")
 ```
 
-Generating a correlation matrix 
+### Generating and exporting a correlation matrix 
 
 ```{r}
+# Extracts variables for which we want a correlation matrix
 desired_variables<-pt_copy %>% select(trade, cgexp, cgrev, catho80)
-
-cor(desired_variables, use="complete.obs")
 ```
 
-Exporting a correlation matrix with stargazer
+```{r}
+# Creates correlation matrix from "desired_variables" object and assigns to object named "cor_matrix"
+cor_matrix<-cor(desired_variables, use="complete.obs")
+```
 
 ```{r}
-matrix_to_export<-cor(desired_variables, use="complete.obs")
+# prints contents of "cor_matrix"
+cor_matrix
+```
 
+```{r}
+# Exports correlation matrix assigned to "cor_matrix" object using stargazer
 stargazer(matrix_to_export, type="text", title="Correlation Matrix", digits=3, out="corr_table.html")
 
 ```
@@ -492,13 +546,14 @@ stargazer(matrix_to_export, type="text", title="Correlation Matrix", digits=3, o
 ### Running a regression model
 
 ```{r}
+# Implements regression with "gexp" as DV, and assigns to object named "regression1"
 regression1<-lm(cgexp~gastil+lyp+trade+prop1564+prop65+federal+oecd, data=pt_copy)
 ```
 
 ```{r}
+# Prints regression table
 summary(regression1)
 ```
-
 
 ### Working with categorical variables in a regression model
 
@@ -507,14 +562,19 @@ summary(regression1)
 ```{r}
 # Set Continent variable as factor
 pt_copy$continent<-as.factor(pt_copy$continent)
+
+# Examines levels of factor variable
 levels(pt_copy$continent)
+
+# Relevels factor variable to set "other" as reference category
 pt_copy$continent<-relevel(pt_copy$continent, ref="other")
 ```
 
 ```{r}
-# Run the regression with the continent variable
+# Run regression with the continent variable and assign result to object named "regression2"
 regression2<-lm(cgexp~gastil+lyp+trade+prop1564+prop65+federal+continent+col_espa+col_uka+col_otha+oecd, data=pt_copy)
 
+# Prints regression table for "regression2"
 summary(regression2)
 ```
 
@@ -533,24 +593,23 @@ regression2_alt<-lm(cgexp~gastil+lyp+trade+prop1564+prop65+federal+continent_afr
 ```
 
 ```{r}
-# View regression2_alt
+# Prints "regression2_alt" regression table
 summary(regression2_alt)
 ```
 
 ### Working with interaction terms in regression models
 
 ```{r}
-# run regression with interaction term
+# run regression with interaction term between "trade" and "federal"
 trade_federal_interaction<-lm(cgexp~trade*federal, data=pt_copy)
 ```
 
 ```{r}
+# prints "trade_federal_interaction" regression table
 summary(trade_federal_interaction)
 ```
 
 **Plotting marginal effects**
-
-What 
 
 ```{r}
 # Finds mean value of trade variable
@@ -558,12 +617,12 @@ mean(pt_copy$trade)
 ```
 
 ```{r}
-# Calculate marginal effects of federalism, with "trade" held at mean
+# Calculates marginal effects of federalism, with "trade" held at mean
 marginal_effect_federalism<-ggpredict(trade_federal_interaction, terms="federal", condition=c(trade=78.7659))
 ```
 
 ```{r}
-# View marginal effects table
+# Prints marginal effects table
 marginal_effect_federalism
 ```
 
