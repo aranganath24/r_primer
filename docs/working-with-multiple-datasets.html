@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-a-table-of-summary-statistics"><i class="fa fa-check"></i><b>3.1</b> Generating a table of summary statistics</a></li>
 <li class="chapter" data-level="3.2" data-path="summary-statistics.html"><a href="summary-statistics.html#exporting-a-summary-statistics-table-as-a-csv-file"><i class="fa fa-check"></i><b>3.2</b> Exporting a summary statistics table as a CSV file</a></li>
-<li class="chapter" data-level="3.3" data-path="summary-statistics.html"><a href="summary-statistics.html#using-stargazer-to-create-and-export-summary-statistics-with"><i class="fa fa-check"></i><b>3.3</b> Using <code>stargazer</code> to create and export summary statistics with</a></li>
+<li class="chapter" data-level="3.3" data-path="summary-statistics.html"><a href="summary-statistics.html#using-stargazer-to-create-and-export-summary-statistics"><i class="fa fa-check"></i><b>3.3</b> Using <code>stargazer</code> to create and export summary statistics</a></li>
 <li class="chapter" data-level="3.4" data-path="summary-statistics.html"><a href="summary-statistics.html#summary-statistics-and-grouping-variables"><i class="fa fa-check"></i><b>3.4</b> Summary statistics and grouping variables</a>
 <ul>
 <li class="chapter" data-level="3.4.1" data-path="summary-statistics.html"><a href="summary-statistics.html#subsetting-summary-statistics-by-group-with-the-describe-function"><i class="fa fa-check"></i><b>3.4.1</b> Subsetting summary statistics by group with the <code>describe</code> function</a></li>
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6.2" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#creating-categorical-variables-from-continuous-numeric-variables"><i class="fa fa-check"></i><b>4.6.2</b> Creating categorical variables from continuous numeric variables</a></li>
 <li class="chapter" data-level="4.6.3" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#creating-dummmy-variables-from-categorical-variables"><i class="fa fa-check"></i><b>4.6.3</b> Creating dummmy variables from categorical variables</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#subsetting-data-based-on-criteria"><i class="fa fa-check"></i><b>4.7</b> Subsetting data based on criteria</a>
+<li class="chapter" data-level="4.7" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#subsetting-rows-data-based-on-criteria"><i class="fa fa-check"></i><b>4.7</b> Subsetting rows data based on criteria</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#the-filter-function"><i class="fa fa-check"></i><b>4.7.1</b> The <code>filter</code> function</a></li>
 </ul></li>
@@ -268,23 +268,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 AUS   Australia               193  2.16   0.960 
 ## # … with 172 more rows</code></pre>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="working-with-multiple-datasets.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Joins &quot;capital_mobility&quot; to &quot;pt_copy&quot; using &quot;ctrycd&quot; as the join field (only keeps observations from &quot;pt_copy&quot;; countries in &quot;capital_mobility&quot; but not &quot;pt_copy&quot; are not included in the final joined dataset; joined dataset is assigned to an object named &quot;pt_capitalmobility&quot;)</span></span>
-<span id="cb140-2"><a href="working-with-multiple-datasets.html#cb140-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility<span class="ot">&lt;-</span><span class="fu">left_join</span>(pt_copy, capital_mobility, <span class="at">by=</span><span class="st">&quot;ctrycd&quot;</span>)</span></code></pre></div>
+<span id="cb140-2"><a href="working-with-multiple-datasets.html#cb140-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility<span class="ot">&lt;-</span><span class="fu">inner_join</span>(pt_copy, capital_mobility, <span class="at">by=</span><span class="st">&quot;ctrycd&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="working-with-multiple-datasets.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;pt_capitalmobility&quot;</span></span>
 <span id="cb141-2"><a href="working-with-multiple-datasets.html#cb141-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility</span></code></pre></div>
-<pre><code>## # A tibble: 85 × 89
+<pre><code>## # A tibble: 84 × 89
 ##    country        kaopen trade_level trade_level_High_… trade_level_Int… trade_level_Low… trade
 ##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                    &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;
 ##  1 Singapore      2.10   High_Trade                   1                0                0  343.
 ##  2 Malta         -1.06   High_Trade                   1                0                0  190.
-##  3 Luxembourg    NA      High_Trade                   1                0                0  189.
-##  4 Malaysia       1.36   High_Trade                   1                0                0  176.
-##  5 Estonia        2.08   High_Trade                   1                0                0  154.
-##  6 Belgium        2.16   High_Trade                   1                0                0  132.
-##  7 Ireland        1.36   High_Trade                   1                0                0  129.
-##  8 Mauritius     -0.0671 High_Trade                   1                0                0  128.
-##  9 St. Vincent&amp;G -0.505  High_Trade                   1                0                0  123.
-## 10 Jamaica        0.245  High_Trade                   1                0                0  122.
-## # … with 75 more rows, and 82 more variables: trade_open &lt;dbl&gt;, catho80 &lt;dbl&gt;,
+##  3 Malaysia       1.36   High_Trade                   1                0                0  176.
+##  4 Estonia        2.08   High_Trade                   1                0                0  154.
+##  5 Belgium        2.16   High_Trade                   1                0                0  132.
+##  6 Ireland        1.36   High_Trade                   1                0                0  129.
+##  7 Mauritius     -0.0671 High_Trade                   1                0                0  128.
+##  8 St. Vincent&amp;G -0.505  High_Trade                   1                0                0  123.
+##  9 Jamaica        0.245  High_Trade                   1                0                0  122.
+## 10 Gambia         1.37   High_Trade                   1                0                0  122.
+## # … with 74 more rows, and 82 more variables: trade_open &lt;dbl&gt;, catho80 &lt;dbl&gt;,
 ## #   non_catholic_80 &lt;dbl&gt;, party_list &lt;dbl&gt;, oecd &lt;dbl&gt;, pind &lt;dbl&gt;, pindo &lt;dbl&gt;,
 ## #   ctrycd &lt;dbl&gt;, col_uk &lt;dbl&gt;, t_indep &lt;dbl&gt;, col_uka &lt;dbl&gt;, col_espa &lt;dbl&gt;, col_otha &lt;dbl&gt;,
 ## #   legor_uk &lt;dbl&gt;, legor_so &lt;dbl&gt;, legor_fr &lt;dbl&gt;, legor_ge &lt;dbl&gt;, legor_sc &lt;dbl&gt;,

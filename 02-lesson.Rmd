@@ -69,7 +69,7 @@ pt_copy_summarystats1<-pt_copy_summarystats1 %>% relocate(variable)
 write_csv(pt_copy_summarystats1, "/Users/adra7980/Documents/git_repositories/r_primer/written_data/pt_copy_summarystats1.csv")
 ```
 
-## Using ```stargazer``` to create and export summary statistics with
+## Using ```stargazer``` to create and export summary statistics
 
 ```{r}
 # Make the summary stats into a data frame
@@ -339,7 +339,7 @@ pt_copy<-pt_copy %>% dummy_cols("trade_level") %>%
 pt_copy
 ```
 
-## Subsetting data based on criteria
+## Subsetting rows data based on criteria
 
 ### The ```filter``` function
 
@@ -676,7 +676,7 @@ capital_mobility
 
 ```{r}
 # Joins "capital_mobility" to "pt_copy" using "ctrycd" as the join field (only keeps observations from "pt_copy"; countries in "capital_mobility" but not "pt_copy" are not included in the final joined dataset; joined dataset is assigned to an object named "pt_capitalmobility")
-pt_capitalmobility<-left_join(pt_copy, capital_mobility, by="ctrycd")
+pt_capitalmobility<-inner_join(pt_copy, capital_mobility, by="ctrycd")
 ```
 
 ```{r, echo=FALSE}

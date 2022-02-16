@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#generating-a-table-of-summary-statistics"><i class="fa fa-check"></i><b>3.1</b> Generating a table of summary statistics</a></li>
 <li class="chapter" data-level="3.2" data-path="summary-statistics.html"><a href="summary-statistics.html#exporting-a-summary-statistics-table-as-a-csv-file"><i class="fa fa-check"></i><b>3.2</b> Exporting a summary statistics table as a CSV file</a></li>
-<li class="chapter" data-level="3.3" data-path="summary-statistics.html"><a href="summary-statistics.html#using-stargazer-to-create-and-export-summary-statistics-with"><i class="fa fa-check"></i><b>3.3</b> Using <code>stargazer</code> to create and export summary statistics with</a></li>
+<li class="chapter" data-level="3.3" data-path="summary-statistics.html"><a href="summary-statistics.html#using-stargazer-to-create-and-export-summary-statistics"><i class="fa fa-check"></i><b>3.3</b> Using <code>stargazer</code> to create and export summary statistics</a></li>
 <li class="chapter" data-level="3.4" data-path="summary-statistics.html"><a href="summary-statistics.html#summary-statistics-and-grouping-variables"><i class="fa fa-check"></i><b>3.4</b> Summary statistics and grouping variables</a>
 <ul>
 <li class="chapter" data-level="3.4.1" data-path="summary-statistics.html"><a href="summary-statistics.html#subsetting-summary-statistics-by-group-with-the-describe-function"><i class="fa fa-check"></i><b>3.4.1</b> Subsetting summary statistics by group with the <code>describe</code> function</a></li>
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6.2" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#creating-categorical-variables-from-continuous-numeric-variables"><i class="fa fa-check"></i><b>4.6.2</b> Creating categorical variables from continuous numeric variables</a></li>
 <li class="chapter" data-level="4.6.3" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#creating-dummmy-variables-from-categorical-variables"><i class="fa fa-check"></i><b>4.6.3</b> Creating dummmy variables from categorical variables</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#subsetting-data-based-on-criteria"><i class="fa fa-check"></i><b>4.7</b> Subsetting data based on criteria</a>
+<li class="chapter" data-level="4.7" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#subsetting-rows-data-based-on-criteria"><i class="fa fa-check"></i><b>4.7</b> Subsetting rows data based on criteria</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="basic-data-cleaning-and-preparation-tasks.html"><a href="basic-data-cleaning-and-preparation-tasks.html#the-filter-function"><i class="fa fa-check"></i><b>4.7.1</b> The <code>filter</code> function</a></li>
 </ul></li>
@@ -717,8 +717,8 @@ col_uk
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="summary-statistics.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write out summary statistics table as CSV file</span></span>
 <span id="cb14-2"><a href="summary-statistics.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(pt_copy_summarystats1, <span class="st">&quot;/Users/adra7980/Documents/git_repositories/r_primer/written_data/pt_copy_summarystats1.csv&quot;</span>)</span></code></pre></div>
 </div>
-<div id="using-stargazer-to-create-and-export-summary-statistics-with" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Using <code>stargazer</code> to create and export summary statistics with</h2>
+<div id="using-stargazer-to-create-and-export-summary-statistics" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Using <code>stargazer</code> to create and export summary statistics</h2>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="summary-statistics.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the summary stats into a data frame</span></span>
 <span id="cb15-2"><a href="summary-statistics.html#cb15-2" aria-hidden="true" tabindex="-1"></a>pt_copy_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(pt_copy)</span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="summary-statistics.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use stargazer to export summary statistics as a text file</span></span>
@@ -1396,12 +1396,12 @@ col_uk
 <h3><span class="header-section-number">3.5.2</span> Crosstabs with <code>tbl_cross</code></h3>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="summary-statistics.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uses &quot;tbl_cross&quot; function to create crosstab showing breakdown of federal/non-federal by continent</span></span>
 <span id="cb38-2"><a href="summary-statistics.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_cross</span>(pt_copy, <span class="at">row=</span>federal, <span class="at">col=</span>continent)</span></code></pre></div>
-<div id="ercyxhovyp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mdzaonncyr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ercyxhovyp .gt_table {
+#mdzaonncyr .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1426,7 +1426,7 @@ col_uk
   border-left-color: #D3D3D3;
 }
 
-#ercyxhovyp .gt_heading {
+#mdzaonncyr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1438,7 +1438,7 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#ercyxhovyp .gt_title {
+#mdzaonncyr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1448,7 +1448,7 @@ col_uk
   border-bottom-width: 0;
 }
 
-#ercyxhovyp .gt_subtitle {
+#mdzaonncyr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1458,13 +1458,13 @@ col_uk
   border-top-width: 0;
 }
 
-#ercyxhovyp .gt_bottom_border {
+#mdzaonncyr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ercyxhovyp .gt_col_headings {
+#mdzaonncyr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1479,7 +1479,7 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#ercyxhovyp .gt_col_heading {
+#mdzaonncyr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1499,7 +1499,7 @@ col_uk
   overflow-x: hidden;
 }
 
-#ercyxhovyp .gt_column_spanner_outer {
+#mdzaonncyr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1511,15 +1511,15 @@ col_uk
   padding-right: 4px;
 }
 
-#ercyxhovyp .gt_column_spanner_outer:first-child {
+#mdzaonncyr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ercyxhovyp .gt_column_spanner_outer:last-child {
+#mdzaonncyr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ercyxhovyp .gt_column_spanner {
+#mdzaonncyr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1531,7 +1531,7 @@ col_uk
   width: 100%;
 }
 
-#ercyxhovyp .gt_group_heading {
+#mdzaonncyr .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1553,7 +1553,7 @@ col_uk
   vertical-align: middle;
 }
 
-#ercyxhovyp .gt_empty_group_heading {
+#mdzaonncyr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1568,15 +1568,15 @@ col_uk
   vertical-align: middle;
 }
 
-#ercyxhovyp .gt_from_md > :first-child {
+#mdzaonncyr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ercyxhovyp .gt_from_md > :last-child {
+#mdzaonncyr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ercyxhovyp .gt_row {
+#mdzaonncyr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1595,7 +1595,7 @@ col_uk
   overflow-x: hidden;
 }
 
-#ercyxhovyp .gt_stub {
+#mdzaonncyr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1607,7 +1607,7 @@ col_uk
   padding-left: 12px;
 }
 
-#ercyxhovyp .gt_summary_row {
+#mdzaonncyr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1617,7 +1617,7 @@ col_uk
   padding-right: 5px;
 }
 
-#ercyxhovyp .gt_first_summary_row {
+#mdzaonncyr .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1627,7 +1627,7 @@ col_uk
   border-top-color: #D3D3D3;
 }
 
-#ercyxhovyp .gt_grand_summary_row {
+#mdzaonncyr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1637,7 +1637,7 @@ col_uk
   padding-right: 5px;
 }
 
-#ercyxhovyp .gt_first_grand_summary_row {
+#mdzaonncyr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1647,11 +1647,11 @@ col_uk
   border-top-color: #D3D3D3;
 }
 
-#ercyxhovyp .gt_striped {
+#mdzaonncyr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ercyxhovyp .gt_table_body {
+#mdzaonncyr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1660,7 +1660,7 @@ col_uk
   border-bottom-color: #D3D3D3;
 }
 
-#ercyxhovyp .gt_footnotes {
+#mdzaonncyr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1674,13 +1674,13 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#ercyxhovyp .gt_footnote {
+#mdzaonncyr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ercyxhovyp .gt_sourcenotes {
+#mdzaonncyr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1694,41 +1694,41 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#ercyxhovyp .gt_sourcenote {
+#mdzaonncyr .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ercyxhovyp .gt_left {
+#mdzaonncyr .gt_left {
   text-align: left;
 }
 
-#ercyxhovyp .gt_center {
+#mdzaonncyr .gt_center {
   text-align: center;
 }
 
-#ercyxhovyp .gt_right {
+#mdzaonncyr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ercyxhovyp .gt_font_normal {
+#mdzaonncyr .gt_font_normal {
   font-weight: normal;
 }
 
-#ercyxhovyp .gt_font_bold {
+#mdzaonncyr .gt_font_bold {
   font-weight: bold;
 }
 
-#ercyxhovyp .gt_font_italic {
+#mdzaonncyr .gt_font_italic {
   font-style: italic;
 }
 
-#ercyxhovyp .gt_super {
+#mdzaonncyr .gt_super {
   font-size: 65%;
 }
 
-#ercyxhovyp .gt_footnote_marks {
+#mdzaonncyr .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1789,12 +1789,12 @@ col_uk
 </div>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="summary-statistics.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uses &quot;tbl_cross&quot; function to create crosstab showing breakdown of majoritarian/non majoritarian by continent</span></span>
 <span id="cb39-2"><a href="summary-statistics.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_cross</span>(pt_copy, <span class="at">row=</span>maj, <span class="at">col=</span>continent)</span></code></pre></div>
-<div id="njwjnqwubx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xuoiictvae" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#njwjnqwubx .gt_table {
+#xuoiictvae .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1819,7 +1819,7 @@ col_uk
   border-left-color: #D3D3D3;
 }
 
-#njwjnqwubx .gt_heading {
+#xuoiictvae .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1831,7 +1831,7 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#njwjnqwubx .gt_title {
+#xuoiictvae .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1841,7 +1841,7 @@ col_uk
   border-bottom-width: 0;
 }
 
-#njwjnqwubx .gt_subtitle {
+#xuoiictvae .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1851,13 +1851,13 @@ col_uk
   border-top-width: 0;
 }
 
-#njwjnqwubx .gt_bottom_border {
+#xuoiictvae .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#njwjnqwubx .gt_col_headings {
+#xuoiictvae .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1872,7 +1872,7 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#njwjnqwubx .gt_col_heading {
+#xuoiictvae .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1892,7 +1892,7 @@ col_uk
   overflow-x: hidden;
 }
 
-#njwjnqwubx .gt_column_spanner_outer {
+#xuoiictvae .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1904,15 +1904,15 @@ col_uk
   padding-right: 4px;
 }
 
-#njwjnqwubx .gt_column_spanner_outer:first-child {
+#xuoiictvae .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#njwjnqwubx .gt_column_spanner_outer:last-child {
+#xuoiictvae .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#njwjnqwubx .gt_column_spanner {
+#xuoiictvae .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1924,7 +1924,7 @@ col_uk
   width: 100%;
 }
 
-#njwjnqwubx .gt_group_heading {
+#xuoiictvae .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1946,7 +1946,7 @@ col_uk
   vertical-align: middle;
 }
 
-#njwjnqwubx .gt_empty_group_heading {
+#xuoiictvae .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1961,15 +1961,15 @@ col_uk
   vertical-align: middle;
 }
 
-#njwjnqwubx .gt_from_md > :first-child {
+#xuoiictvae .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#njwjnqwubx .gt_from_md > :last-child {
+#xuoiictvae .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#njwjnqwubx .gt_row {
+#xuoiictvae .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1988,7 +1988,7 @@ col_uk
   overflow-x: hidden;
 }
 
-#njwjnqwubx .gt_stub {
+#xuoiictvae .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2000,7 +2000,7 @@ col_uk
   padding-left: 12px;
 }
 
-#njwjnqwubx .gt_summary_row {
+#xuoiictvae .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2010,7 +2010,7 @@ col_uk
   padding-right: 5px;
 }
 
-#njwjnqwubx .gt_first_summary_row {
+#xuoiictvae .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2020,7 +2020,7 @@ col_uk
   border-top-color: #D3D3D3;
 }
 
-#njwjnqwubx .gt_grand_summary_row {
+#xuoiictvae .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2030,7 +2030,7 @@ col_uk
   padding-right: 5px;
 }
 
-#njwjnqwubx .gt_first_grand_summary_row {
+#xuoiictvae .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2040,11 +2040,11 @@ col_uk
   border-top-color: #D3D3D3;
 }
 
-#njwjnqwubx .gt_striped {
+#xuoiictvae .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#njwjnqwubx .gt_table_body {
+#xuoiictvae .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2053,7 +2053,7 @@ col_uk
   border-bottom-color: #D3D3D3;
 }
 
-#njwjnqwubx .gt_footnotes {
+#xuoiictvae .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2067,13 +2067,13 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#njwjnqwubx .gt_footnote {
+#xuoiictvae .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#njwjnqwubx .gt_sourcenotes {
+#xuoiictvae .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2087,41 +2087,41 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#njwjnqwubx .gt_sourcenote {
+#xuoiictvae .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#njwjnqwubx .gt_left {
+#xuoiictvae .gt_left {
   text-align: left;
 }
 
-#njwjnqwubx .gt_center {
+#xuoiictvae .gt_center {
   text-align: center;
 }
 
-#njwjnqwubx .gt_right {
+#xuoiictvae .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#njwjnqwubx .gt_font_normal {
+#xuoiictvae .gt_font_normal {
   font-weight: normal;
 }
 
-#njwjnqwubx .gt_font_bold {
+#xuoiictvae .gt_font_bold {
   font-weight: bold;
 }
 
-#njwjnqwubx .gt_font_italic {
+#xuoiictvae .gt_font_italic {
   font-style: italic;
 }
 
-#njwjnqwubx .gt_super {
+#xuoiictvae .gt_super {
   font-size: 65%;
 }
 
-#njwjnqwubx .gt_footnote_marks {
+#xuoiictvae .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;

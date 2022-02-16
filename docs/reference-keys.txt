@@ -1,4 +1,4 @@
-fig:unnamed-chunk-84
+fig:unnamed-chunk-70
 introduction
 loading-data
 reading-in-data-from-the-working-directory
@@ -7,7 +7,7 @@ make-a-copy-of-the-dataset
 summary-statistics
 generating-a-table-of-summary-statistics
 exporting-a-summary-statistics-table-as-a-csv-file
-using-stargazer-to-create-and-export-summary-statistics-with
+using-stargazer-to-create-and-export-summary-statistics
 summary-statistics-and-grouping-variables
 subsetting-summary-statistics-by-group-with-the-describe-function
 generating-group-level-summary-statistics-with-the-summarize-function-from-dplyr
@@ -26,7 +26,7 @@ recoding-variables
 creating-dummy-variables-from-continuous-numeric-variables
 creating-categorical-variables-from-continuous-numeric-variables
 creating-dummmy-variables-from-categorical-variables
-subsetting-data-based-on-criteria
+subsetting-rows-data-based-on-criteria
 the-filter-function
 exploratory-visualizations-using-ggplot
 bar-charts
