@@ -537,7 +537,7 @@ cor_matrix
 
 ```{r}
 # Exports correlation matrix assigned to "cor_matrix" object using stargazer
-stargazer(matrix_to_export, type="text", title="Correlation Matrix", digits=3, out="corr_table.html")
+stargazer(cor_matrix, type="text", title="Correlation Matrix", digits=3, out="corr_table.html")
 
 ```
 
