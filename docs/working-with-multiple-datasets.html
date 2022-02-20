@@ -237,11 +237,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">7</span> Working with multiple datasets</h1>
 <div id="merging-data" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Merging data</h2>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="working-with-multiple-datasets.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility from working directory</span></span>
-<span id="cb135-2"><a href="working-with-multiple-datasets.html#cb135-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="working-with-multiple-datasets.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility from working directory</span></span>
+<span id="cb137-2"><a href="working-with-multiple-datasets.html#cb137-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
 <p>Alternatively,</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="working-with-multiple-datasets.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility data from Github repository</span></span>
-<span id="cb136-2"><a href="working-with-multiple-datasets.html#cb136-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/aranganath24/r_primer/main/workshop_data/chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="working-with-multiple-datasets.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in capital mobility data from Github repository</span></span>
+<span id="cb138-2"><a href="working-with-multiple-datasets.html#cb138-2" aria-hidden="true" tabindex="-1"></a>capital_mobility<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/aranganath24/r_primer/main/workshop_data/chinn_eto_capitalopenness_summary.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## ── Column specification ───────────────────────────────────────────────────────────────────────
 ## cols(
@@ -251,8 +251,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   kaopen = col_double(),
 ##   ka_open = col_double()
 ## )</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="working-with-multiple-datasets.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View capital mobility data</span></span>
-<span id="cb138-2"><a href="working-with-multiple-datasets.html#cb138-2" aria-hidden="true" tabindex="-1"></a>capital_mobility</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="working-with-multiple-datasets.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View capital mobility data</span></span>
+<span id="cb140-2"><a href="working-with-multiple-datasets.html#cb140-2" aria-hidden="true" tabindex="-1"></a>capital_mobility</span></code></pre></div>
 <pre><code>## # A tibble: 182 × 5
 ##    ccode country_name         ctrycd kaopen ka_open
 ##    &lt;chr&gt; &lt;chr&gt;                 &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
@@ -267,10 +267,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 ATG   Antigua and Barbuda     311  1.98   0.916 
 ## 10 AUS   Australia               193  2.16   0.960 
 ## # … with 172 more rows</code></pre>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="working-with-multiple-datasets.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Joins &quot;capital_mobility&quot; to &quot;pt_copy&quot; using &quot;ctrycd&quot; as the join field (only keeps observations from &quot;pt_copy&quot;; countries in &quot;capital_mobility&quot; but not &quot;pt_copy&quot; are not included in the final joined dataset; joined dataset is assigned to an object named &quot;pt_capitalmobility&quot;)</span></span>
-<span id="cb140-2"><a href="working-with-multiple-datasets.html#cb140-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility<span class="ot">&lt;-</span><span class="fu">inner_join</span>(pt_copy, capital_mobility, <span class="at">by=</span><span class="st">&quot;ctrycd&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="working-with-multiple-datasets.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;pt_capitalmobility&quot;</span></span>
-<span id="cb141-2"><a href="working-with-multiple-datasets.html#cb141-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="working-with-multiple-datasets.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Joins &quot;capital_mobility&quot; to &quot;pt_copy&quot; using &quot;ctrycd&quot; as the join field (only keeps observations from &quot;pt_copy&quot;; countries in &quot;capital_mobility&quot; but not &quot;pt_copy&quot; are not included in the final joined dataset; joined dataset is assigned to an object named &quot;pt_capitalmobility&quot;)</span></span>
+<span id="cb142-2"><a href="working-with-multiple-datasets.html#cb142-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility<span class="ot">&lt;-</span><span class="fu">inner_join</span>(pt_copy, capital_mobility, <span class="at">by=</span><span class="st">&quot;ctrycd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="working-with-multiple-datasets.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;pt_capitalmobility&quot;</span></span>
+<span id="cb143-2"><a href="working-with-multiple-datasets.html#cb143-2" aria-hidden="true" tabindex="-1"></a>pt_capitalmobility</span></code></pre></div>
 <pre><code>## # A tibble: 84 × 89
 ##    country        kaopen trade_level trade_level_High_… trade_level_Int… trade_level_Low… trade
 ##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;                    &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;dbl&gt;

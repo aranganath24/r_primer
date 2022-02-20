@@ -237,10 +237,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">3</span> Summary statistics</h1>
 <div id="generating-a-table-of-summary-statistics" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Generating a table of summary statistics</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="summary-statistics.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate summary statistics for &quot;pt_copy&quot; and assign to new object named &quot;pt_copy_summarystats1&quot;</span></span>
-<span id="cb10-2"><a href="summary-statistics.html#cb10-2" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1<span class="ot">&lt;-</span><span class="fu">describe</span>(pt_copy)</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="summary-statistics.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print contents of &quot;pt_copy_summarystats1&quot;</span></span>
-<span id="cb11-2"><a href="summary-statistics.html#cb11-2" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="summary-statistics.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate summary statistics for &quot;pt_copy&quot; and assign to new object named &quot;pt_copy_summarystats1&quot;</span></span>
+<span id="cb12-2"><a href="summary-statistics.html#cb12-2" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1<span class="ot">&lt;-</span><span class="fu">describe</span>(pt_copy)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="summary-statistics.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print contents of &quot;pt_copy_summarystats1&quot;</span></span>
+<span id="cb13-2"><a href="summary-statistics.html#cb13-2" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1</span></code></pre></div>
 <pre><code>##            vars  n    mean      sd  median trimmed     mad     min      max    range  skew
 ## oecd          1 85    0.29    0.46    0.00    0.25    0.00    0.00     1.00     1.00  0.89
 ## country*      2 85   43.00   24.68   43.00   43.00   31.13    1.00    85.00    84.00  0.00
@@ -709,31 +709,31 @@ col_uk
 </div>
 <div id="exporting-a-summary-statistics-table-as-a-csv-file" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Exporting a summary statistics table as a CSV file</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="summary-statistics.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add rownames to pt_copy_summarystats1</span></span>
-<span id="cb13-2"><a href="summary-statistics.html#cb13-2" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1<span class="sc">$</span>variable<span class="ot">&lt;-</span><span class="fu">rownames</span>(pt_copy_summarystats1)</span>
-<span id="cb13-3"><a href="summary-statistics.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="summary-statistics.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make &quot;variables&quot; field the first one in the dataset</span></span>
-<span id="cb13-5"><a href="summary-statistics.html#cb13-5" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1<span class="ot">&lt;-</span>pt_copy_summarystats1 <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(variable)</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="summary-statistics.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write out summary statistics table as CSV file</span></span>
-<span id="cb14-2"><a href="summary-statistics.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(pt_copy_summarystats1, <span class="st">&quot;/Users/adra7980/Documents/git_repositories/r_primer/written_data/pt_copy_summarystats1.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="summary-statistics.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add rownames to pt_copy_summarystats1</span></span>
+<span id="cb15-2"><a href="summary-statistics.html#cb15-2" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1<span class="sc">$</span>variable<span class="ot">&lt;-</span><span class="fu">rownames</span>(pt_copy_summarystats1)</span>
+<span id="cb15-3"><a href="summary-statistics.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="summary-statistics.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make &quot;variables&quot; field the first one in the dataset</span></span>
+<span id="cb15-5"><a href="summary-statistics.html#cb15-5" aria-hidden="true" tabindex="-1"></a>pt_copy_summarystats1<span class="ot">&lt;-</span>pt_copy_summarystats1 <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(variable)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="summary-statistics.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write out summary statistics table as CSV file</span></span>
+<span id="cb16-2"><a href="summary-statistics.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(pt_copy_summarystats1, <span class="st">&quot;/Users/adra7980/Documents/git_repositories/r_primer/written_data/pt_copy_summarystats1.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="using-stargazer-to-create-and-export-summary-statistics" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Using <code>stargazer</code> to create and export summary statistics</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="summary-statistics.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the summary stats into a data frame</span></span>
-<span id="cb15-2"><a href="summary-statistics.html#cb15-2" aria-hidden="true" tabindex="-1"></a>pt_copy_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(pt_copy)</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="summary-statistics.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use stargazer to export summary statistics as a text file</span></span>
-<span id="cb16-2"><a href="summary-statistics.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(pt_copy_df, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">title=</span><span class="st">&quot;Descriptive Statistics&quot;</span>, <span class="at">digits=</span><span class="dv">1</span>, <span class="at">out=</span><span class="st">&quot;summary_stats.txt&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="summary-statistics.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use stargazer to export summary statistics as an html file</span></span>
-<span id="cb17-2"><a href="summary-statistics.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(pt_copy_df, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">title=</span><span class="st">&quot;Descriptive Statistics&quot;</span>, <span class="at">digits=</span><span class="dv">1</span>, <span class="at">out=</span><span class="st">&quot;summary_stats.html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="summary-statistics.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the summary stats into a data frame</span></span>
+<span id="cb17-2"><a href="summary-statistics.html#cb17-2" aria-hidden="true" tabindex="-1"></a>pt_copy_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(pt_copy)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="summary-statistics.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use stargazer to export summary statistics as a text file</span></span>
+<span id="cb18-2"><a href="summary-statistics.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(pt_copy_df, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">title=</span><span class="st">&quot;Descriptive Statistics&quot;</span>, <span class="at">digits=</span><span class="dv">1</span>, <span class="at">out=</span><span class="st">&quot;summary_stats.txt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="summary-statistics.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use stargazer to export summary statistics as an html file</span></span>
+<span id="cb19-2"><a href="summary-statistics.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(pt_copy_df, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">title=</span><span class="st">&quot;Descriptive Statistics&quot;</span>, <span class="at">digits=</span><span class="dv">1</span>, <span class="at">out=</span><span class="st">&quot;summary_stats.html&quot;</span>)</span></code></pre></div>
 </div>
 <div id="summary-statistics-and-grouping-variables" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Summary statistics and grouping variables</h2>
 <div id="subsetting-summary-statistics-by-group-with-the-describe-function" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Subsetting summary statistics by group with the <code>describe</code> function</h3>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="summary-statistics.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates summary statistics for each continent grouping, and puts results in list named &quot;summary_stats_by_continent&quot;</span></span>
-<span id="cb18-2"><a href="summary-statistics.html#cb18-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent<span class="ot">&lt;-</span><span class="fu">describeBy</span>(pt_copy, pt_copy<span class="sc">$</span>continent)</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="summary-statistics.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accessing continent-level summary statistics for africa from the &quot;summary_stats_by_continent&quot; list</span></span>
-<span id="cb19-2"><a href="summary-statistics.html#cb19-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent[[<span class="st">&quot;africa&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="summary-statistics.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates summary statistics for each continent grouping, and puts results in list named &quot;summary_stats_by_continent&quot;</span></span>
+<span id="cb20-2"><a href="summary-statistics.html#cb20-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent<span class="ot">&lt;-</span><span class="fu">describeBy</span>(pt_copy, pt_copy<span class="sc">$</span>continent)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="summary-statistics.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accessing continent-level summary statistics for africa from the &quot;summary_stats_by_continent&quot; list</span></span>
+<span id="cb21-2"><a href="summary-statistics.html#cb21-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent[[<span class="st">&quot;africa&quot;</span>]]</span></code></pre></div>
 <pre><code>##            vars  n    mean      sd  median trimmed    mad     min     max   range  skew
 ## oecd          1 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN
 ## country*      2 11    6.00    3.32    6.00    6.00   4.45    1.00   11.00   10.00  0.00
@@ -886,8 +886,8 @@ col_uk
 ## propar         0.08   0.12
 ## lpop          -2.33   0.09
 ## continent*      NaN   0.00</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="summary-statistics.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accessing continent-level summary statistics for africa from the &quot;summary_stats_by_continent&quot; list; alternate syntax</span></span>
-<span id="cb21-2"><a href="summary-statistics.html#cb21-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent <span class="sc">%&gt;%</span> <span class="fu">pluck</span>(<span class="st">&quot;africa&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="summary-statistics.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accessing continent-level summary statistics for africa from the &quot;summary_stats_by_continent&quot; list; alternate syntax</span></span>
+<span id="cb23-2"><a href="summary-statistics.html#cb23-2" aria-hidden="true" tabindex="-1"></a>summary_stats_by_continent <span class="sc">%&gt;%</span> <span class="fu">pluck</span>(<span class="st">&quot;africa&quot;</span>)</span></code></pre></div>
 <pre><code>##            vars  n    mean      sd  median trimmed    mad     min     max   range  skew
 ## oecd          1 11    0.00    0.00    0.00    0.00   0.00    0.00    0.00    0.00   NaN
 ## country*      2 11    6.00    3.32    6.00    6.00   4.45    1.00   11.00   10.00  0.00
@@ -1040,10 +1040,10 @@ col_uk
 ## propar         0.08   0.12
 ## lpop          -2.33   0.09
 ## continent*      NaN   0.00</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="summary-statistics.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group-level summary statistics can be assigned to their own object for easy retrieval</span></span>
-<span id="cb23-2"><a href="summary-statistics.html#cb23-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics<span class="ot">&lt;-</span>summary_stats_by_continent <span class="sc">%&gt;%</span> <span class="fu">pluck</span>(<span class="st">&quot;asiae&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="summary-statistics.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># retrieve summary statistics for Asia/Europe </span></span>
-<span id="cb24-2"><a href="summary-statistics.html#cb24-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="summary-statistics.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group-level summary statistics can be assigned to their own object for easy retrieval</span></span>
+<span id="cb25-2"><a href="summary-statistics.html#cb25-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics<span class="ot">&lt;-</span>summary_stats_by_continent <span class="sc">%&gt;%</span> <span class="fu">pluck</span>(<span class="st">&quot;asiae&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="summary-statistics.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># retrieve summary statistics for Asia/Europe </span></span>
+<span id="cb26-2"><a href="summary-statistics.html#cb26-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics</span></code></pre></div>
 <pre><code>##            vars  n    mean      sd  median trimmed     mad     min      max    range  skew
 ## oecd          1 13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN
 ## country*      2 13    7.00    3.89    7.00    7.00    4.45    1.00    13.00    12.00  0.00
@@ -1197,10 +1197,10 @@ col_uk
 ## lpop          -0.80    0.73
 ## continent*      NaN    0.00</code></pre>
 <p>The “vars” column in the summary statistics table is an index variable; it can be removed with the following:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="summary-statistics.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removes &quot;vars&quot; indexing variable from &quot;asia_europe_summary_statistics&quot;</span></span>
-<span id="cb26-2"><a href="summary-statistics.html#cb26-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics<span class="ot">&lt;-</span>asia_europe_summary_statistics <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>vars)</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="summary-statistics.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prints contents of &quot;asia_europe_summary_statistics&quot;</span></span>
-<span id="cb27-2"><a href="summary-statistics.html#cb27-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="summary-statistics.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removes &quot;vars&quot; indexing variable from &quot;asia_europe_summary_statistics&quot;</span></span>
+<span id="cb28-2"><a href="summary-statistics.html#cb28-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics<span class="ot">&lt;-</span>asia_europe_summary_statistics <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>vars)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="summary-statistics.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prints contents of &quot;asia_europe_summary_statistics&quot;</span></span>
+<span id="cb29-2"><a href="summary-statistics.html#cb29-2" aria-hidden="true" tabindex="-1"></a>asia_europe_summary_statistics</span></code></pre></div>
 <pre><code>##             n    mean      sd  median trimmed     mad     min      max    range  skew kurtosis
 ## oecd       13    0.00    0.00    0.00    0.00    0.00    0.00     0.00     0.00   NaN      NaN
 ## country*   13    7.00    3.89    7.00    7.00    4.45    1.00    13.00    12.00  0.00    -1.48
@@ -1356,13 +1356,13 @@ col_uk
 </div>
 <div id="generating-group-level-summary-statistics-with-the-summarize-function-from-dplyr" class="section level3" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Generating group-level summary statistics with the <code>summarize</code> function from <code>dplyr</code></h3>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="summary-statistics.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a table that displays summary statistics for trade at the continent level and assign to object named &quot;trade_age_by_continent&quot;</span></span>
-<span id="cb29-2"><a href="summary-statistics.html#cb29-2" aria-hidden="true" tabindex="-1"></a>trade_age_by_continent<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-3"><a href="summary-statistics.html#cb29-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">summarise</span>(<span class="at">meanTrade=</span><span class="fu">mean</span>(trade),<span class="at">sdTrade=</span><span class="fu">sd</span>(trade),</span>
-<span id="cb29-4"><a href="summary-statistics.html#cb29-4" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">meanAge=</span><span class="fu">mean</span>(age), <span class="at">sdAge=</span><span class="fu">sd</span>(age),</span>
-<span id="cb29-5"><a href="summary-statistics.html#cb29-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="summary-statistics.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;trade_age_by_continent&quot;</span></span>
-<span id="cb30-2"><a href="summary-statistics.html#cb30-2" aria-hidden="true" tabindex="-1"></a>trade_age_by_continent</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="summary-statistics.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a table that displays summary statistics for trade at the continent level and assign to object named &quot;trade_age_by_continent&quot;</span></span>
+<span id="cb31-2"><a href="summary-statistics.html#cb31-2" aria-hidden="true" tabindex="-1"></a>trade_age_by_continent<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="summary-statistics.html#cb31-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">summarise</span>(<span class="at">meanTrade=</span><span class="fu">mean</span>(trade),<span class="at">sdTrade=</span><span class="fu">sd</span>(trade),</span>
+<span id="cb31-4"><a href="summary-statistics.html#cb31-4" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">meanAge=</span><span class="fu">mean</span>(age), <span class="at">sdAge=</span><span class="fu">sd</span>(age),</span>
+<span id="cb31-5"><a href="summary-statistics.html#cb31-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="summary-statistics.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;trade_age_by_continent&quot;</span></span>
+<span id="cb32-2"><a href="summary-statistics.html#cb32-2" aria-hidden="true" tabindex="-1"></a>trade_age_by_continent</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 6
 ##   continent meanTrade sdTrade meanAge  sdAge     n
 ##   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
@@ -1376,32 +1376,32 @@ col_uk
 <h2><span class="header-section-number">3.5</span> Generating crosstabs</h2>
 <div id="crosstabs-with-tabyl" class="section level3" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Crosstabs with <code>tabyl</code></h3>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="summary-statistics.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates cross-tab showing the breakdown of federal/non federal across continents</span></span>
-<span id="cb32-2"><a href="summary-statistics.html#cb32-2" aria-hidden="true" tabindex="-1"></a>crosstab_federal_continent<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(federal, continent)</span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="summary-statistics.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prints contents of &quot;crosstab_federal_continent&quot;</span></span>
-<span id="cb33-2"><a href="summary-statistics.html#cb33-2" aria-hidden="true" tabindex="-1"></a>crosstab_federal_continent</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="summary-statistics.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates cross-tab showing the breakdown of federal/non federal across continents</span></span>
+<span id="cb34-2"><a href="summary-statistics.html#cb34-2" aria-hidden="true" tabindex="-1"></a>crosstab_federal_continent<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(federal, continent)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="summary-statistics.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prints contents of &quot;crosstab_federal_continent&quot;</span></span>
+<span id="cb35-2"><a href="summary-statistics.html#cb35-2" aria-hidden="true" tabindex="-1"></a>crosstab_federal_continent</span></code></pre></div>
 <pre><code>##  federal africa asiae laam other
 ##        0     11    11   19    29
 ##        1      0     2    4     7
 ##       NA      0     0    0     2</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="summary-statistics.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates cross-tab showing the breakdown of majoritarian/nonmajoritarian across continents</span></span>
-<span id="cb35-2"><a href="summary-statistics.html#cb35-2" aria-hidden="true" tabindex="-1"></a>crosstab_majoritarian_continent<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(maj, continent)</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="summary-statistics.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;crosstab_majoritarian_continent&quot;</span></span>
-<span id="cb36-2"><a href="summary-statistics.html#cb36-2" aria-hidden="true" tabindex="-1"></a>crosstab_majoritarian_continent</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="summary-statistics.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates cross-tab showing the breakdown of majoritarian/nonmajoritarian across continents</span></span>
+<span id="cb37-2"><a href="summary-statistics.html#cb37-2" aria-hidden="true" tabindex="-1"></a>crosstab_majoritarian_continent<span class="ot">&lt;-</span>pt_copy <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(maj, continent)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="summary-statistics.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints contents of &quot;crosstab_majoritarian_continent&quot;</span></span>
+<span id="cb38-2"><a href="summary-statistics.html#cb38-2" aria-hidden="true" tabindex="-1"></a>crosstab_majoritarian_continent</span></code></pre></div>
 <pre><code>##  maj africa asiae laam other
 ##    0      3     4   16    29
 ##    1      8     9    7     9</code></pre>
 </div>
 <div id="crosstabs-with-tbl_cross" class="section level3" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Crosstabs with <code>tbl_cross</code></h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="summary-statistics.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uses &quot;tbl_cross&quot; function to create crosstab showing breakdown of federal/non-federal by continent</span></span>
-<span id="cb38-2"><a href="summary-statistics.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_cross</span>(pt_copy, <span class="at">row=</span>federal, <span class="at">col=</span>continent)</span></code></pre></div>
-<div id="jxcuhhcucx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="summary-statistics.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uses &quot;tbl_cross&quot; function to create crosstab showing breakdown of federal/non-federal by continent</span></span>
+<span id="cb40-2"><a href="summary-statistics.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_cross</span>(pt_copy, <span class="at">row=</span>federal, <span class="at">col=</span>continent)</span></code></pre></div>
+<div id="xbfzbbkyrf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jxcuhhcucx .gt_table {
+#xbfzbbkyrf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1426,7 +1426,7 @@ col_uk
   border-left-color: #D3D3D3;
 }
 
-#jxcuhhcucx .gt_heading {
+#xbfzbbkyrf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1438,7 +1438,7 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#jxcuhhcucx .gt_title {
+#xbfzbbkyrf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1448,7 +1448,7 @@ col_uk
   border-bottom-width: 0;
 }
 
-#jxcuhhcucx .gt_subtitle {
+#xbfzbbkyrf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1458,13 +1458,13 @@ col_uk
   border-top-width: 0;
 }
 
-#jxcuhhcucx .gt_bottom_border {
+#xbfzbbkyrf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jxcuhhcucx .gt_col_headings {
+#xbfzbbkyrf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1479,7 +1479,7 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#jxcuhhcucx .gt_col_heading {
+#xbfzbbkyrf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1499,7 +1499,7 @@ col_uk
   overflow-x: hidden;
 }
 
-#jxcuhhcucx .gt_column_spanner_outer {
+#xbfzbbkyrf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1511,15 +1511,15 @@ col_uk
   padding-right: 4px;
 }
 
-#jxcuhhcucx .gt_column_spanner_outer:first-child {
+#xbfzbbkyrf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jxcuhhcucx .gt_column_spanner_outer:last-child {
+#xbfzbbkyrf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jxcuhhcucx .gt_column_spanner {
+#xbfzbbkyrf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1531,7 +1531,7 @@ col_uk
   width: 100%;
 }
 
-#jxcuhhcucx .gt_group_heading {
+#xbfzbbkyrf .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1553,7 +1553,7 @@ col_uk
   vertical-align: middle;
 }
 
-#jxcuhhcucx .gt_empty_group_heading {
+#xbfzbbkyrf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1568,15 +1568,15 @@ col_uk
   vertical-align: middle;
 }
 
-#jxcuhhcucx .gt_from_md > :first-child {
+#xbfzbbkyrf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jxcuhhcucx .gt_from_md > :last-child {
+#xbfzbbkyrf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jxcuhhcucx .gt_row {
+#xbfzbbkyrf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1595,7 +1595,7 @@ col_uk
   overflow-x: hidden;
 }
 
-#jxcuhhcucx .gt_stub {
+#xbfzbbkyrf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1607,7 +1607,7 @@ col_uk
   padding-left: 12px;
 }
 
-#jxcuhhcucx .gt_summary_row {
+#xbfzbbkyrf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1617,7 +1617,7 @@ col_uk
   padding-right: 5px;
 }
 
-#jxcuhhcucx .gt_first_summary_row {
+#xbfzbbkyrf .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1627,7 +1627,7 @@ col_uk
   border-top-color: #D3D3D3;
 }
 
-#jxcuhhcucx .gt_grand_summary_row {
+#xbfzbbkyrf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1637,7 +1637,7 @@ col_uk
   padding-right: 5px;
 }
 
-#jxcuhhcucx .gt_first_grand_summary_row {
+#xbfzbbkyrf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1647,11 +1647,11 @@ col_uk
   border-top-color: #D3D3D3;
 }
 
-#jxcuhhcucx .gt_striped {
+#xbfzbbkyrf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jxcuhhcucx .gt_table_body {
+#xbfzbbkyrf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1660,7 +1660,7 @@ col_uk
   border-bottom-color: #D3D3D3;
 }
 
-#jxcuhhcucx .gt_footnotes {
+#xbfzbbkyrf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1674,13 +1674,13 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#jxcuhhcucx .gt_footnote {
+#xbfzbbkyrf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#jxcuhhcucx .gt_sourcenotes {
+#xbfzbbkyrf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1694,41 +1694,41 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#jxcuhhcucx .gt_sourcenote {
+#xbfzbbkyrf .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#jxcuhhcucx .gt_left {
+#xbfzbbkyrf .gt_left {
   text-align: left;
 }
 
-#jxcuhhcucx .gt_center {
+#xbfzbbkyrf .gt_center {
   text-align: center;
 }
 
-#jxcuhhcucx .gt_right {
+#xbfzbbkyrf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jxcuhhcucx .gt_font_normal {
+#xbfzbbkyrf .gt_font_normal {
   font-weight: normal;
 }
 
-#jxcuhhcucx .gt_font_bold {
+#xbfzbbkyrf .gt_font_bold {
   font-weight: bold;
 }
 
-#jxcuhhcucx .gt_font_italic {
+#xbfzbbkyrf .gt_font_italic {
   font-style: italic;
 }
 
-#jxcuhhcucx .gt_super {
+#xbfzbbkyrf .gt_super {
   font-size: 65%;
 }
 
-#jxcuhhcucx .gt_footnote_marks {
+#xbfzbbkyrf .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1787,14 +1787,14 @@ col_uk
   
 </table>
 </div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="summary-statistics.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uses &quot;tbl_cross&quot; function to create crosstab showing breakdown of majoritarian/non majoritarian by continent</span></span>
-<span id="cb39-2"><a href="summary-statistics.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_cross</span>(pt_copy, <span class="at">row=</span>maj, <span class="at">col=</span>continent)</span></code></pre></div>
-<div id="zujczlhfuw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="summary-statistics.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uses &quot;tbl_cross&quot; function to create crosstab showing breakdown of majoritarian/non majoritarian by continent</span></span>
+<span id="cb41-2"><a href="summary-statistics.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_cross</span>(pt_copy, <span class="at">row=</span>maj, <span class="at">col=</span>continent)</span></code></pre></div>
+<div id="cltnkclsfp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zujczlhfuw .gt_table {
+#cltnkclsfp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1819,7 +1819,7 @@ col_uk
   border-left-color: #D3D3D3;
 }
 
-#zujczlhfuw .gt_heading {
+#cltnkclsfp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1831,7 +1831,7 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#zujczlhfuw .gt_title {
+#cltnkclsfp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1841,7 +1841,7 @@ col_uk
   border-bottom-width: 0;
 }
 
-#zujczlhfuw .gt_subtitle {
+#cltnkclsfp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1851,13 +1851,13 @@ col_uk
   border-top-width: 0;
 }
 
-#zujczlhfuw .gt_bottom_border {
+#cltnkclsfp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zujczlhfuw .gt_col_headings {
+#cltnkclsfp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1872,7 +1872,7 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#zujczlhfuw .gt_col_heading {
+#cltnkclsfp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1892,7 +1892,7 @@ col_uk
   overflow-x: hidden;
 }
 
-#zujczlhfuw .gt_column_spanner_outer {
+#cltnkclsfp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1904,15 +1904,15 @@ col_uk
   padding-right: 4px;
 }
 
-#zujczlhfuw .gt_column_spanner_outer:first-child {
+#cltnkclsfp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zujczlhfuw .gt_column_spanner_outer:last-child {
+#cltnkclsfp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zujczlhfuw .gt_column_spanner {
+#cltnkclsfp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1924,7 +1924,7 @@ col_uk
   width: 100%;
 }
 
-#zujczlhfuw .gt_group_heading {
+#cltnkclsfp .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1946,7 +1946,7 @@ col_uk
   vertical-align: middle;
 }
 
-#zujczlhfuw .gt_empty_group_heading {
+#cltnkclsfp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1961,15 +1961,15 @@ col_uk
   vertical-align: middle;
 }
 
-#zujczlhfuw .gt_from_md > :first-child {
+#cltnkclsfp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zujczlhfuw .gt_from_md > :last-child {
+#cltnkclsfp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zujczlhfuw .gt_row {
+#cltnkclsfp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1988,7 +1988,7 @@ col_uk
   overflow-x: hidden;
 }
 
-#zujczlhfuw .gt_stub {
+#cltnkclsfp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2000,7 +2000,7 @@ col_uk
   padding-left: 12px;
 }
 
-#zujczlhfuw .gt_summary_row {
+#cltnkclsfp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2010,7 +2010,7 @@ col_uk
   padding-right: 5px;
 }
 
-#zujczlhfuw .gt_first_summary_row {
+#cltnkclsfp .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2020,7 +2020,7 @@ col_uk
   border-top-color: #D3D3D3;
 }
 
-#zujczlhfuw .gt_grand_summary_row {
+#cltnkclsfp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2030,7 +2030,7 @@ col_uk
   padding-right: 5px;
 }
 
-#zujczlhfuw .gt_first_grand_summary_row {
+#cltnkclsfp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2040,11 +2040,11 @@ col_uk
   border-top-color: #D3D3D3;
 }
 
-#zujczlhfuw .gt_striped {
+#cltnkclsfp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zujczlhfuw .gt_table_body {
+#cltnkclsfp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2053,7 +2053,7 @@ col_uk
   border-bottom-color: #D3D3D3;
 }
 
-#zujczlhfuw .gt_footnotes {
+#cltnkclsfp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2067,13 +2067,13 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#zujczlhfuw .gt_footnote {
+#cltnkclsfp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#zujczlhfuw .gt_sourcenotes {
+#cltnkclsfp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2087,41 +2087,41 @@ col_uk
   border-right-color: #D3D3D3;
 }
 
-#zujczlhfuw .gt_sourcenote {
+#cltnkclsfp .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#zujczlhfuw .gt_left {
+#cltnkclsfp .gt_left {
   text-align: left;
 }
 
-#zujczlhfuw .gt_center {
+#cltnkclsfp .gt_center {
   text-align: center;
 }
 
-#zujczlhfuw .gt_right {
+#cltnkclsfp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zujczlhfuw .gt_font_normal {
+#cltnkclsfp .gt_font_normal {
   font-weight: normal;
 }
 
-#zujczlhfuw .gt_font_bold {
+#cltnkclsfp .gt_font_bold {
   font-weight: bold;
 }
 
-#zujczlhfuw .gt_font_italic {
+#cltnkclsfp .gt_font_italic {
   font-style: italic;
 }
 
-#zujczlhfuw .gt_super {
+#cltnkclsfp .gt_super {
   font-size: 65%;
 }
 
-#zujczlhfuw .gt_footnote_marks {
+#cltnkclsfp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;

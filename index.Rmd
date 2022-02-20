@@ -17,6 +17,10 @@ library(fastDummies)
 library(gtsummary)
 ```
 
+```{r, echo=FALSE}
+library(kableExtra)
+```
+
 
 
 
